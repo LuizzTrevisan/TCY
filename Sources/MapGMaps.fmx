@@ -1,0 +1,27 @@
+object FrmMapGMaps: TFrmMapGMaps
+  Height = 530.000000000000000000
+  Width = 644.000000000000000000
+  TabOrder = 0
+  object TMSFMXWebGMaps1: TTMSFMXWebGMaps
+    Align = Client
+    Height = 465.000000000000000000
+    Width = 644.000000000000000000
+    Markers = <>
+    Polylines = <>
+    Polygons = <>
+    MapOptions.DefaultLatitude = 48.859040000000000000
+    MapOptions.DefaultLongitude = 2.294297000000000000
+    Directions = <>
+    StreetViewOptions.DefaultLatitude = 48.859040000000000000
+    StreetViewOptions.DefaultLongitude = 2.294297000000000000
+    TabOrder = 0
+    Version = '1.8.0.2'
+  end
+  object Button1: TButton
+    Align = Top
+    Height = 65.000000000000000000
+    TabOrder = 1
+    Text = 'Button1'
+    Width = 644.000000000000000000
+  end
+end
