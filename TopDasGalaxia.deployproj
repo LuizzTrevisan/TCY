@@ -20,7 +20,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\libTopDasGalaxia.so" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="Android\libTopDasGalaxia.so" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TopDasGalaxia\library\lib\armeabi-v7a\</RemoteDir>
             <RemoteName>libTopDasGalaxia.so</RemoteName>
             <Operation>1</Operation>
@@ -45,7 +45,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="Android\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TopDasGalaxia\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
             <Operation>1</Operation>

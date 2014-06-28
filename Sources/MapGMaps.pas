@@ -11,6 +11,7 @@ type
   TFrmMapGMaps = class(TFrame)
     TMSFMXWebGMaps1: TTMSFMXWebGMaps;
     Button1: TButton;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,6 +26,12 @@ implementation
 {$R *.fmx}
 
 { TFrmMapGMaps }
+
+procedure TFrmMapGMaps.Button1Click(Sender: TObject);
+begin
+  TMSFMXWebGMaps1.MapOptions.DefaultLatitude := 23;;
+  TMSFMXWebGMaps1.MapOptions.DefaultLongitude := 44;;
+end;
 
 class function TFrmMapGMaps.getMe: TFrmMapGMaps;
 begin

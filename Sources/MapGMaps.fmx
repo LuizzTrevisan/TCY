@@ -5,7 +5,7 @@ object FrmMapGMaps: TFrmMapGMaps
   TabOrder = 0
   object TMSFMXWebGMaps1: TTMSFMXWebGMaps
     Align = Client
-    Height = 465.000000000000000000
+    Height = 497.000000000000000000
     Width = 644.000000000000000000
     Markers = <>
     Polylines = <>
@@ -20,9 +20,10 @@ object FrmMapGMaps: TFrmMapGMaps
   end
   object Button1: TButton
     Align = Top
-    Height = 65.000000000000000000
+    Height = 33.000000000000000000
     TabOrder = 1
     Text = 'Button1'
     Width = 644.000000000000000000
+    OnClick = Button1Click
   end
 end
