@@ -7,41 +7,17 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Effects, FMX.Filter.Effects, FMX.ListView.Types, FMX.ListView, FMX.Objects,
   FMX.Ani, FMX.Menus, System.Actions, FMX.ActnList,System.Math, FMX.Layouts,
-  FMX.ListBox;
+  FMX.ListBox, MainMenu, FMX.Edit, FMX.Notification;
 
 type
-  TForm1 = class(TForm)
-    Image1: TImage;
-    BlurEffect1: TBlurEffect;
-    Text1: TText;
-    GlowEffect1: TGlowEffect;
-    Text2: TText;
-    GlowEffect2: TGlowEffect;
+  TFMain = class(TForm)
+    Rectangle1: TRectangle;
+    Image2: TImage;
+    SpeedButton1: TSpeedButton;
     actMenu: TActionList;
     actShowMenuLateral: TAction;
-    GlowEffect3: TGlowEffect;
-    Panel2: TPanel;
-    Rectangle1: TRectangle;
-    Rectangle2: TRectangle;
-    SpeedButton1: TSpeedButton;
-    Image2: TImage;
-    rectFormMenuShow: TRectangle;
-    rectFormMenuShowAnimationIn: TFloatAnimation;
-    MenuAnimationIn: TFloatAnimation;
-    rectFormMenuShowAnimationOut: TFloatAnimation;
-    MenuAnimationOut: TFloatAnimation;
-    ListBox1: TListBox;
-    ListBoxItem1: TListBoxItem;
-    ListBoxGroupHeader1: TListBoxGroupHeader;
-    ListBoxItem2: TListBoxItem;
-    ListBoxItem3: TListBoxItem;
-    ListBox2: TListBox;
-    ListBoxItem4: TListBoxItem;
-    ListBoxItem5: TListBoxItem;
-    ListBoxItem6: TListBoxItem;
     procedure FormCreate(Sender: TObject);
     procedure actShowMenuLateralExecute(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure MenuAnimationInFinish(Sender: TObject);
     procedure rectFormMenuShowAnimationOutFinish(Sender: TObject);
     procedure ListBoxItem2Click(Sender: TObject);
@@ -53,67 +29,59 @@ type
   end;
 
 var
-  Form1: TForm1;
+  FMain: TFMain;
+  frMainMenu : TfrMainMenu;
 
 implementation
 
 {$R *.fmx}
 
-uses MapGMaps;
+uses MapGMaps, Splash;
 
-procedure TForm1.actShowMenuLateralExecute(Sender: TObject);
+procedure TFMain.actShowMenuLateralExecute(Sender: TObject);
 begin
+
+
   actShowMenuLateral.Enabled := False;
   actShowMenuLateral.Tag := not actShowMenuLateral.Tag;
 
   if Boolean(actShowMenuLateral.Tag) then begin
-    MenuAnimationIn.Start;
-    rectFormMenuShow.Opacity := 0;
-    rectFormMenuShow.Visible := True;
-    rectFormMenuShowAnimationIn.Start;
+    frMainMenu.Parent := Self;
+    Rectangle1.BringToFront;
+    frMainMenu.MenuAnimationIn.Start;
   end else begin
-    MenuAnimationOut.Start;
-    rectFormMenuShowAnimationOut.Start;
+    frMainMenu.MenuAnimationOut.Start;
   end;
-
-
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TFMain.FormCreate(Sender: TObject);
 begin
-
-  MenuAnimationOut.StopValue  := -ListBox1.Width;
-  MenuAnimationIn.StartValue := -ListBox1.Width;
-
+  frSplash.Parent := Self;
 end;
 
-procedure TForm1.FormShow(Sender: TObject);
-begin
-  ListBox1.Position.X := -ListBox1.Width;
-end;
 
-procedure TForm1.ListBoxItem2Click(Sender: TObject);
+procedure TFMain.ListBoxItem2Click(Sender: TObject);
 begin
   TFrmMapGMaps.getMe;
-  frameGMaps.Parent  := Panel2 ;
+//  frameGMaps.Parent  := Panel2 ;
   frameGMaps.Visible := True;
   actShowMenuLateral.Execute;
 
 end;
 
-procedure TForm1.ListBoxItem3Click(Sender: TObject);
+procedure TFMain.ListBoxItem3Click(Sender: TObject);
 begin
   actShowMenuLateral.Execute;
 end;
 
-procedure TForm1.MenuAnimationInFinish(Sender: TObject);
+procedure TFMain.MenuAnimationInFinish(Sender: TObject);
 begin
   actShowMenuLateral.Enabled := True;
 end;
 
-procedure TForm1.rectFormMenuShowAnimationOutFinish(Sender: TObject);
+procedure TFMain.rectFormMenuShowAnimationOutFinish(Sender: TObject);
 begin
-  rectFormMenuShow.Visible := False;
+  frMainMenu.Parent := nil ;
 end;
 
 end.

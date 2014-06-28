@@ -1,4 +1,5 @@
 object FrmMapGMaps: TFrmMapGMaps
+  Align = Client
   Height = 530.000000000000000000
   Width = 644.000000000000000000
   TabOrder = 0
