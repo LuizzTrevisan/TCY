@@ -10,7 +10,6 @@ object FMain: TFMain
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  OnCreate = FormCreate
   DesignerMobile = True
   DesignerWidth = 384
   DesignerHeight = 592
@@ -60,8 +59,13 @@ object FMain: TFMain
       TextSettings.Font.Size = 22.000000000000000000
       TextSettings.FontColor = claWhite
       TextSettings.HorzAlign = Trailing
-      Width = 79.000000000000000000
+      Width = 95.000000000000000000
     end
+  end
+  object Rectangle2: TRectangle
+    Align = Client
+    Height = 520.000000000000000000
+    Width = 384.000000000000000000
   end
   object actMenu: TActionList
     Left = 240

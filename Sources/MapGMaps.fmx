@@ -5,7 +5,7 @@ object FrmMapGMaps: TFrmMapGMaps
   TabOrder = 0
   object TMSFMXWebGMaps1: TTMSFMXWebGMaps
     Align = Client
-    Height = 497.000000000000000000
+    Height = 464.000000000000000000
     Width = 644.000000000000000000
     Markers = <>
     Polylines = <>
@@ -17,13 +17,40 @@ object FrmMapGMaps: TFrmMapGMaps
     StreetViewOptions.DefaultLongitude = 2.294297000000000000
     TabOrder = 0
     Version = '1.8.0.2'
+    OnMapClick = TMSFMXWebGMaps1MapClick
   end
   object Button1: TButton
     Align = Top
     Height = 33.000000000000000000
-    TabOrder = 1
+    TabOrder = 2
     Text = 'Button1'
     Width = 644.000000000000000000
     OnClick = Button1Click
+  end
+  object Button2: TButton
+    Align = Top
+    Height = 33.000000000000000000
+    Position.Y = 33.000000000000000000
+    TabOrder = 1
+    Text = 'caarregar'
+    Width = 644.000000000000000000
+    OnClick = Button2Click
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'lo'
+        DataType = ftFloat
+      end
+      item
+        Name = 'la'
+        DataType = ftFloat
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 368
+    Top = 160
   end
 end

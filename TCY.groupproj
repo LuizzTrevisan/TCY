@@ -9,6 +9,9 @@
         <Projects Include="TopDasGalaxia.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\..\1\TabSlideTransition\TabSlidingProject.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="TopDasGalaxia:Make">
         <MSBuild Projects="TopDasGalaxia.dproj" Targets="Make"/>
     </Target>
+    <Target Name="TabSlidingProject">
+        <MSBuild Projects="..\..\..\1\TabSlideTransition\TabSlidingProject.dproj"/>
+    </Target>
+    <Target Name="TabSlidingProject:Clean">
+        <MSBuild Projects="..\..\..\1\TabSlideTransition\TabSlidingProject.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TabSlidingProject:Make">
+        <MSBuild Projects="..\..\..\1\TabSlideTransition\TabSlidingProject.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6;TopDasGalaxia"/>
+        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6;TopDasGalaxia;TabSlidingProject"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Clean;TopDasGalaxia:Clean"/>
+        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Clean;TopDasGalaxia:Clean;TabSlidingProject:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Make;TopDasGalaxia:Make"/>
+        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Make;TopDasGalaxia:Make;TabSlidingProject:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

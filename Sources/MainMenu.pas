@@ -3,10 +3,11 @@ unit MainMenu;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.ListBox, FMX.Layouts, FMX.Effects, FMX.Objects, FMX.Ani, System.Actions,
-  FMX.ActnList,FMX.Notification;
+  FMX.ActnList, FMX.Notification;
 
 type
   TfrMainMenu = class(TFrame)
@@ -55,7 +56,8 @@ uses Main, MapGMaps;
 constructor TfrMainMenu.Create(AOwner: TComponent);
 begin
   inherited;
-  TControl(MenuAnimationIn.Parent).Position.X := -TControl(MenuAnimationIn.Parent).Width;
+  TControl(MenuAnimationIn.Parent).Position.X :=
+    -TControl(MenuAnimationIn.Parent).Width;
   MenuAnimationOut.StopValue := -TControl(MenuAnimationIn.Parent).Width;
   MenuAnimationIn.StartValue := -TControl(MenuAnimationIn.Parent).Width;
 end;
@@ -63,22 +65,26 @@ end;
 procedure TfrMainMenu.ListBoxItem2Click(Sender: TObject);
 begin
   Main.FMain.actShowMenuLateral.Execute;
-  MapGMaps.TFrmMapGMaps.getMe.Parent := Main.FMain;
+  MapGMaps.TFrmMapGMaps.getMe;
+  frameGMaps.Parent := Main.FMain.Rectangle2;
+  frameGMaps.Visible := True;
 end;
 
 procedure TfrMainMenu.ListBoxItem3Click(Sender: TObject);
 var
-  a : Tnotification     ;
+  a: Tnotification;
 begin
-  a := NotificationCenter1.CreateNotification ;
+  a := NotificationCenter1.CreateNotification;
   a.Name := 'Opa';
   a.AlertBody := 'Deposite 500.000,00 para ter acesso a esta funcao';
   NotificationCenter1.PresentNotification(a);
   a.DisposeOf;
 
   Main.FMain.actShowMenuLateral.Execute;
-  if Assigned(MapGMaps.frameGMaps) then
-    MapGMaps.TFrmMapGMaps.getMe.Parent := nil
+  if Assigned(MapGMaps.frameGMaps) then begin
+    MapGMaps.frameGMaps.Visible := false;
+    MapGMaps.frameGMaps.TMSFMXWebGMaps1.Visible := false;
+  end;
 end;
 
 procedure TfrMainMenu.MenuAnimationInFinish(Sender: TObject);

@@ -1839,13 +1839,14 @@ object frMainMenu: TfrMainMenu
     end
     object ListBox1: TListBox
       Align = Top
+      AutoHide = False
       Height = 173.000000000000000000
       Padding.Top = 100.000000000000000000
       Position.Y = 58.000000000000000000
       ShowScrollBars = False
       TabOrder = 1
       Width = 281.000000000000000000
-      DisableFocusEffect = False
+      CanFocus = False
       DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
