@@ -15,6 +15,7 @@ object FrmMapGMaps: TFrmMapGMaps
     MapOptions.MapType = mtSatellite
     MapOptions.DefaultLatitude = 48.859040000000000000
     MapOptions.DefaultLongitude = 2.294297000000000000
+    MapOptions.PreloaderVisible = False
     Directions = <>
     StreetViewOptions.DefaultLatitude = 48.859040000000000000
     StreetViewOptions.DefaultLongitude = 2.294297000000000000
@@ -28,7 +29,7 @@ object FrmMapGMaps: TFrmMapGMaps
     OnMapClick = TMSFMXWebGMaps1MapClick
   end
   inline frMarkers1: TfrMarkers
-    Align = MostBottom
+    Align = Bottom
     Height = 183.000000000000000000
     Position.Y = 362.000000000000000000
     Visible = False
@@ -47,6 +48,9 @@ object FrmMapGMaps: TFrmMapGMaps
         inherited Button1: TButton
           Position.X = 285.000000000000000000
           OnClick = frMarkers1Button1Click
+        end
+        inherited Button2: TButton
+          OnClick = frMarkers1Button2Click
         end
         inherited edInfo1: TClearingEdit
           Position.Y = 8.000000000000000000

@@ -29,6 +29,7 @@ type
       KeyboardVisible: Boolean; const Bounds: TRect);
   private
     { Private declarations }
+    FNeedRecalc: Boolean;
   public
     { Public declarations }
   end;
@@ -68,16 +69,18 @@ end;
 procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
-  MainLayout.Align  := TAlignLayout.Client;
-  Application.ProcessMessages;
+  MainLayout.Align := TAlignLayout.Client;
+  FNeedRecalc := True;
 end;
 
 procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
-  MainLayout.Align  := TAlignLayout.Horizontal;
-  MainLayout.Height := MainLayout.Height - Bounds.Height;
-  Application.ProcessMessages;
+  if FNeedRecalc then begin
+    MainLayout.Align := TAlignLayout.Horizontal;
+    MainLayout.Height := MainLayout.Height - Bounds.Height;
+  end;
+  FNeedRecalc := False;
 end;
 
 procedure TFMain.ListBoxItem2Click(Sender: TObject);

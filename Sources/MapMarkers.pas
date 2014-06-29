@@ -18,7 +18,6 @@ type
     Button2: TButton;
     Rectangle1: TRectangle;
     Rectangle2: TRectangle;
-    procedure edInfo2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,10 +27,5 @@ type
 implementation
 
 {$R *.fmx}
-
-procedure TfrMarkers.edInfo2Click(Sender: TObject);
-begin
-  Self.Repaint;
-end;
 
 end.

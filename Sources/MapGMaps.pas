@@ -102,8 +102,8 @@ begin
   ClientDataSet1.FieldByName('la').AsFloat := Latitude;
   ClientDataSet1.FieldByName('lo').AsFloat := Longitude;
   ClientDataSet1.Post;
-  frMarkers1.Visible := True;
 
+  frMarkers1.Visible := True;
 end;
 
 procedure TFrmMapGMaps.TMSFMXWebGMaps1MarkerClick(Sender: TObject;
