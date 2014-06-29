@@ -6,7 +6,8 @@ uses
   FMX.Forms,
   Main in 'Sources\Main.pas' {FMain},
   MapGMaps in 'Sources\MapGMaps.pas' {FrmMapGMaps: TFrame},
-  MainMenu in 'Sources\MainMenu.pas' {frMainMenu: TFrame};
+  MainMenu in 'Sources\MainMenu.pas' {frMainMenu: TFrame},
+  MapMarkers in 'Sources\MapMarkers.pas' {frMarkers: TFrame};
 
 {$R *.res}
 

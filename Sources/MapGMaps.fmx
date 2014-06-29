@@ -1,40 +1,66 @@
 object FrmMapGMaps: TFrmMapGMaps
   Align = Client
-  Height = 530.000000000000000000
-  Width = 644.000000000000000000
+  Height = 545.000000000000000000
+  Width = 466.000000000000000000
   TabOrder = 0
   object TMSFMXWebGMaps1: TTMSFMXWebGMaps
     Align = Client
-    Height = 464.000000000000000000
-    Width = 644.000000000000000000
+    Height = 545.000000000000000000
+    Width = 466.000000000000000000
     Markers = <>
     Polylines = <>
     Polygons = <>
+    MapOptions.Language = lnPortuguese_Brazil
+    MapOptions.ZoomMap = 15
+    MapOptions.MapType = mtSatellite
     MapOptions.DefaultLatitude = 48.859040000000000000
     MapOptions.DefaultLongitude = 2.294297000000000000
     Directions = <>
     StreetViewOptions.DefaultLatitude = 48.859040000000000000
     StreetViewOptions.DefaultLongitude = 2.294297000000000000
+    ControlsOptions.ControlsType = ctAndroid
+    ControlsOptions.StreetViewControl.Visible = False
+    ControlsOptions.OverviewMapControl.Open = True
     TabOrder = 0
     Version = '1.8.0.2'
+    OnMarkerClick = TMSFMXWebGMaps1MarkerClick
+    OnMarkerDragEnd = TMSFMXWebGMaps1MarkerDragEnd
     OnMapClick = TMSFMXWebGMaps1MapClick
   end
-  object Button1: TButton
-    Align = Top
-    Height = 33.000000000000000000
-    TabOrder = 2
-    Text = 'Button1'
-    Width = 644.000000000000000000
-    OnClick = Button1Click
-  end
-  object Button2: TButton
-    Align = Top
-    Height = 33.000000000000000000
-    Position.Y = 33.000000000000000000
-    TabOrder = 1
-    Text = 'caarregar'
-    Width = 644.000000000000000000
-    OnClick = Button2Click
+  inline frMarkers1: TfrMarkers
+    Align = MostBottom
+    Height = 183.000000000000000000
+    Position.Y = 362.000000000000000000
+    Visible = False
+    Width = 466.000000000000000000
+    TabOrder = 5
+    inherited Layout1: TLayout
+      Width = 466.000000000000000000
+      inherited Rectangle1: TRectangle
+        Width = 466.000000000000000000
+        inherited Text1: TText
+          Width = 466.000000000000000000
+        end
+      end
+      inherited Rectangle2: TRectangle
+        Width = 466.000000000000000000
+        inherited Button1: TButton
+          Position.X = 285.000000000000000000
+          OnClick = frMarkers1Button1Click
+        end
+        inherited edInfo1: TClearingEdit
+          Position.Y = 8.000000000000000000
+          Width = 446.000000000000000000
+        end
+        inherited edInfo2: TClearingEdit
+          Width = 446.000000000000000000
+        end
+        inherited edTitle: TClearingEdit
+          Position.Y = 46.000000000000000000
+          Width = 446.000000000000000000
+        end
+      end
+    end
   end
   object ClientDataSet1: TClientDataSet
     Aggregates = <>
@@ -46,11 +72,26 @@ object FrmMapGMaps: TFrmMapGMaps
       item
         Name = 'la'
         DataType = ftFloat
+      end
+      item
+        Name = 'Title'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Info1'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Info2'
+        DataType = ftString
+        Size = 20
       end>
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 368
-    Top = 160
+    Left = 176
+    Top = 248
   end
 end

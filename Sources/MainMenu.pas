@@ -30,7 +30,6 @@ type
     MenuAnimationOut: TFloatAnimation;
     ListBox2: TListBox;
     NotificationCenter1: TNotificationCenter;
-    ListBoxHeader1: TListBoxHeader;
     ListBoxItem1: TListBoxItem;
     ListBoxItem4: TListBoxItem;
     procedure MenuAnimationOutFinish(Sender: TObject);
@@ -66,7 +65,7 @@ procedure TfrMainMenu.ListBoxItem2Click(Sender: TObject);
 begin
   Main.FMain.actShowMenuLateral.Execute;
   MapGMaps.TFrmMapGMaps.getMe;
-  frameGMaps.Parent := Main.FMain.Rectangle2;
+  frameGMaps.Parent := Main.FMain.MainLayout;
   frameGMaps.Visible := True;
 end;
 

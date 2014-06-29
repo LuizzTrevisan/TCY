@@ -4,11 +4,10 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
-  System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Effects, FMX.Filter.Effects, FMX.ListView.Types, FMX.ListView,
-  FMX.Objects,
-  FMX.Ani, FMX.Menus, System.Actions, FMX.ActnList, System.Math, FMX.Layouts,
+  System.Variants, FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics,
+  FMX.Dialogs, FMX.StdCtrls, FMX.Effects, FMX.Filter.Effects,
+  FMX.ListView.Types, FMX.ListView, FMX.Objects, FMX.VirtualKeyboard, FMX.Ani,
+  FMX.Menus, System.Actions, FMX.ActnList, System.Math, FMX.Layouts,
   FMX.ListBox, MainMenu, FMX.Edit, FMX.Notification;
 
 type
@@ -18,12 +17,16 @@ type
     SpeedButton1: TSpeedButton;
     actMenu: TActionList;
     actShowMenuLateral: TAction;
-    Rectangle2: TRectangle;
+    MainLayout: TLayout;
     procedure actShowMenuLateralExecute(Sender: TObject);
     procedure MenuAnimationInFinish(Sender: TObject);
     procedure rectFormMenuShowAnimationOutFinish(Sender: TObject);
     procedure ListBoxItem2Click(Sender: TObject);
     procedure ListBoxItem3Click(Sender: TObject);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormVirtualKeyboardHidden(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
   private
     { Private declarations }
   public
@@ -60,6 +63,21 @@ begin
     if Assigned(frameGMaps) then
       frameGMaps.TMSFMXWebGMaps1.Visible := True;
   end;
+end;
+
+procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  MainLayout.Align  := TAlignLayout.Client;
+  Application.ProcessMessages;
+end;
+
+procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  MainLayout.Align  := TAlignLayout.Horizontal;
+  MainLayout.Height := MainLayout.Height - Bounds.Height;
+  Application.ProcessMessages;
 end;
 
 procedure TFMain.ListBoxItem2Click(Sender: TObject);

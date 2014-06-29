@@ -10,6 +10,8 @@ object FMain: TFMain
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   DesignerMobile = True
   DesignerWidth = 384
   DesignerHeight = 592
@@ -62,14 +64,15 @@ object FMain: TFMain
       Width = 95.000000000000000000
     end
   end
-  object Rectangle2: TRectangle
+  object MainLayout: TLayout
     Align = Client
     Height = 520.000000000000000000
     Width = 384.000000000000000000
+    TabOrder = 3
   end
   object actMenu: TActionList
-    Left = 240
-    Top = 128
+    Left = 280
+    Top = 8
     object actShowMenuLateral: TAction
       Text = 'Menu     '
       OnExecute = actShowMenuLateralExecute
