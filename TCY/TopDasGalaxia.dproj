@@ -220,7 +220,7 @@
         <AUP_ACCESS_WIFI_STATE>true</AUP_ACCESS_WIFI_STATE>
         <AUP_NFC>true</AUP_NFC>
         <AUP_ACCESS_LOCATION_EXTRA_COMMANDS>true</AUP_ACCESS_LOCATION_EXTRA_COMMANDS>
-        <DCC_DcuOutput>.\Android\</DCC_DcuOutput>
+        <DCC_DcuOutput>.\Android\Release\</DCC_DcuOutput>
         <DCC_ExeOutput>.\Android\</DCC_ExeOutput>
         <AUP_ACCESS_NETWORK_STATE>true</AUP_ACCESS_NETWORK_STATE>
         <DCC_DebugInfoInExe>false</DCC_DebugInfoInExe>
@@ -400,9 +400,9 @@
                     <Excluded_Packages Name="$(BDSBIN)\Tee9200.bpl">TeeChart Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACDBXDriver200.bpl">Embarcadero FireDAC DBX Driver Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACDSDriver200.bpl">Embarcadero FireDAC DataSnap Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\office2K200.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDXE6.bpl">File C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDXE6.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDEDXE6.bpl">File C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDEDXE6.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\office2K200.bpl">(untitled)</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>
@@ -423,9 +423,10 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Configuration="Debug" Class="Android_LauncherIcon36">
+                <DeployFile LocalName="Splash\res\values\strings.xml" Class="File">
                     <Platform Name="Android">
-                        <RemoteName>ic_launcher.png</RemoteName>
+                        <RemoteDir>res\values\</RemoteDir>
+                        <RemoteName>strings.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -441,7 +442,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Debug" Class="Android_LauncherIcon144">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Configuration="Debug" Class="Android_LauncherIcon36">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -459,17 +460,23 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Splash\res\values\strings.xml" Class="File">
+                <DeployFile LocalName="Splash\res\layout\splash_activity.xml" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>res\values\</RemoteDir>
-                        <RemoteName>strings.xml</RemoteName>
+                        <RemoteDir>res\layout\</RemoteDir>
+                        <RemoteName>splash_activity.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Splash\java\output\dex\classes.dex" Class="File">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Debug" Class="Android_LauncherIcon144">
                     <Platform Name="Android">
-                        <RemoteDir>classes\</RemoteDir>
-                        <RemoteName>classes.dex</RemoteName>
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Splash\Splash.png" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable\</RemoteDir>
+                        <RemoteName>splash.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -482,13 +489,6 @@
                 <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile">
                     <Platform Name="Android">
                         <RemoteName>classes.dex</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Splash\res\layout\splash_activity.xml" Class="File">
-                    <Platform Name="Android">
-                        <RemoteDir>res\layout\</RemoteDir>
-                        <RemoteName>splash_activity.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -518,10 +518,10 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Splash\Splash.png" Class="File">
+                <DeployFile LocalName="Splash\java\output\dex\classes.dex" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>res\drawable\</RemoteDir>
-                        <RemoteName>splash.png</RemoteName>
+                        <RemoteDir>classes\</RemoteDir>
+                        <RemoteName>classes.dex</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -839,7 +839,7 @@
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
-                <Platform value="Android" ActiveMobileDevice="02538733059009be">True</Platform>
+                <Platform value="Android">True</Platform>
                 <Platform value="iOSDevice">True</Platform>
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">True</Platform>
                 <Platform value="Win32">True</Platform>

@@ -1,0 +1,94 @@
+object FMain: TFMain
+  Left = 0
+  Top = 0
+  Border.Styling = False
+  Caption = 'Main'
+  ClientHeight = 567
+  ClientWidth = 384
+  Quality = HighPerformance
+  Visible = True
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMobile = True
+  DesignerWidth = 384
+  DesignerHeight = 592
+  DesignerDeviceName = 'Google Nexus 4'
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  object Rectangle1: TRectangle
+    Align = MostTop
+    ClipChildren = True
+    Fill.Color = xFF3767A2
+    Height = 47.000000000000000000
+    Margins.Left = -5.000000000000000000
+    Position.X = -5.000000000000000000
+    Sides = [Bottom]
+    Stroke.Color = xFF294181
+    Stroke.Thickness = 3.000000000000000000
+    Stroke.Join = Bevel
+    Width = 389.000000000000000000
+    object Image2: TImage
+      MultiResBitmap.Height = 48
+      MultiResBitmap.Width = 48
+      MultiResBitmap.LoadSize = 2
+      MultiResBitmap = <
+        item
+          Width = 48
+          Height = 48
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+            87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            004F494441546843EDD7B10D80400C04413FDD7E455F2E24EE008913F24C62A7
+            1B5EC170EB9C73F7FFA9BDF7EAF795ABEF6F0948139026000098CC224B139026
+            204D00003099459626204D409A80ACAA07830E0C2E65FDF1040000000049454E
+            44AE426082}
+          FileName = 
+            'C:\Users\LuizFernando\Desktop\TCY\Android Design - Icons 2013112' +
+            '0\Navigation_Drawer_Indicator\holo_light\drawable-xxhdpi\ic_draw' +
+            'er.png'
+        end>
+      Align = Left
+      Height = 47.000000000000000000
+      Width = 25.000000000000000000
+    end
+    object SpeedButton1: TSpeedButton
+      Action = actShowMenuLateral
+      StyledSettings = [Family, Style, Other]
+      Height = 48.000000000000000000
+      Position.X = 18.000000000000000000
+      TextSettings.Font.Size = 22.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Trailing
+      Width = 103.000000000000000000
+    end
+    object Text1: TText
+      Align = Right
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      Height = 27.000000000000000000
+      Margins.Bottom = 20.000000000000000000
+      Position.X = 136.000000000000000000
+      Text = 'Status'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.FontColor = claWhite
+      Width = 253.000000000000000000
+    end
+  end
+  object MainLayout: TLayout
+    Align = Client
+    Height = 520.000000000000000000
+    Width = 384.000000000000000000
+    TabOrder = 3
+  end
+  object actMenu: TActionList
+    Left = 280
+    Top = 8
+    object actShowMenuLateral: TAction
+      Text = 'Menu     '
+      OnExecute = actShowMenuLateralExecute
+    end
+  end
+end
