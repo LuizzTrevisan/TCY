@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="unsupported_os">Sorry, this app only supports the following
+    Android vesions:\n\n
+      - GingerBread MR1\n
+      - Ice Cream Sandwich MR1\n
+      - Jellybean (or later)\n\n
+    :o(</string>
+</resources>
