@@ -1,37 +1,15 @@
 object FrmMapGMaps: TFrmMapGMaps
   Align = Client
-  Height = 657.000000000000000000
-  Width = 529.000000000000000000
+  Height = 500.000000000000000000
+  Width = 428.000000000000000000
   TabOrder = 0
-  object TMSFMXWebGMaps1: TTMSFMXWebGMaps
-    Align = Client
-    Height = 657.000000000000000000
-    Width = 529.000000000000000000
-    Markers = <>
-    Polylines = <>
-    Polygons = <>
-    MapOptions.Language = lnPortuguese_Brazil
-    MapOptions.ZoomMap = 15
-    MapOptions.DefaultLatitude = 48.859040000000000000
-    MapOptions.DefaultLongitude = 2.294297000000000000
-    Directions = <>
-    StreetViewOptions.DefaultLatitude = 48.859040000000000000
-    StreetViewOptions.DefaultLongitude = 2.294297000000000000
-    ControlsOptions.ControlsType = ctAndroid
-    ControlsOptions.StreetViewControl.Visible = False
-    TabOrder = 0
-    Version = '1.8.0.2'
-    OnMarkerClick = TMSFMXWebGMaps1MarkerClick
-    OnMarkerDragEnd = TMSFMXWebGMaps1MarkerDragEnd
-    OnMapClick = TMSFMXWebGMaps1MapClick
-  end
   inline frMarkers1: TfrMarkers
     Align = Bottom
     Height = 201.000000000000000000
     Position.Y = 456.000000000000000000
     Visible = False
     Width = 529.000000000000000000
-    TabOrder = 7
+    TabOrder = 6
     OnResize = frMarkers1Resize
     inherited Layout1: TLayout
       Height = 201.000000000000000000
@@ -68,6 +46,30 @@ object FrmMapGMaps: TFrmMapGMaps
         end
       end
     end
+  end
+  object TMSFMXWebGMaps1: TTMSFMXWebGMaps
+    Height = 250.000000000000000000
+    Position.X = 24.000000000000000000
+    Position.Y = 56.000000000000000000
+    Width = 400.000000000000000000
+    Markers = <>
+    Polylines = <>
+    Polygons = <>
+    MapOptions.Language = lnPortuguese_Brazil
+    MapOptions.DefaultLatitude = 10.000000000000000000
+    MapOptions.DefaultLongitude = 20.000000000000000000
+    Directions = <>
+    StreetViewOptions.DefaultLatitude = 48.859040000000000000
+    StreetViewOptions.DefaultLongitude = 2.294297000000000000
+    ControlsOptions.ControlsType = ctZoomPan
+    ControlsOptions.MapTypeControl.Style = mtsDropDownMenu
+    ControlsOptions.StreetViewControl.Visible = False
+    ControlsOptions.OverviewMapControl.Visible = False
+    TabOrder = 9
+    Version = '1.8.0.2'
+    OnMarkerClick = TMSFMXWebGMaps1MarkerClick
+    OnMarkerDragEnd = TMSFMXWebGMaps1MarkerDragEnd
+    OnMapClick = TMSFMXWebGMaps1MapClick
   end
   object ClientDataSet1: TClientDataSet
     Aggregates = <>

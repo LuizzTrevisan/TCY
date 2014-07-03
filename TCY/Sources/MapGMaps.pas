@@ -11,9 +11,9 @@ uses
 
 type
   TFrmMapGMaps = class(TFrame)
-    TMSFMXWebGMaps1: TTMSFMXWebGMaps;
     ClientDataSet1: TClientDataSet;
     frMarkers1: TfrMarkers;
+    TMSFMXWebGMaps1: TTMSFMXWebGMaps;
     procedure TMSFMXWebGMaps1MapClick(Sender: TObject;
       Latitude, Longitude: Double; X, Y: Integer);
     procedure TMSFMXWebGMaps1MarkerDragEnd(Sender: TObject; MarkerTitle: string;
@@ -94,8 +94,8 @@ end;
 
 procedure TFrmMapGMaps.frMarkers1Resize(Sender: TObject);
 begin
-   frMarkers1.Button1.Width := frMarkers1.Rectangle3.Width / 2;
-   frMarkers1.Button2.Width := frMarkers1.Rectangle3.Width / 2;
+//   frMarkers1.Button1.Width := frMarkers1.Rectangle3.Width / 2;
+//   frMarkers1.Button2.Width := frMarkers1.Rectangle3.Width / 2;
 end;
 
 class function TFrmMapGMaps.getMe: TFrmMapGMaps;
@@ -110,6 +110,7 @@ procedure TFrmMapGMaps.TMSFMXWebGMaps1MapClick(Sender: TObject;
   Latitude, Longitude: Double; X, Y: Integer);
 begin
 
+  showmessage('aiosjd');
   ClientDataSet1.Append;
   ClientDataSet1.FieldByName('la').AsFloat := Latitude;
   ClientDataSet1.FieldByName('lo').AsFloat := Longitude;

@@ -8,7 +8,8 @@ uses
   FMX.Dialogs, FMX.StdCtrls, FMX.Effects, FMX.Filter.Effects,
   FMX.ListView.Types, FMX.ListView, FMX.Objects, FMX.VirtualKeyboard, FMX.Ani,
   FMX.Menus, System.Actions, FMX.ActnList, System.Math, FMX.Layouts,
-  FMX.ListBox, MainMenu, FMX.Edit, FMX.Notification;
+  FMX.ListBox, MainMenu, FMX.Edit, FMX.Notification, FMX.TMSWebGMapsWebBrowser,
+  FMX.TMSWebGMaps;
 
 type
   TFMain = class(TForm)
@@ -17,8 +18,8 @@ type
     SpeedButton1: TSpeedButton;
     actMenu: TActionList;
     actShowMenuLateral: TAction;
-    MainLayout: TLayout;
     Text1: TText;
+    TMSFMXWebGMaps1: TTMSFMXWebGMaps;
     procedure actShowMenuLateralExecute(Sender: TObject);
     procedure MenuAnimationInFinish(Sender: TObject);
     procedure rectFormMenuShowAnimationOutFinish(Sender: TObject);
@@ -29,6 +30,8 @@ type
     procedure FormVirtualKeyboardHidden(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure FormCreate(Sender: TObject);
+    procedure TMSFMXWebGMaps1MapClick(Sender: TObject; Latitude,
+      Longitude: Double; X, Y: Integer);
   private
     { Private declarations }
     FNeedRecalc: Boolean;
@@ -71,12 +74,14 @@ end;
 procedure TFMain.FormCreate(Sender: TObject);
 begin
   FNeedRecalc := True;
+  TMSFMXWebGMaps1.MapOptions.DefaultLatitude := 12;
+  TMSFMXWebGMaps1.MapOptions.DefaultLongitude := 40;
 end;
 
 procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
-  MainLayout.Align := TAlignLayout.Client;
+//  MainLayout.Align := TAlignLayout.Client;
   FNeedRecalc := True;
 end;
 
@@ -84,8 +89,8 @@ procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   if FNeedRecalc then begin
-    MainLayout.Align := TAlignLayout.Horizontal;
-    MainLayout.Height := MainLayout.Height - Bounds.Height;
+//    MainLayout.Align := TAlignLayout.Horizontal;
+//    MainLayout.Height := MainLayout.Height - Bounds.Height;
   end;
   FNeedRecalc := False;
 end;
@@ -112,6 +117,12 @@ end;
 procedure TFMain.rectFormMenuShowAnimationOutFinish(Sender: TObject);
 begin
   frMainMenu.Parent := nil;
+end;
+
+procedure TFMain.TMSFMXWebGMaps1MapClick(Sender: TObject; Latitude,
+  Longitude: Double; X, Y: Integer);
+begin
+showmessage('odas');
 end;
 
 end.

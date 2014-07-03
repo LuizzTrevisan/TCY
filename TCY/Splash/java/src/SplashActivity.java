@@ -26,7 +26,7 @@ public class SplashActivity extends Activity
 
   private int elapsed = 0;
 
-  private static int SPLASH_TIME_OUT = 3000;
+  private static int SPLASH_TIME_OUT = 1000;
 
   private static int SPLASH_INTERVAL = 100;
 
@@ -99,7 +99,12 @@ public class SplashActivity extends Activity
     {
       @Override
       public void run() {
-        try
+
+	  
+ 	  Intent launchIntent = new Intent();
+      launchIntent.setClassName(SplashActivity.this, "com.embarcadero.firemonkey.FMXNativeActivity");
+     
+  	  try
         {
           int elapsed = 0;
           while (SplashActivity.this.active && (elapsed < SPLASH_TIME_OUT))
@@ -108,20 +113,21 @@ public class SplashActivity extends Activity
             if (SplashActivity.this.active)
               elapsed += SPLASH_INTERVAL;
           }
-        }
+	    
+
+	
+		}
         catch (InterruptedException e)
         {
           // Nothing
         }
+		
         finally
         {
-          finish();
           if (SplashActivity.this.active)
-          {
-            Intent launchIntent = new Intent();
-            Log.d("Splash", "Launching the main activity now");
-            launchIntent.setClassName(SplashActivity.this, "com.embarcadero.firemonkey.FMXNativeActivity");
-            startActivity(launchIntent);
+          { 
+		    startActivity(launchIntent);
+            finish();
           }
         }
       }

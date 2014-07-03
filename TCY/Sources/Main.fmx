@@ -77,11 +77,22 @@ object FMain: TFMain
       Width = 253.000000000000000000
     end
   end
-  object MainLayout: TLayout
-    Align = Client
-    Height = 520.000000000000000000
-    Width = 384.000000000000000000
-    TabOrder = 3
+  object TMSFMXWebGMaps1: TTMSFMXWebGMaps
+    Height = 250.000000000000000000
+    Position.Y = 104.000000000000000000
+    Width = 400.000000000000000000
+    Markers = <>
+    Polylines = <>
+    Polygons = <>
+    MapOptions.DefaultLatitude = 48.859040000000000000
+    MapOptions.DefaultLongitude = 2.294297000000000000
+    Directions = <>
+    StreetViewOptions.DefaultLatitude = 48.859040000000000000
+    StreetViewOptions.DefaultLongitude = 2.294297000000000000
+    ControlsOptions.ControlsType = ctDefault
+    TabOrder = 6
+    Version = '1.8.0.2'
+    OnMapClick = TMSFMXWebGMaps1MapClick
   end
   object actMenu: TActionList
     Left = 280
