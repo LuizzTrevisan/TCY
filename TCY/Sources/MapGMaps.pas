@@ -14,8 +14,6 @@ type
     ClientDataSet1: TClientDataSet;
     frMarkers1: TfrMarkers;
     TMSFMXWebGMaps1: TTMSFMXWebGMaps;
-    procedure TMSFMXWebGMaps1MapClick(Sender: TObject;
-      Latitude, Longitude: Double; X, Y: Integer);
     procedure TMSFMXWebGMaps1MarkerDragEnd(Sender: TObject; MarkerTitle: string;
       IdMarker: Integer; Latitude, Longitude: Double);
     procedure frMarkers1Button1Click(Sender: TObject);
@@ -23,6 +21,8 @@ type
     procedure TMSFMXWebGMaps1MarkerClick(Sender: TObject; MarkerTitle: string;
       IdMarker: Integer; Latitude, Longitude: Double);
     procedure frMarkers1Resize(Sender: TObject);
+    procedure TMSFMXWebGMaps1MapClick(Sender: TObject; Latitude,
+      Longitude: Double; X, Y: Integer);
   private
     { Private declarations }
   public
@@ -62,10 +62,10 @@ begin
     end;
   end;
 
-//  LocationSensor1.Active := True;
+  // LocationSensor1.Active := True;
 
-//  TMSFMXWebGMaps1.MapOptions.DefaultLatitude :=  LocationSensor1.Sensor.Latitude;
-//  TMSFMXWebGMaps1.MapOptions.DefaultLongitude :=  LocationSensor1.Sensor.Longitude;
+   TMSFMXWebGMaps1.MapOptions.DefaultLatitude :=  20;
+   TMSFMXWebGMaps1.MapOptions.DefaultLongitude :=  30;
 
 end;
 
@@ -83,19 +83,21 @@ begin
 
   ClientDataSet1.SaveToFile(GetHomePath + '/Te.txt');
 
-  frMarkers1.Visible := False;
+  frMarkers1.Ocultar;
+  frMarkers1.Text1.Text := 'Clique no Mapa para Adicionar um Local';
 end;
 
 procedure TFrmMapGMaps.frMarkers1Button2Click(Sender: TObject);
 begin
   ClientDataSet1.Delete;
-  frMarkers1.Visible := False;
+  frMarkers1.Ocultar;
+  frMarkers1.Text1.Text := 'Clique no Mapa para Adicionar um Local';
 end;
 
 procedure TFrmMapGMaps.frMarkers1Resize(Sender: TObject);
 begin
-//   frMarkers1.Button1.Width := frMarkers1.Rectangle3.Width / 2;
-//   frMarkers1.Button2.Width := frMarkers1.Rectangle3.Width / 2;
+  // frMarkers1.Button1.Width := frMarkers1.Rectangle3.Width / 2;
+  // frMarkers1.Button2.Width := frMarkers1.Rectangle3.Width / 2;
 end;
 
 class function TFrmMapGMaps.getMe: TFrmMapGMaps;
@@ -106,23 +108,26 @@ begin
   Result := frameGMaps;
 end;
 
-procedure TFrmMapGMaps.TMSFMXWebGMaps1MapClick(Sender: TObject;
-  Latitude, Longitude: Double; X, Y: Integer);
+procedure TFrmMapGMaps.TMSFMXWebGMaps1MapClick(Sender: TObject; Latitude,
+  Longitude: Double; X, Y: Integer);
 begin
 
-  showmessage('aiosjd');
   ClientDataSet1.Append;
   ClientDataSet1.FieldByName('la').AsFloat := Latitude;
   ClientDataSet1.FieldByName('lo').AsFloat := Longitude;
   ClientDataSet1.Post;
 
-  frMarkers1.Visible := True;
+  frMarkers1.Text1.Text := 'Adicionando Novo Local';
+  frMarkers1.Mostrar;
+
 end;
 
 procedure TFrmMapGMaps.TMSFMXWebGMaps1MarkerClick(Sender: TObject;
   MarkerTitle: string; IdMarker: Integer; Latitude, Longitude: Double);
 begin
-  frMarkers1.Visible := True;
+
+  frMarkers1.Text1.Text := 'Editando Local';
+  frMarkers1.Mostrar;
 
 end;
 

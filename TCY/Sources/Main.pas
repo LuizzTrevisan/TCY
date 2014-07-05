@@ -9,7 +9,7 @@ uses
   FMX.ListView.Types, FMX.ListView, FMX.Objects, FMX.VirtualKeyboard, FMX.Ani,
   FMX.Menus, System.Actions, FMX.ActnList, System.Math, FMX.Layouts,
   FMX.ListBox, MainMenu, FMX.Edit, FMX.Notification, FMX.TMSWebGMapsWebBrowser,
-  FMX.TMSWebGMaps;
+  FMX.TMSWebGMaps, FMX.WebBrowser;
 
 type
   TFMain = class(TForm)
@@ -19,7 +19,11 @@ type
     actMenu: TActionList;
     actShowMenuLateral: TAction;
     Text1: TText;
-    TMSFMXWebGMaps1: TTMSFMXWebGMaps;
+    Layout1: TLayout;
+    GlowEffect1: TGlowEffect;
+    GlowEffect2: TGlowEffect;
+    GlowEffect3: TGlowEffect;
+    GlowEffect4: TGlowEffect;
     procedure actShowMenuLateralExecute(Sender: TObject);
     procedure MenuAnimationInFinish(Sender: TObject);
     procedure rectFormMenuShowAnimationOutFinish(Sender: TObject);
@@ -58,30 +62,32 @@ begin
     frMainMenu := TfrMainMenu.Create(Self);
 
   if Boolean(actShowMenuLateral.Tag) then begin
-    frMainMenu.Parent := Self;
+    frMainMenu.Parent := Layout1;
     if Assigned(frameGMaps) then
       frameGMaps.TMSFMXWebGMaps1.Visible := False;
+
     frMainMenu.BringToFront;
     Rectangle1.BringToFront;
+
     frMainMenu.MenuAnimationIn.Start;
   end else begin
+
     frMainMenu.MenuAnimationOut.Start;
     if Assigned(frameGMaps) then
       frameGMaps.TMSFMXWebGMaps1.Visible := True;
+
   end;
 end;
 
 procedure TFMain.FormCreate(Sender: TObject);
 begin
   FNeedRecalc := True;
-  TMSFMXWebGMaps1.MapOptions.DefaultLatitude := 12;
-  TMSFMXWebGMaps1.MapOptions.DefaultLongitude := 40;
 end;
 
 procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
-//  MainLayout.Align := TAlignLayout.Client;
+  Layout1.Align := TAlignLayout.Client;
   FNeedRecalc := True;
 end;
 
@@ -89,8 +95,8 @@ procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   if FNeedRecalc then begin
-//    MainLayout.Align := TAlignLayout.Horizontal;
-//    MainLayout.Height := MainLayout.Height - Bounds.Height;
+     Layout1.Align := TAlignLayout.Horizontal;
+     Layout1.Height := Layout1.Height - Bounds.Height;
   end;
   FNeedRecalc := False;
 end;
@@ -122,7 +128,7 @@ end;
 procedure TFMain.TMSFMXWebGMaps1MapClick(Sender: TObject; Latitude,
   Longitude: Double; X, Y: Integer);
 begin
-showmessage('odas');
+  ShowMessage('mapclick');
 end;
 
 end.

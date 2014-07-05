@@ -215,19 +215,13 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Android)'!=''">
+        <DCC_Optimize>true</DCC_Optimize>
         <AUP_EXPAND_STATUS_BAR>true</AUP_EXPAND_STATUS_BAR>
-        <AUP_ACCESS_MOCK_LOCATION>true</AUP_ACCESS_MOCK_LOCATION>
-        <AUP_ACCESS_WIFI_STATE>true</AUP_ACCESS_WIFI_STATE>
         <AUP_NFC>true</AUP_NFC>
-        <AUP_ACCESS_LOCATION_EXTRA_COMMANDS>true</AUP_ACCESS_LOCATION_EXTRA_COMMANDS>
         <DCC_DcuOutput>.\Android\Release\</DCC_DcuOutput>
         <DCC_ExeOutput>.\Android\</DCC_ExeOutput>
-        <AUP_ACCESS_NETWORK_STATE>true</AUP_ACCESS_NETWORK_STATE>
-        <DCC_DebugInfoInExe>false</DCC_DebugInfoInExe>
-        <DCC_Define>RELEASE;</DCC_Define>
         <DCC_DebugInformation>0</DCC_DebugInformation>
         <DCC_UnitSearchPath>TMS\Android;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_Optimize>true</DCC_Optimize>
         <VerInfo_Build>1</VerInfo_Build>
         <DCC_IOChecking>false</DCC_IOChecking>
         <VerInfo_Keys>package=com.Top.Das.Galaxia;label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=True;installLocation=preferExternal;largeHeap=False;theme=No TitleBar;hardwareAccelerated=true</VerInfo_Keys>
@@ -315,7 +309,6 @@
                     <Source Name="MainSource">TopDasGalaxia.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataSnapFireDAC200.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACCommon200.bpl">Embarcadero FireDAC Common Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDAC200.bpl">Embarcadero FireDAC Database Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACSqliteDriver200.bpl">Embarcadero FireDAC Sqlite Driver Components</Excluded_Packages>
@@ -334,7 +327,6 @@
                     <Excluded_Packages Name="$(BDSBIN)\FireDACIBDriver200.bpl">Embarcadero FireDAC IB Driver Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACMySQLDriver200.bpl">Embarcadero FireDAC MySQL Driver Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACADSDriver200.bpl">Embarcadero FireDAC ADS Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bindcomp200.bpl">Data Binding Expression Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\fmxFireDAC200.bpl">Embarcadero FireDAC FMX Forms Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\vclribbon200.bpl">Embarcadero Ribbon Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\VclSmp200.bpl">Embarcadero Sample Components</Excluded_Packages>
@@ -342,15 +334,12 @@
                     <Excluded_Packages Name="$(BDSBIN)\bindcompvcl200.bpl">Embarcadero LiveBindings Components VCL</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\vcldsnap200.bpl">Embarcadero Vcl DataSnap Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dsnap200.bpl">Embarcadero DataSnap Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\inetdbxpress200.bpl">(untitled)</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\inetdbbde200.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\inetdb200.bpl">Embarcadero Internet/World Wide Web database components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dbexpress200.bpl">Embarcadero dbExpress Database Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\DBXSqliteDriver200.bpl">Embarcadero Sqlite Client</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\DBXMySQLDriver200.bpl">Embarcadero MySQL Client</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\DBXInterBaseDriver200.bpl">Embarcadero InterBase Client</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dbxcds200.bpl">Embarcadero SimpleDataSet Component (DBX)</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bindcompdbx200.bpl">Data Binding Expression Components DBExpress</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\soapmidas200.bpl">Embarcadero SOAP Midas Runtime Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\soapserver200.bpl">Embarcadero SOAP Server Runtime Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dsnapcon200.bpl">Embarcadero DataSnap Connection Components</Excluded_Packages>
@@ -371,7 +360,6 @@
                     <Excluded_Packages Name="$(BDSBIN)\fmxdae200.bpl">Embarcadero FMX DAE Import Library</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\fmxase200.bpl">Embarcadero FMX ASE Import Library</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\svnui200.bpl">User interface code for subversion integration</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\svn200.bpl">Subversion integration</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bindcompfmx200.bpl">Embarcadero LiveBindings Components Firemonkey</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\tethering200.bpl">Tethering Component</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\vcldbx200.bpl">Embarcadero Compatibility Database Components</Excluded_Packages>
@@ -382,25 +370,19 @@
                     <Excluded_Packages Name="$(BDSBIN)\IndyIPClient200.bpl">Embarcadero IP Indy Client Implementation</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\IndyIPCommon200.bpl">Embarcadero IP Indy Common Implementation</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\IndySystem200.bpl">Indy 10 System</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\IndyProtocols200.bpl">Indy 10 Protocols</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\IndyCore200.bpl">Indy 10 Core</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\IndyIPServer200.bpl">Embarcadero IP Indy Server Implementation</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\RESTBackendComponents200.bpl">Embarcadero REST-Backend Components (Runtime)</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\VCLRESTComponents200.bpl">Embarcadero REST Client Components VCL</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\RESTComponents200.bpl">Embarcadero REST Client Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\CloudService200.bpl">Embarcadero Cloud Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dsnapxml200.bpl">Embarcadero XML Transform Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\DatasnapConnectorsFreePascal200.bpl">Embarcadero DataSnap Free Pascal Connector</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\DataSnapConnectors200.bpl">Embarcadero DataSnap Connector Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\DataSnapProviderClient200.bpl">Embarcadero DBExpress DataSnap Provider Client Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FMXTeeUI9200.bpl">TeeChart FMX User Interface</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FMXTee9200.bpl">TeeChart for FireMonkey</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\TeeUI9200.bpl">TeeChart User Interface Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\TeeDB9200.bpl">TeeChart Database Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\Tee9200.bpl">TeeChart Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACDBXDriver200.bpl">Embarcadero FireDAC DBX Driver Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACDSDriver200.bpl">Embarcadero FireDAC DataSnap Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\office2K200.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl\DCEF_XE5.bpl">File C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl\DCEF_XE5.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDXE6.bpl">File C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDXE6.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDEDXE6.bpl">File C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDEDXE6.bpl not found</Excluded_Packages>
                 </Excluded_Packages>
@@ -426,6 +408,7 @@
                 <DeployFile LocalName="Splash\res\values\strings.xml" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\values\</RemoteDir>
+                        <Enabled>false</Enabled>
                         <RemoteName>strings.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -463,6 +446,7 @@
                 <DeployFile LocalName="Splash\res\layout\splash_activity.xml" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\layout\</RemoteDir>
+                        <Enabled>false</Enabled>
                         <RemoteName>splash_activity.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -476,6 +460,7 @@
                 <DeployFile LocalName="Splash\Splash.png" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\drawable\</RemoteDir>
+                        <Enabled>false</Enabled>
                         <RemoteName>splash.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -521,6 +506,7 @@
                 <DeployFile LocalName="Splash\java\output\dex\classes.dex" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>classes\</RemoteDir>
+                        <Enabled>false</Enabled>
                         <RemoteName>classes.dex</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -839,7 +825,7 @@
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
-                <Platform value="Android" ActiveMobileDevice="192.168.1.102:5555">True</Platform>
+                <Platform value="Android" ActiveMobileDevice="02538733059009be">True</Platform>
                 <Platform value="iOSDevice">True</Platform>
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">True</Platform>
                 <Platform value="Win32">True</Platform>

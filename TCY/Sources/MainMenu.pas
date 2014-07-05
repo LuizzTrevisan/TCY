@@ -65,8 +65,8 @@ procedure TfrMainMenu.ListBoxItem2Click(Sender: TObject);
 begin
   Main.FMain.actShowMenuLateral.Execute;
   MapGMaps.TFrmMapGMaps.getMe;
-  frameGMaps.Parent := Main.FMain;
-//  .MainLayout;
+  frameGMaps.frMarkers1.Ocultar;
+  frameGMaps.Parent := FMain.Layout1;
   frameGMaps.Visible := True;
 
 end;
