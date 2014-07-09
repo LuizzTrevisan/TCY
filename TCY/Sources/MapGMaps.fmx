@@ -1,100 +1,239 @@
-object FrmMapGMaps: TFrmMapGMaps
-  Align = Client
-  Height = 500.000000000000000000
-  Width = 428.000000000000000000
-  TabOrder = 0
-  inline frMarkers1: TfrMarkers
-    Align = Bottom
-    Height = 201.000000000000000000
-    Position.Y = 299.000000000000000000
-    Width = 428.000000000000000000
-    TabOrder = 6
-    OnResize = frMarkers1Resize
-    inherited Layout1: TLayout
-      Height = 201.000000000000000000
-      Width = 428.000000000000000000
-      inherited Rectangle2: TRectangle
-        Height = 175.000000000000000000
-        Width = 424.000000000000000000
-        inherited edInfo1: TClearingEdit
-          Width = 404.000000000000000000
-        end
-        inherited edInfo2: TClearingEdit
-          Width = 404.000000000000000000
-        end
-        inherited edTitle: TClearingEdit
-          Width = 404.000000000000000000
-        end
-        inherited Rectangle3: TRectangle
-          Position.Y = 129.000000000000000000
-          Width = 420.000000000000000000
-          inherited Button1: TButton
-            Position.X = 200.000000000000000000
-            Width = 217.000000000000000000
-            OnClick = frMarkers1Button1Click
-          end
-          inherited Button2: TButton
-            Width = 190.000000000000000000
-            OnClick = frMarkers1Button2Click
-          end
-        end
-      end
-      inherited Rectangle1: TRectangle
-        Width = 428.000000000000000000
-        inherited Text1: TText
-          Width = 428.000000000000000000
-        end
+inherited FMapGMaps: TFMapGMaps
+  Caption = 'FMain1'
+  OnResize = FormResize
+  DesignerMobile = True
+  DesignerWidth = 384
+  DesignerHeight = 592
+  DesignerDeviceName = 'Google Nexus 4'
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  inherited rectMenuLateral: TRectangle
+    inherited rectTop: TRectangle
+      inherited imgTop: TImage
+        MultiResBitmap.Height = 108
+        MultiResBitmap.Width = 205
       end
     end
   end
-  object TMSFMXWebGMaps1: TTMSFMXWebGMaps
+  inherited Rectangle1: TRectangle
+    inherited txtStatus: TText [0]
+      object GlowEffect8: TGlowEffect
+        Softness = 0.100000001490116100
+        GlowColor = claBlack
+        Opacity = 1.000000000000000000
+      end
+    end
+    inherited Image2: TImage [1]
+      MultiResBitmap.Height = 48
+      MultiResBitmap.Width = 48
+      MultiResBitmap.LoadSize = 2
+    end
+  end
+  object Timer1: TTimer [2]
+    Interval = 8000
+    OnTimer = Timer1Timer
+    Left = 176
+    Top = 272
+  end
+  object TMSFMXWebGMaps1: TTMSFMXWebGMaps [3]
     Align = Client
-    Height = 299.000000000000000000
-    Width = 428.000000000000000000
+    Height = 386.000000000000000000
+    Width = 384.000000000000000000
     Markers = <>
     Polylines = <>
     Polygons = <>
-    MapOptions.ZoomMap = 15
     MapOptions.DefaultLatitude = 48.859040000000000000
     MapOptions.DefaultLongitude = 2.294297000000000000
     Directions = <>
     StreetViewOptions.DefaultLatitude = 48.859040000000000000
     StreetViewOptions.DefaultLongitude = 2.294297000000000000
-    TabOrder = 11
+    TabOrder = 9
     Version = '1.8.0.2'
     OnMarkerClick = TMSFMXWebGMaps1MarkerClick
+    OnMarkerDragEnd = TMSFMXWebGMaps1MarkerDragEnd
     OnMapClick = TMSFMXWebGMaps1MapClick
+  end
+  object rectMarkers: TRectangle [4]
+    Align = Bottom
+    Height = 134.000000000000000000
+    Position.Y = 433.000000000000000000
+    Width = 384.000000000000000000
+    object rectMarkersTop: TRectangle
+      Align = MostTop
+      Fill.Color = xFF3767A2
+      Height = 38.000000000000000000
+      Margins.Left = -10.000000000000000000
+      Margins.Right = -10.000000000000000000
+      Position.X = -10.000000000000000000
+      Sides = [Bottom]
+      Stroke.Color = xFF294181
+      Stroke.Thickness = 4.000000000000000000
+      Stroke.Join = Bevel
+      Width = 404.000000000000000000
+      object Image3: TImage
+        MultiResBitmap = <
+          item
+            Width = 96
+            Height = 96
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+              38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              072A49444154785EED9C2D701B4714C7FD5960EACEF89B14B8A020B66C031704
+              3424A0A1210509E84C27A4A06175615B16ECE94C414C0A4A0A12D00207B4C0C0
+              B66C83828604D823BB4005062EA865F7FF3F3D6974A7FBD893EEDD4AC9FBCD68
+              6E77EDDBDB7D6FF7BD7DAB3D8D18866118866118866118866118EF0CA3721D2A
+              D6D6D6A6C6C6C616251BB0BFBFFF5A9243C5985C870A0AFFE6E6E669E747FE34
+              740CA502DE264C019E310578C614E0195380674C019E310578662802B18D8D8D
+              E5EBEBEB0F474747197C4DE1BADCFC4B98DBDB5B066357B89E4D4C4CFC350CC1
+              D9C02A6075757513825EE1478A7A02CA38E6E7E8E8684F8A068A815200B71810
+              D5DE43A4FB09B253CDD2C2B842DDAF50F7EEE1E1E19594796760148011FF4049
+              F05102456046BC90BC57BC2B607D7D7D0926E211924BCD9244EAB4F1F8D469DF
+              A52C84F88969F111D3CDD2444EF17F3B070707A792F782570560D4D3DC3C946C
+              1C758CD65D08FC180EB52E654EC0714F43212BA8FF1EB289CA40FD3F6336EC4A
+              B674BC29A052A93CC608DC946C088EF4F1F1F11745AD62B88A6A341A0F646674
+              81E7ED55ABD5E7922D95D21540478B0E3F4910C61546EC0E047F2CF942812256
+              30E269EEBAFC0C958E366D97EDA04B0FC492848F720A7D4B4BF844EADE926785
+              609BD836C99646A93320C9ECF8B0C349FE074A28D51C8DCB551DE9F07DC9B681
+              F09F43F8BF4BB6342E2E2EDECCCECED6312042811EF24B28FF977F9722554A51
+              00979AE858D7F416E17B8B5021E4B304257CB4B0B07052ABD52EA5488D527C00
+              A6351D5F08313BDEB707D806B645B26DE2DAAC81BA0F9008F753C906D009C2CE
+              6E4BD609D9A6B8C3D14A3381A2E8DA9E81DA29EBC6F34EF2AE66E09FB83808CD
+              043CEF2514A41A31AB2A8042C3E53B7C3A977D14CC96AB807ADC1FCABDEF5344
+              5B7B41D507C0BEDEA73D956C0084F2A36BF8CF753B46F45752C764B3D48949DC
+              C3A5EEDDC5C5C5BF61CB2F9AC5C99C9F9FFF87F65E4666C12414790D5FA1B6AD
+              ADEA0364D4B681305FBBAEF361BA36D1793A6ED7511F0767CF13D625F954E80F
+              D846C90644FB50346A0A904E8784C7ED0549A6C27BD1F1C792ED1BD6E5AA8498
+              364EB9DEDB0B6A0A883A345077D9DBA1D92952F82D5827EB966C22D2C6D0C65F
+              4C5F0AA33405C0146446BAE270D5967FAC5B9C6D2AD1B60E9D02B8FB28C936DC
+              52966422E838B78EFBB1F959042B2A492712D7D6B83E15818A02F8C588245BD0
+              FCA4EEE773646A3B3CC26764CD02696BA8BD317D2A04150560CA868E8E475716
+              716064DEC14573F4B708023A4927126D73B44F45A1E5034282446752473FD1B4
+              B3515C9E15D36695C1A11209638AFF20C9004CFB67592B20DCF33D2E59DFE316
+              451DD1EDD7928E85361F3325F4DE01FB21C958F0FF6779A3E6DC0A886B58168E
+              0A08294D1B08EA0B49C6A2D5CF286ACB50C30D5380674C019EC9ED0364BD9EBA
+              248B735E6F8313CEF21BBD907B3B9ADBB6B55AAD9EF6999B9B0B4EA8C92D238D
+              46E39FAC2D5DDCB38C7B6625AB0AD7F8E8C7816463999999F918ED6947BF724F
+              E1DFE06999A0D052AC531949A0834EDBD445E0F2AC9836AB7C29A3A20074F04C
+              92019D23290998A9135CD4BE79EA8087BFF8AC54A26D8EF6A928541410737876
+              1A36357516308081CD7D255935F88CAC6049DA1A6A6FD281E07E5151409CC3E5
+              415949268291C96D60CD59C0D19FB92D1ED7D6BC01962B6ACBD0A89D45C733B7
+              813932F17F3B922D1CD4ED74F633DA564DFF549A0200CD50A62FC0483B869928
+              FC6820EB7419C56823477FC8FC0CA502E4D05568B4F188B8245391C352852981
+              75497B32411BA333F5CAF5DE5E505300A1C39364005716794E28D06420D98F4F
+              A0497BE62A40B62DBAFA89F6A168541580CE773955943D64342DD954688E70D9
+              82105EE29A47115C51F11E1E7777729E12E1474F4B3B39ED7E503D9825879DDE
+              8B8CAA49D8D4D9AC48B405EB60143D3F3FFF07841A1CB0427D3CA4155562EB1D
+              B25FF1F79FAAD5EA9FBC57FE960922F1CF715FE83D353CEF37D6235915D4CF86
+              128CAE6F708976CEEBBB599DC0F4C4BD2B708A15D3B7925643D504B5C0C8EA5A
+              5AB2C39A079E5C611B62841FDB660D4A793FA056AB5DF2A507742A744E14F915
+              9ECFE7397D292A15117ED72130CE4E981EB5A56727A5288040C86F6067DF8FDA
+              595142696FA4B410B3F39964DBC087ECC134FE2259754AF1019D542A95A7107A
+              5740C66007E53B2E916A3F70B583673DA2E2A5A80D9D38467EEA17EF4553DA0C
+              6881D5CC093AFA0104108A3691E777017779445CCB24D1E4E0395FE2D3F5563E
+              858FF2ED3C2BA722287D06B47078517B57E280BEE1F602235C3C2F762B04CF7B
+              775ED4EE44ECB0FD54814F0AFCB18E29089C6F63DA8F75F4026683FD5C8D6FB8
+              428170F2BE90E74AEE17F7CA60A014D089AC58EC27CB06017E91C3F3F95046EB
+              47FB826BF0C70EE82370B11FED2B0398ABDC27B007915236E38C644C019E3105
+              78C614E0195380674C019E3105786668E380E829BB9B1EDE50340CC3300CC330
+              0CC3300CC3308CF21819F91F432FD82EC91730C70000000049454E44AE426082}
+          end>
+        Align = Right
+        Height = 34.000000000000000000
+        Margins.Right = 12.000000000000000000
+        Margins.Bottom = 4.000000000000000000
+        Position.X = 354.000000000000000000
+        Width = 38.000000000000000000
+        OnClick = Image3Click
+        object AniIndicator1: TAniIndicator
+          Align = Client
+          Height = 14.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Width = 18.000000000000000000
+        end
+      end
+      object Text2: TText
+        Align = Client
+        Height = 38.000000000000000000
+        Width = 354.000000000000000000
+        object GlowEffect7: TGlowEffect
+          Softness = 0.100000001490116100
+          GlowColor = claBlack
+          Opacity = 1.000000000000000000
+        end
+      end
+    end
+    object Edit1: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Top
+      TabOrder = 1
+      Position.Y = 48.000000000000000000
+      Width = 384.000000000000000000
+      Height = 32.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+    end
+    object Rectangle2: TRectangle
+      Align = Bottom
+      Height = 43.000000000000000000
+      Position.Y = 91.000000000000000000
+      Sides = []
+      Width = 384.000000000000000000
+      object Button1: TButton
+        Align = Right
+        Height = 43.000000000000000000
+        Position.X = 216.000000000000000000
+        TabOrder = 0
+        Text = 'Button1'
+        Width = 168.000000000000000000
+        OnClick = Button1Click
+      end
+      object Button2: TButton
+        Align = Left
+        Height = 43.000000000000000000
+        TabOrder = 1
+        Text = 'Button1'
+        Width = 161.000000000000000000
+        OnClick = Button2Click
+      end
+    end
+  end
+  object LocationSensor1: TLocationSensor
+    OnLocationChanged = LocationSensor1LocationChanged
+    Left = 104
+    Top = 104
   end
   object ClientDataSet1: TClientDataSet
     Aggregates = <>
     FieldDefs = <
       item
-        Name = 'lo'
+        Name = 'la'
         DataType = ftFloat
       end
       item
-        Name = 'la'
+        Name = 'lo'
         DataType = ftFloat
       end
       item
         Name = 'Title'
         DataType = ftString
         Size = 20
-      end
-      item
-        Name = 'Info1'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'Info2'
-        DataType = ftString
-        Size = 20
       end>
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 176
-    Top = 248
+    Left = 184
+    Top = 112
+    object ClientDataSet1la: TFloatField
+      FieldName = 'la'
+    end
+    object ClientDataSet1lo: TFloatField
+      FieldName = 'lo'
+    end
+    object ClientDataSet1Title: TStringField
+      FieldName = 'Title'
+    end
   end
 end
