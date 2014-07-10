@@ -9,8 +9,8 @@ uses
   Main, System.Actions, FMX.ActnList, FMX.Objects, FMX.Effects, FMX.Layouts,
   CacheLayout, System.Sensors, FMX.Edit, FMX.TMSWebGMapsWebBrowser,
   FMX.TMSWebGMaps, System.Sensors.Components, Data.DB, Datasnap.DBClient,
-  FMX.ListBox, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
-  System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
+  FMX.ListBox, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, FMX.ListView.Types, FMX.ListView;
 
 type
@@ -30,7 +30,6 @@ type
     Button2: TButton;
     Text2: TText;
     Image3: TImage;
-    AniIndicator1: TAniIndicator;
     Image1: TImage;
     BindingsList1: TBindingsList;
     ListView1: TListView;
@@ -53,6 +52,7 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure Image3Click(Sender: TObject);
     procedure Image1Click(Sender: TObject);
+    procedure ListView1DeleteItem(Sender: TObject; AIndex: Integer);
   private
     { Private declarations }
     procedure Mostrar;
@@ -141,7 +141,7 @@ begin
   inherited;
 
   Image1.Tag := not Image1.Tag;
-  if Boolean(Image1.Tag) then  begin
+  if Boolean(Image1.Tag) then begin
     Text2.Text := 'Lista de Marcadores ';
     Rectangle1.Visible := False;
     Rectangle2.Visible := False;
@@ -171,8 +171,14 @@ begin
   inherited;
   if not LocationSensor1.Active then begin
     LocationSensor1.Active := True;
-    AniIndicator1.Enabled := True;
   end;
+end;
+
+procedure TFMapGMaps.ListView1DeleteItem(Sender: TObject; AIndex: Integer);
+begin
+  inherited;
+  ClientDataSet1.RecNo := AIndex;
+  ClientDataSet1.Delete;
 end;
 
 procedure TFMapGMaps.LocationSensor1LocationChanged(Sender: TObject;
@@ -180,7 +186,6 @@ procedure TFMapGMaps.LocationSensor1LocationChanged(Sender: TObject;
 begin
   inherited;
   LocationSensor1.Active := False;
-  AniIndicator1.Enabled := False;
 end;
 
 procedure TFMapGMaps.Mostrar;

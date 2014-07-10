@@ -19,11 +19,9 @@ object FMain: TFMain
   DesignerDeviceName = 'Google Nexus 4'
   DesignerOrientation = 0
   DesignerOSVersion = ''
-  object ScaledLayout1: TScaledLayout
+  object RectClient: TRectangle
     Align = Client
     Height = 520.000000000000000000
-    OriginalWidth = 384.000000000000000000
-    OriginalHeight = 520.000000000000000000
     Width = 384.000000000000000000
     object rectMenuLateral: TRectangle
       Align = Left

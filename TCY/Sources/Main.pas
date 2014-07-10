@@ -35,11 +35,11 @@ type
     ListBoxGroupHeader1: TListBoxGroupHeader;
     ListBoxItem3: TListBoxItem;
     ListBoxItem2: TListBoxItem;
-    GlowEffect6: TGlowEffect;
     ListBox2: TListBox;
     ListBoxItem1: TListBoxItem;
     ListBoxItem4: TListBoxItem;
-    ScaledLayout1: TScaledLayout;
+    GlowEffect6: TGlowEffect;
+    RectClient: TRectangle;
     procedure actShowMenuLateralExecute(Sender: TObject);
     procedure MenuAnimationInFinish(Sender: TObject);
     procedure FormVirtualKeyboardShown(Sender: TObject;
@@ -89,7 +89,7 @@ procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   FNeedRecalc := True;
-  ScaledLayout1.Height := ScaledLayout1.Height + Bounds.Height;
+  RectClient.Align := TAlignLayout.Client;
   Showmessage('hidden');
 end;
 
@@ -97,8 +97,10 @@ procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   Showmessage('Show');
-  if FNeedRecalc then
-    ScaledLayout1.Height := ScaledLayout1.Height - Bounds.Height;
+  if FNeedRecalc then begin
+    RectClient.Align := TAlignLayout.Top;
+    RectClient.Height := RectClient.Height - Bounds.Height;
+  end;
 
   FNeedRecalc := False;
 end;
