@@ -9,7 +9,9 @@ uses
   Main, System.Actions, FMX.ActnList, FMX.Objects, FMX.Effects, FMX.Layouts,
   CacheLayout, System.Sensors, FMX.Edit, FMX.TMSWebGMapsWebBrowser,
   FMX.TMSWebGMaps, System.Sensors.Components, Data.DB, Datasnap.DBClient,
-  FMX.ListBox;
+  FMX.ListBox, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
+  Data.Bind.DBScope, FMX.ListView.Types, FMX.ListView;
 
 type
   TFMapGMaps = class(TFMain)
@@ -22,15 +24,19 @@ type
     TMSFMXWebGMaps1: TTMSFMXWebGMaps;
     rectMarkers: TRectangle;
     rectMarkersTop: TRectangle;
-    Image3: TImage;
-    AniIndicator1: TAniIndicator;
     Edit1: TEdit;
     Rectangle2: TRectangle;
     Button1: TButton;
     Button2: TButton;
     Text2: TText;
-    GlowEffect7: TGlowEffect;
-    GlowEffect8: TGlowEffect;
+    Image3: TImage;
+    AniIndicator1: TAniIndicator;
+    Image1: TImage;
+    BindingsList1: TBindingsList;
+    ListView1: TListView;
+    BindSourceDB1: TBindSourceDB;
+    LinkListControlToField1: TLinkListControlToField;
+    Rectangle3: TRectangle;
     procedure FormResize(Sender: TObject);
     procedure TMSFMXWebGMaps1MapClick(Sender: TObject;
       Latitude, Longitude: Double; X, Y: Integer);
@@ -46,6 +52,7 @@ type
     procedure actShowMenuLateralExecute(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Image3Click(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
   private
     { Private declarations }
     procedure Mostrar;
@@ -108,7 +115,6 @@ begin
         ClientDataSet1.FieldByName('Title').AsString, '', True, True, True,
         False, True, 0).MapLabel.Text := 'MapLabel:' +
         ClientDataSet1.FieldByName('Title').AsString;
-      showmessage('add');
       ClientDataSet1.Next;
     end;
   end;
@@ -120,7 +126,7 @@ begin
   inherited;
   ClientDataSet1.Close;
   ClientDataSet1.CreateDataSet;
-
+  Ocultar;
 end;
 
 procedure TFMapGMaps.FormResize(Sender: TObject);
@@ -128,6 +134,36 @@ begin
   inherited;
   Button1.Width := Self.Width / 2 - 5;
   Button2.Width := Button1.Width - 5;
+end;
+
+procedure TFMapGMaps.Image1Click(Sender: TObject);
+begin
+  inherited;
+
+  Image1.Tag := not Image1.Tag;
+  if Boolean(Image1.Tag) then  begin
+    Text2.Text := 'Lista de Marcadores ';
+    Rectangle1.Visible := False;
+    Rectangle2.Visible := False;
+    Edit1.Visible := False;
+    TMSFMXWebGMaps1.Visible := False;
+    rectMarkers.Align := TAlignLayout.Client;
+    Rectangle3.Sides := [TSide.Bottom];
+    ListView1.Visible := True;
+  end else begin
+    if Boolean(actShowMenuLateral.Tag) then
+      actShowMenuLateral.Execute;
+    Text2.Text := 'Clique no Mapa para Adicionar um Marcador ';
+    Rectangle1.Visible := True;
+    Rectangle2.Visible := True;
+    Edit1.Visible := True;
+    rectMarkers.Align := TAlignLayout.Bottom;
+    TMSFMXWebGMaps1.Visible := True;
+    Rectangle3.Sides := [];
+    ListView1.Visible := False;
+    Ocultar;
+  end;
+
 end;
 
 procedure TFMapGMaps.Image3Click(Sender: TObject);
@@ -145,9 +181,6 @@ begin
   inherited;
   LocationSensor1.Active := False;
   AniIndicator1.Enabled := False;
-  AniIndicator1.Visible := False;
-
-  txtStatus.Text := newlocation.Latitude.ToString() + ' ' + newlocation.Longitude.ToString();
 end;
 
 procedure TFMapGMaps.Mostrar;
@@ -171,17 +204,19 @@ procedure TFMapGMaps.TMSFMXWebGMaps1MapClick(Sender: TObject;
   Latitude, Longitude: Double; X, Y: Integer);
 begin
   inherited;
-  ClientDataSet1.Append;
+
+  if ClientDataSet1.State <> dsInsert then
+    ClientDataSet1.Append;
+
   ClientDataSet1.FieldByName('la').AsFloat := Latitude;
   ClientDataSet1.FieldByName('lo').AsFloat := Longitude;
   ClientDataSet1.Post;
 
-  if rectMenuLateral.Visible then
+  if Boolean(actShowMenuLateral.Tag) then
     actShowMenuLateral.Execute;
 
   Text2.Text := 'Adicionando Novo Local';
   Mostrar;
-
 end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1MarkerClick(Sender: TObject;

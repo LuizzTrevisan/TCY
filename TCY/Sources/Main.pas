@@ -7,7 +7,7 @@ uses
   System.Variants, FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics,
   FMX.Dialogs, FMX.StdCtrls, FMX.Effects, FMX.Filter.Effects,
   FMX.ListView.Types, FMX.ListView, FMX.Objects, FMX.VirtualKeyboard, FMX.Ani,
-  FMX.Menus,  System.Actions, FMX.ActnList, System.Math, FMX.Layouts,
+  FMX.Menus, System.Actions, FMX.ActnList, System.Math, FMX.Layouts,
   FMX.ListBox, FMX.Edit, FMX.Notification, FMX.TMSWebGMapsWebBrowser,
   FMX.TMSWebGMaps, FMX.WebBrowser, CacheLayout;
 
@@ -39,6 +39,7 @@ type
     ListBox2: TListBox;
     ListBoxItem1: TListBoxItem;
     ListBoxItem4: TListBoxItem;
+    ScaledLayout1: TScaledLayout;
     procedure actShowMenuLateralExecute(Sender: TObject);
     procedure MenuAnimationInFinish(Sender: TObject);
     procedure FormVirtualKeyboardShown(Sender: TObject;
@@ -88,15 +89,17 @@ procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   FNeedRecalc := True;
-  FMain.SetBounds(0,0,FMain.Width, FMain.Height + Bounds.Height);
+  ScaledLayout1.Height := ScaledLayout1.Height + Bounds.Height;
+  Showmessage('hidden');
 end;
 
 procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
-  if FNeedRecalc then begin
-    FMain.SetBounds(0,0,FMain.Width, FMain.Height - Bounds.Height);
-  end;
+  Showmessage('Show');
+  if FNeedRecalc then
+    ScaledLayout1.Height := ScaledLayout1.Height - Bounds.Height;
+
   FNeedRecalc := False;
 end;
 
