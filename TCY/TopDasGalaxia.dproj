@@ -222,7 +222,7 @@
         <DCC_DcuOutput>.\Android\Release\</DCC_DcuOutput>
         <DCC_ExeOutput>.\Android\</DCC_ExeOutput>
         <DCC_DebugInformation>0</DCC_DebugInformation>
-        <DCC_UnitSearchPath>C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\CacheLayout\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\CacheLayout\Source;C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\ProgressDialogs\Library;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Build>1</VerInfo_Build>
         <DCC_IOChecking>false</DCC_IOChecking>
         <VerInfo_Keys>package=com.Top.Das.Galaxia;label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=True;installLocation=preferExternal;largeHeap=False;theme=No TitleBar;hardwareAccelerated=true</VerInfo_Keys>
@@ -273,7 +273,7 @@
         <DCCReference Include="Sources\Main.pas">
             <Form>FMain</Form>
         </DCCReference>
-        <DCCReference Include="Sources\MapGmaps.pas">
+        <DCCReference Include="Sources\MapGMaps.pas">
             <Form>FMapGMaps</Form>
             <FormType>fmx</FormType>
         </DCCReference>
@@ -371,9 +371,6 @@
                     <Excluded_Packages Name="$(BDSBIN)\TeeUI9200.bpl">TeeChart User Interface Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACDBXDriver200.bpl">Embarcadero FireDAC DBX Driver Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACDSDriver200.bpl">Embarcadero FireDAC DataSnap Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl\DCEF_XE5.bpl">File C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl\DCEF_XE5.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDXE6.bpl">File C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDXE6.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDEDXE6.bpl">File C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDEDXE6.bpl not found</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>

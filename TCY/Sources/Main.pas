@@ -47,6 +47,7 @@ type
     procedure FormVirtualKeyboardHidden(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure FormCreate(Sender: TObject);
+    procedure ListBoxItem2Click(Sender: TObject);
   private
     { Private declarations }
     FNeedRecalc: Boolean;
@@ -96,13 +97,17 @@ end;
 procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
-  Showmessage('Show');
-  if FNeedRecalc then begin
-    RectClient.Align := TAlignLayout.Top;
-    RectClient.Height := RectClient.Height - Bounds.Height;
-  end;
+  RectClient.Align  := TAlignLayout.Top;
+  RectClient.Height := Self.Height - Bounds.Height;
+end;
 
-  FNeedRecalc := False;
+procedure TFMain.ListBoxItem2Click(Sender: TObject);
+begin
+
+  if not Assigned(FMapGMaps) then
+    Application.CreateForm(TFMapGMaps,FMapGMaps);
+  FMapGMaps.Show;
+
 end;
 
 procedure TFMain.MenuAnimationInFinish(Sender: TObject);

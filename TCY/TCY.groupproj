@@ -15,6 +15,12 @@
         <Projects Include="CacheLayout\Source\CacheLayoutDesigntime.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="ProgressDialogs\Design\dclfgx.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ProgressDialogs\Library\fgx.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +65,32 @@
     <Target Name="CacheLayoutDesigntime:Make">
         <MSBuild Projects="CacheLayout\Source\CacheLayoutDesigntime.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dclfgx">
+        <MSBuild Projects="ProgressDialogs\Design\dclfgx.dproj"/>
+    </Target>
+    <Target Name="dclfgx:Clean">
+        <MSBuild Projects="ProgressDialogs\Design\dclfgx.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfgx:Make">
+        <MSBuild Projects="ProgressDialogs\Design\dclfgx.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="fgx">
+        <MSBuild Projects="ProgressDialogs\Library\fgx.dproj"/>
+    </Target>
+    <Target Name="fgx:Clean">
+        <MSBuild Projects="ProgressDialogs\Library\fgx.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="fgx:Make">
+        <MSBuild Projects="ProgressDialogs\Library\fgx.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6;TopDasGalaxia;CacheLayoutRuntime;CacheLayoutDesigntime"/>
+        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6;TopDasGalaxia;CacheLayoutRuntime;CacheLayoutDesigntime;dclfgx;fgx"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Clean;TopDasGalaxia:Clean;CacheLayoutRuntime:Clean;CacheLayoutDesigntime:Clean"/>
+        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Clean;TopDasGalaxia:Clean;CacheLayoutRuntime:Clean;CacheLayoutDesigntime:Clean;dclfgx:Clean;fgx:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Make;TopDasGalaxia:Make;CacheLayoutRuntime:Make;CacheLayoutDesigntime:Make"/>
+        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Make;TopDasGalaxia:Make;CacheLayoutRuntime:Make;CacheLayoutDesigntime:Make;dclfgx:Make;fgx:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

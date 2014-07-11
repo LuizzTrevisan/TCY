@@ -5,14 +5,14 @@ uses
   FMX.MobilePreview,
   FMX.Forms,
   Main in 'Sources\Main.pas' {FMain},
-  MapGmaps in 'Sources\MapGmaps.pas' {FMapGMaps};
+  MapGmaps in 'Sources\MapGMaps.pas' {FMapGMaps};
 
 {$R *.res}
 
 
 begin
   Application.Initialize;
-  Application.CreateForm(TFMapGMaps, FMapGMaps);
+  Application.CreateForm(TFMain, FMain);
   Application.Run;
 
 end.
