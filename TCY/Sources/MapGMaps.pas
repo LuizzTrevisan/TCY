@@ -239,7 +239,7 @@ end;
 
 procedure TFMapGMaps.Mostrar;
 begin
-  rectMarkers.Height := 133;
+  rectMarkers.Height := 140;
 end;
 
 procedure TFMapGMaps.Ocultar;
