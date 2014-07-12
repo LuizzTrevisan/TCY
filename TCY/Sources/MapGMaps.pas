@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants, FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms,
   FMX.Dialogs, FMX.StdCtrls, Main, System.Actions, FMX.ActnList, FMX.Objects,
-  FMX.Effects, FMX.Layouts, CacheLayout, System.Sensors, FMX.Edit,
+  FMX.Effects, FMX.Layouts, System.Sensors, FMX.Edit, System.Math,
   FMX.TMSWebGMapsWebBrowser, FMX.TMSWebGMaps, System.Sensors.Components,
   Data.DB, Datasnap.DBClient, FMX.ListBox, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
@@ -55,9 +55,9 @@ type
     procedure Image3Click(Sender: TObject);
     procedure Image1Click(Sender: TObject);
     procedure ListView1DeleteItem(Sender: TObject; AIndex: Integer);
-    procedure ClientDataSet1AfterPost(DataSet: TDataSet);
     procedure ClientDataSet1BeforeDelete(DataSet: TDataSet);
     procedure TMSFMXWebGMaps1DownloadFinish(Sender: TObject);
+    procedure ClientDataSet1BeforePost(DataSet: TDataSet);
   private
     { Private declarations }
     Operacao: MarkerOpcao;
@@ -84,7 +84,9 @@ end;
 procedure TFMapGMaps.Button1Click(Sender: TObject);
 begin
   inherited;
-  Operacao := MarkerOpcao.Adicionando;
+  if Operacao = MarkerOpcao.Nenhuma then
+    Operacao := MarkerOpcao.Adicionando;
+
   ClientDataSet1.Edit;
   ClientDataSet1Title.AsString := Edit1.Text;
   ClientDataSet1.Post;
@@ -117,48 +119,80 @@ begin
   end else begin
     ClientDataSet1.Close;
     ClientDataSet1.CreateDataSet;
+    ClientDataSet1.EmptyDataSet;
   end;
 
-//  ClientDataSet1.First;
-//  while not ClientDataSet1.eof do begin
-//    ClientDataSet1.Edit;
-//    ClientDataSet1.Post;
-//    ClientDataSet1.Next;
-//  end;
+  if (ClientDataSet1.RecordCount > 0) then begin
+
+    ClientDataSet1.First;
+    while not ClientDataSet1.eof do begin
+      ClientDataSet1.Edit;
+      ClientDataSet1.Post;
+      ClientDataSet1.Next;
+    end;
+  end;
 
 end;
 
-procedure TFMapGMaps.ClientDataSet1AfterPost(DataSet: TDataSet);
+procedure TFMapGMaps.ClientDataSet1BeforeDelete(DataSet: TDataSet);
 var
-  vMarker: TMarker;
+  i: Integer;
 begin
   inherited;
-  // if ClientDataSet1.State = TDataSetState.dsInsert then begin
+  for i := 0 to TMSFMXWebGMaps1.Markers.Count - 1 do
+    if TMSFMXWebGMaps1.Markers[i].Tag = ClientDataSet1Index.AsInteger then begin
+      TMSFMXWebGMaps1.Markers.Delete(i);
+      Break;
+    end;
+end;
+
+procedure TFMapGMaps.ClientDataSet1BeforePost(DataSet: TDataSet);
+var
+  vMarker: TMarker;
+  i: Integer;
+begin
+  inherited;
+    showmessage(ClientDataSet1la.AsFloat.ToString() + ' ' +
+      ClientDataSet1lo.AsFloat.ToString());
   if Operacao = MarkerOpcao.Adicionando then begin
 
     if fgProgressDialog1.Progress < 100 then
       fgProgressDialog1.Progress :=
         ((ClientDataSet1.RecNo / ClientDataSet1.RecordCount) * 90) + 10;
 
-    vMarker := TMSFMXWebGMaps1.Markers.Add(ClientDataSet1.FieldByName('la')
-      .AsFloat, ClientDataSet1lo.AsFloat, ClientDataSet1Title.AsString, '',
-      True, True, True, False, True, 0);
+    vMarker := TMSFMXWebGMaps1.Markers.Add(ClientDataSet1la.AsFloat,
+      ClientDataSet1lo.AsFloat, ClientDataSet1Title.AsString, '', True, True,
+      True, False, True, 0);
     vMarker.MapLabel.Text := 'MapLabel:' + ClientDataSet1Title.AsString;
 
-    Operacao := MarkerOpcao.Nenhuma;
-    ClientDataSet1.Edit;
-    ClientDataSet1Index.AsInteger := vMarker.Index;
-    ClientDataSet1.Post;
-    Operacao := MarkerOpcao.Adicionando
+    if ClientDataSet1Index.AsInteger <= 0 then begin
+      Operacao := MarkerOpcao.Nenhuma;
+      ClientDataSet1.Edit;
+      if TMSFMXWebGMaps1.Markers.Count >= 2 then
+        ClientDataSet1Index.AsInteger := TMSFMXWebGMaps1.Markers
+          [TMSFMXWebGMaps1.Markers.Count - 2].Tag + 1
+      else
+        ClientDataSet1Index.AsInteger := 1;
+      // ClientDataSet1.Post;
+      Operacao := MarkerOpcao.Adicionando;
+    end;
 
+    vMarker.Tag := ClientDataSet1Index.AsInteger;
+
+    showmessage(vMarker.Tag.ToString());
+
+  end
+  else if Operacao = MarkerOpcao.Editando then begin
+
+    for i := 0 to TMSFMXWebGMaps1.Markers.Count - 1 do
+      if TMSFMXWebGMaps1.Markers[i].Tag = ClientDataSet1Index.AsInteger then
+      begin
+        TMSFMXWebGMaps1.Markers[i].MapLabel.Text := 'MapLabel:' +
+          ClientDataSet1Title.AsString;
+        Break;
+      end;
   end;
 
-end;
-
-procedure TFMapGMaps.ClientDataSet1BeforeDelete(DataSet: TDataSet);
-begin
-  inherited;
-  TMSFMXWebGMaps1.Markers.Delete(ClientDataSet1Index.AsInteger);
 end;
 
 procedure TFMapGMaps.FormCreate(Sender: TObject);
@@ -224,8 +258,8 @@ end;
 procedure TFMapGMaps.ListView1DeleteItem(Sender: TObject; AIndex: Integer);
 begin
   inherited;
-  ShowMessage(AIndex.ToString());
-  ClientDataSet1.RecNo := AIndex;
+  showmessage(AIndex.ToString());
+  ClientDataSet1.RecNo := AIndex + 1;
   ClientDataSet1.Delete;
 
 end;
@@ -278,11 +312,16 @@ end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1MarkerClick(Sender: TObject;
   MarkerTitle: string; IdMarker: Integer; Latitude, Longitude: Double);
+var
+  i: Integer;
+  vMarker: TMarker;
 begin
   inherited;
   Operacao := MarkerOpcao.Editando;
+
   ClientDataSet1.First;
-  ClientDataSet1.Locate('INDEX',IdMarker,[]);
+  if not ClientDataSet1.FindKey([TMSFMXWebGMaps1.Markers[IdMarker].Tag]) then
+    showmessage('Fuu');
 
   Text2.Text := 'Editando Local';
   Mostrar;
@@ -294,8 +333,9 @@ procedure TFMapGMaps.TMSFMXWebGMaps1MarkerDragEnd(Sender: TObject;
 begin
   inherited;
   Operacao := MarkerOpcao.Editando;
+
   ClientDataSet1.First;
-  ClientDataSet1.Locate('la;lo', VarArrayOf([Latitude, Longitude]), []);
+  ClientDataSet1.FindKey([TMSFMXWebGMaps1.Markers[IdMarker].Tag]);
   ClientDataSet1.Edit;
   ClientDataSet1.FieldByName('la').AsFloat := Latitude;
   ClientDataSet1.FieldByName('lo').AsFloat := Longitude;

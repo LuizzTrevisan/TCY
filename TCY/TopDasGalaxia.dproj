@@ -238,7 +238,7 @@
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DCC_UnitSearchPath>TMS\Win32;TMS;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>TMS\Win32;TMS;C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\CacheLayout\Source;C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\ProgressDialogs\Library;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
@@ -433,7 +433,6 @@
                 <DeployFile LocalName="Splash\Splash.png" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\drawable\</RemoteDir>
-                        <Enabled>false</Enabled>
                         <RemoteName>splash.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -475,6 +474,13 @@
                         <RemoteDir>classes\</RemoteDir>
                         <Enabled>false</Enabled>
                         <RemoteName>classes.dex</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Splash\styles.xml" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values\</RemoteDir>
+                        <RemoteName>styles.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

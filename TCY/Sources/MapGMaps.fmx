@@ -1,7 +1,6 @@
 inherited FMapGMaps: TFMapGMaps
-  BorderStyle = None
   Caption = 'FMain1'
-  ClientHeight = 592
+  OnCreate = FormCreate
   OnResize = FormResize
   DesignerMobile = True
   DesignerWidth = 384
@@ -10,7 +9,6 @@ inherited FMapGMaps: TFMapGMaps
   DesignerOrientation = 0
   DesignerOSVersion = ''
   inherited RectClient: TRectangle
-    Height = 545.000000000000000000
     inherited rectMenuLateral: TRectangle
       inherited rectTop: TRectangle
         inherited imgTop: TImage
@@ -21,7 +19,7 @@ inherited FMapGMaps: TFMapGMaps
     end
     object TMSFMXWebGMaps1: TTMSFMXWebGMaps
       Align = Client
-      Height = 405.000000000000000000
+      Height = 380.000000000000000000
       Width = 384.000000000000000000
       Markers = <>
       Polylines = <>
@@ -50,7 +48,7 @@ inherited FMapGMaps: TFMapGMaps
       Align = Bottom
       ClipChildren = True
       Height = 140.000000000000000000
-      Position.Y = 405.000000000000000000
+      Position.Y = 380.000000000000000000
       Width = 384.000000000000000000
       object Rectangle2: TRectangle
         Align = Bottom
@@ -242,9 +240,10 @@ inherited FMapGMaps: TFMapGMaps
         DataType = ftInteger
       end>
     IndexDefs = <>
+    IndexFieldNames = 'Index'
     Params = <>
     StoreDefs = True
-    AfterPost = ClientDataSet1AfterPost
+    BeforePost = ClientDataSet1BeforePost
     BeforeDelete = ClientDataSet1BeforeDelete
     Left = 200
     Top = 144
@@ -264,8 +263,8 @@ inherited FMapGMaps: TFMapGMaps
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 316
-    Top = 213
+    Left = 340
+    Top = 133
     object LinkListControlToField1: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1

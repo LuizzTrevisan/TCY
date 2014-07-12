@@ -62,6 +62,14 @@
             <Overwrite>True</Overwrite>
             <Required>True</Required>
         </DeployFile>
+        <DeployFile Include="Splash\Splash.png">
+            <RemoteDir>TopDasGalaxia\res\drawable\</RemoteDir>
+            <RemoteName>splash.png</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TopDasGalaxia\library\lib\x86\</RemoteDir>
             <RemoteName>libTopDasGalaxia.so</RemoteName>
@@ -90,6 +98,14 @@
             <RemoteDir>TopDasGalaxia\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Splash\styles.xml">
+            <RemoteDir>TopDasGalaxia\res\values\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>

@@ -9,7 +9,7 @@ uses
   FMX.ListView.Types, FMX.ListView, FMX.Objects, FMX.VirtualKeyboard, FMX.Ani,
   FMX.Menus, System.Actions, FMX.ActnList, System.Math, FMX.Layouts,
   FMX.ListBox, FMX.Edit, FMX.Notification, FMX.TMSWebGMapsWebBrowser,
-  FMX.TMSWebGMaps, FMX.WebBrowser, CacheLayout;
+  FMX.TMSWebGMaps, FMX.WebBrowser;
 
 type
   TFMain = class(TForm)
@@ -41,16 +41,13 @@ type
     GlowEffect6: TGlowEffect;
     RectClient: TRectangle;
     procedure actShowMenuLateralExecute(Sender: TObject);
-    procedure MenuAnimationInFinish(Sender: TObject);
     procedure FormVirtualKeyboardShown(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure FormVirtualKeyboardHidden(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
-    procedure FormCreate(Sender: TObject);
     procedure ListBoxItem2Click(Sender: TObject);
   private
     { Private declarations }
-    FNeedRecalc: Boolean;
   public
     { Public declarations }
   end;
@@ -81,24 +78,17 @@ begin
   actShowMenuLateral.Enabled := True;
 end;
 
-procedure TFMain.FormCreate(Sender: TObject);
-begin
-  FNeedRecalc := True;
-end;
-
 procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
-  FNeedRecalc := True;
   RectClient.Align := TAlignLayout.Client;
-  Showmessage('hidden');
 end;
 
 procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   RectClient.Align  := TAlignLayout.Top;
-  RectClient.Height := Self.Height - Bounds.Height;
+  RectClient.Height := Self.Height - Bounds.Height - Rectangle1.Height;
 end;
 
 procedure TFMain.ListBoxItem2Click(Sender: TObject);
@@ -106,13 +96,12 @@ begin
 
   if not Assigned(FMapGMaps) then
     Application.CreateForm(TFMapGMaps,FMapGMaps);
+
+  actShowMenuLateral.Execute;
+
   FMapGMaps.Show;
 
-end;
 
-procedure TFMain.MenuAnimationInFinish(Sender: TObject);
-begin
-  actShowMenuLateral.Enabled := True;
 end;
 
 end.

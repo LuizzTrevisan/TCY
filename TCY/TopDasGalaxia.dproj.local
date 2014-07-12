@@ -59,8 +59,8 @@
     <File Path="Sources"/>
     <File Path="Sources\Main.pas"/>
     <File Path="Sources\Main.fmx"/>
-    <File Path="Sources\MapGmaps.pas"/>
-    <File Path="Sources\MapGmaps.fmx"/>
+    <File Path="Sources\MapGMaps.pas"/>
+    <File Path="Sources\MapGMaps.fmx"/>
   </ProjectSortOrder>
 	<BT_BuildType>Debug</BT_BuildType>
 </BorlandProject>
