@@ -9,7 +9,8 @@ uses
   FMX.ListView.Types, FMX.ListView, FMX.Objects, FMX.VirtualKeyboard, FMX.Ani,
   FMX.Menus, System.Actions, FMX.ActnList, System.Math, FMX.Layouts,
   FMX.ListBox, FMX.Edit, FMX.Notification, FMX.TMSWebGMapsWebBrowser,
-  FMX.TMSWebGMaps, FMX.WebBrowser;
+  FMX.TMSWebGMaps, FMX.WebBrowser, FGX.ProgressDialog, FGX.VirtualKeyboard,
+  CacheLayout;
 
 type
   TFMain = class(TForm)
@@ -18,7 +19,6 @@ type
     SpeedButton1: TSpeedButton;
     actMenu: TActionList;
     actShowMenuLateral: TAction;
-    txtStatus: TText;
     GlowEffect2: TGlowEffect;
     GlowEffect3: TGlowEffect;
     rectMenuLateral: TRectangle;
@@ -40,12 +40,11 @@ type
     ListBoxItem4: TListBoxItem;
     GlowEffect6: TGlowEffect;
     RectClient: TRectangle;
+    fgVirtualKeyboard1: TfgVirtualKeyboard;
     procedure actShowMenuLateralExecute(Sender: TObject);
-    procedure FormVirtualKeyboardShown(Sender: TObject;
-      KeyboardVisible: Boolean; const Bounds: TRect);
-    procedure FormVirtualKeyboardHidden(Sender: TObject;
-      KeyboardVisible: Boolean; const Bounds: TRect);
     procedure ListBoxItem2Click(Sender: TObject);
+    procedure fgVirtualKeyboard1Hide(Sender: TObject; const Bounds: TRect);
+    procedure fgVirtualKeyboard1Show(Sender: TObject; const Bounds: TRect);
   private
     { Private declarations }
   public
@@ -78,16 +77,14 @@ begin
   actShowMenuLateral.Enabled := True;
 end;
 
-procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
+procedure TFMain.fgVirtualKeyboard1Hide(Sender: TObject; const Bounds: TRect);
 begin
   RectClient.Align := TAlignLayout.Client;
 end;
 
-procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
+procedure TFMain.fgVirtualKeyboard1Show(Sender: TObject; const Bounds: TRect);
 begin
-  RectClient.Align  := TAlignLayout.Top;
+  RectClient.Align := TAlignLayout.Top;
   RectClient.Height := Self.Height - Bounds.Height - Rectangle1.Height;
 end;
 
@@ -95,12 +92,11 @@ procedure TFMain.ListBoxItem2Click(Sender: TObject);
 begin
 
   if not Assigned(FMapGMaps) then
-    Application.CreateForm(TFMapGMaps,FMapGMaps);
+    Application.CreateForm(TFMapGMaps, FMapGMaps);
 
   actShowMenuLateral.Execute;
 
   FMapGMaps.Show;
-
 
 end;
 

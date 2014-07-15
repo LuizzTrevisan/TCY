@@ -5,13 +5,11 @@ object FMain: TFMain
   Caption = 'Main'
   ClientHeight = 567
   ClientWidth = 384
-  Quality = HighPerformance
+  Quality = HighQuality
   Visible = True
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  OnVirtualKeyboardShown = FormVirtualKeyboardShown
-  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   DesignerMobile = True
   DesignerWidth = 384
   DesignerHeight = 592
@@ -21,6 +19,7 @@ object FMain: TFMain
   object RectClient: TRectangle
     Align = Client
     Height = 520.000000000000000000
+    Sides = []
     Width = 384.000000000000000000
     object rectMenuLateral: TRectangle
       Align = Left
@@ -30,9 +29,122 @@ object FMain: TFMain
       Sides = []
       Visible = False
       Width = 281.000000000000000000
+      object GlowEffect6: TGlowEffect
+        Softness = 0.500000000000000000
+        GlowColor = claBlack
+        Opacity = 1.000000000000000000
+      end
+      object ListBox1: TListBox
+        Align = Client
+        AutoHide = False
+        Height = 342.000000000000000000
+        Padding.Top = 100.000000000000000000
+        ShowScrollBars = False
+        TabOrder = 1
+        Width = 281.000000000000000000
+        CanFocus = False
+        DefaultItemStyles.ItemStyle = 'listboxitemstyle'
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        GroupingKind = Grouped
+        object ListBoxGroupHeader1: TListBoxGroupHeader
+          TextSettings.HorzAlign = Center
+          StyledSettings = [Family, Size, Style, FontColor]
+          Height = 30.000000000000000000
+          StyleLookup = 'listboxgroupheader'
+          TabOrder = 0
+          Text = 'S'#243' nas Op'#231#227'o'
+          Width = 281.000000000000000000
+        end
+        object ListBoxItem3: TListBoxItem
+          Selectable = False
+          TextSettings.Font.Size = 20.000000000000000000
+          StyledSettings = [Family, Style, FontColor]
+          Height = 46.000000000000000000
+          Position.Y = 30.000000000000000000
+          StyleLookup = 'listboxitemnodetail'
+          TabOrder = 1
+          Text = '  Imagem'
+          Width = 281.000000000000000000
+        end
+        object ListBoxItem2: TListBoxItem
+          Selectable = False
+          TextSettings.Font.Size = 20.000000000000000000
+          StyledSettings = [Family, Style, FontColor]
+          Height = 48.000000000000000000
+          Position.Y = 76.000000000000000000
+          StyleLookup = 'listboxitemnodetail'
+          TabOrder = 2
+          Text = '  GMaps'
+          Width = 281.000000000000000000
+          OnClick = ListBoxItem2Click
+        end
+      end
+      object ListBox2: TListBox
+        Align = Bottom
+        Height = 73.000000000000000000
+        Position.Y = 447.000000000000000000
+        ShowScrollBars = False
+        TabOrder = 2
+        Width = 281.000000000000000000
+        CanFocus = False
+        ItemHeight = 26.000000000000000000
+        DefaultItemStyles.ItemStyle = 'listboxitemstyle'
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        GroupingKind = Grouped
+        object ListBoxItem1: TListBoxItem
+          Height = 26.000000000000000000
+          ItemData.Bitmap.PNG = {
+            89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+            87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            0372494441546843ED9AAB77134114C693CD1A6A10A988005BDBE6258AA436B1
+            58701C2C92C3BF506C0FAED858B0350822F2AC045B444C6C6AF2E0FBB6377BF6
+            3193D96CF6554E7FE7ECD99969B2F77E337766EE4E5A2E254CBBDDAEE2C64BC5
+            7C3018CCA59C08070B68369B47EBF5FAB45C2E9FE13A41D3D1C35FB42C369BCD
+            1F5C53CBB26E47A3D142DA63115B007B7AB55A75E1F4B934C50242FA954AE57B
+            DC91D95B007B1C463B70FC429A94B097A5E820A3A3059FBFC1677EEC3B227B09
+            68B55A2F61E8038AC1186758DCA227A728DFE97A93E2113627183986DB299A82
+            E13647FBD57038BC93BA91C802C4F98F287A8D2E10FFBD38B1BC9D3BF86E1755
+            6F872CD0F60D9DC0CE30124980CAF9B8431E44179210710911BE30546114C0C9
+            8A9EFA8CA2EB3CEAD793C9A42FD544A8D7EBE770FA9D54C902A2BE98C2C992BB
+            1638CB984FD579C267F2D952251C99B752D65291BB12F4CA057AE19554E97C0F
+            867E4A357166B3D9DF5AADC6897C264DCF512FA35D1B4ADA119015A32355C6FC
+            14CEDF4835353812B42555CE85D7F445AA21B402D0DBDCA0DC2F6289EC493175
+            C4D67671E06AA5DD73B402A0DCFD127AA49F740EB30BDAA24DA9D217ED6EAF14
+            C0651337776DC603520F9D201805AFCDAAF8144229003BA577DB9FEFB3332685
+            8CB86B97BBB7147D280560157005782754D6C0B6BBFAC0A71752F4A19B03DE1D
+            37F3DEDFE2B50D01CA770CE308D8B69DD9E40D12B01D7D0E140863E719054449
+            A8D222CAD25DF41130F2E80528D369E41E5FA55842BEFF5EF332E3704876CA14
+            1A0B86932CCA32790F3B4ED86023BB6608057D91A24BA411C0C39FE1A64BA88E
+            E51E8763AE78B2EAF1F9554F5D7734E3C328A0D168BC9162E644B11D650494EB
+            6F46186D8704ECCABDF3464EFD7C84046052F2B8A3902C974B6F92E9A00AA143
+            2665DA847C8B32070ACD9380BCF92F051C7454983221DF42029083E4963E9B50
+            F91612C01778EFBB6851A04FAAC305E51C403275553011CEEF0652F6A114C023
+            F3F1787C6959D6275C999DC829707A9C29B6EE185F29600BF3F13CCE84B6C0F1
+            7B296A89FC0B8D1CF6FACE6668E010819E9F648F90E73899A76DDBBF79E7BB38
+            5E78BAB0D961383322D81E24B2803C88226067083D069E04E44D6A73C07BE2A0
+            0271FDCB749A91EB24DE1A97AA0AFE88B1F3E40D1DE0AC52459DC4EE118AEEE2
+            671E3EAA4F30531B01C3BFDDEC8BE6DF744AA57FFBD89AB36B883E6F00000000
+            49454E44AE426082}
+          StyleLookup = 'listboxitemnodetail'
+          TabOrder = 0
+          Text = 'Configura'#231#245'es'
+          Width = 281.000000000000000000
+        end
+        object ListBoxItem4: TListBoxItem
+          Height = 26.000000000000000000
+          Position.Y = 26.000000000000000000
+          StyleLookup = 'listboxitemnodetail'
+          TabOrder = 1
+          Text = 'Ajuda'
+          Width = 281.000000000000000000
+        end
+      end
       object rectTop: TRectangle
         Align = Top
         ClipChildren = True
+        CornerType = InnerLine
         Height = 105.000000000000000000
         Sides = []
         Width = 281.000000000000000000
@@ -1887,118 +1999,6 @@ object FMain: TFMain
           end
         end
       end
-      object ListBox1: TListBox
-        Align = Client
-        AutoHide = False
-        Height = 342.000000000000000000
-        Padding.Top = 100.000000000000000000
-        ShowScrollBars = False
-        TabOrder = 1
-        Width = 281.000000000000000000
-        CanFocus = False
-        DefaultItemStyles.ItemStyle = 'listboxitemstyle'
-        DefaultItemStyles.GroupHeaderStyle = ''
-        DefaultItemStyles.GroupFooterStyle = ''
-        GroupingKind = Grouped
-        object ListBoxGroupHeader1: TListBoxGroupHeader
-          TextSettings.HorzAlign = Center
-          StyledSettings = [Family, Size, Style, FontColor]
-          Height = 30.000000000000000000
-          StyleLookup = 'listboxgroupheader'
-          TabOrder = 0
-          Text = 'S'#243' nas Op'#231#227'o'
-          Width = 281.000000000000000000
-        end
-        object ListBoxItem3: TListBoxItem
-          Selectable = False
-          TextSettings.Font.Size = 20.000000000000000000
-          StyledSettings = [Family, Style, FontColor]
-          Height = 46.000000000000000000
-          Position.Y = 30.000000000000000000
-          StyleLookup = 'listboxitemnodetail'
-          TabOrder = 1
-          Text = '  Imagem'
-          Width = 281.000000000000000000
-        end
-        object ListBoxItem2: TListBoxItem
-          Selectable = False
-          TextSettings.Font.Size = 20.000000000000000000
-          StyledSettings = [Family, Style, FontColor]
-          Height = 48.000000000000000000
-          Position.Y = 76.000000000000000000
-          StyleLookup = 'listboxitemnodetail'
-          TabOrder = 2
-          Text = '  GMaps'
-          Width = 281.000000000000000000
-          OnClick = ListBoxItem2Click
-        end
-      end
-      object ListBox2: TListBox
-        Align = Bottom
-        Height = 73.000000000000000000
-        Position.Y = 447.000000000000000000
-        ShowScrollBars = False
-        StyleLookup = 'transparentlistboxstyle'
-        TabOrder = 2
-        Width = 281.000000000000000000
-        CanFocus = False
-        ItemHeight = 26.000000000000000000
-        DefaultItemStyles.ItemStyle = 'listboxitemstyle'
-        DefaultItemStyles.GroupHeaderStyle = ''
-        DefaultItemStyles.GroupFooterStyle = ''
-        object ListBoxItem1: TListBoxItem
-          Height = 26.000000000000000000
-          ItemData.Bitmap.PNG = {
-            89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
-            87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-            0372494441546843ED9AAB77134114C693CD1A6A10A988005BDBE6258AA436B1
-            58701C2C92C3BF506C0FAED858B0350822F2AC045B444C6C6AF2E0FBB6377BF6
-            3193D96CF6554E7FE7ECD99969B2F77E337766EE4E5A2E254CBBDDAEE2C64BC5
-            7C3018CCA59C08070B68369B47EBF5FAB45C2E9FE13A41D3D1C35FB42C369BCD
-            1F5C53CBB26E47A3D142DA63115B007B7AB55A75E1F4B934C50242FA954AE57B
-            DC91D95B007B1C463B70FC429A94B097A5E820A3A3059FBFC1677EEC3B227B09
-            68B55A2F61E8038AC1186758DCA227A728DFE97A93E2113627183986DB299A82
-            E13647FBD57038BC93BA91C802C4F98F287A8D2E10FFBD38B1BC9D3BF86E1755
-            6F872CD0F60D9DC0CE30124980CAF9B8431E44179210710911BE30546114C0C9
-            8A9EFA8CA2EB3CEAD793C9A42FD544A8D7EBE770FA9D54C902A2BE98C2C992BB
-            1638CB984FD579C267F2D952251C99B752D65291BB12F4CA057AE19554E97C0F
-            867E4A357166B3D9DF5AADC6897C264DCF512FA35D1B4ADA119015A32355C6FC
-            14CEDF4835353812B42555CE85D7F445AA21B402D0DBDCA0DC2F6289EC493175
-            C4D67671E06AA5DD73B402A0DCFD127AA49F740EB30BDAA24DA9D217ED6EAF14
-            C0651337776DC603520F9D201805AFCDAAF8144229003BA577DB9FEFB3332685
-            8CB86B97BBB7147D280560157005782754D6C0B6BBFAC0A71752F4A19B03DE1D
-            37F3DEDFE2B50D01CA770CE308D8B69DD9E40D12B01D7D0E140863E719054449
-            A8D222CAD25DF41130F2E80528D369E41E5FA55842BEFF5EF332E3704876CA14
-            1A0B86932CCA32790F3B4ED86023BB6608057D91A24BA411C0C39FE1A64BA88E
-            E51E8763AE78B2EAF1F9554F5D7734E3C328A0D168BC9162E644B11D650494EB
-            6F46186D8704ECCABDF3464EFD7C84046052F2B8A3902C974B6F92E9A00AA143
-            2665DA847C8B32070ACD9380BCF92F051C7454983221DF42029083E4963E9B50
-            F91612C01778EFBB6851A04FAAC305E51C403275553011CEEF0652F6A114C023
-            F3F1787C6959D6275C999DC829707A9C29B6EE185F29600BF3F13CCE84B6C0F1
-            7B296A89FC0B8D1CF6FACE6668E010819E9F648F90E73899A76DDBBF79E7BB38
-            5E78BAB0D961383322D81E24B2803C88226067083D069E04E44D6A73C07BE2A0
-            0271FDCB749A91EB24DE1A97AA0AFE88B1F3E40D1DE0AC52459DC4EE118AEEE2
-            671E3EAA4F30531B01C3BFDDEC8BE6DF744AA57FFBD89AB36B883E6F00000000
-            49454E44AE426082}
-          StyleLookup = 'listboxitemnodetail'
-          TabOrder = 0
-          Text = 'Configura'#231#245'es'
-          Width = 241.000000000000000000
-        end
-        object ListBoxItem4: TListBoxItem
-          Height = 26.000000000000000000
-          Position.Y = 26.000000000000000000
-          StyleLookup = 'listboxitemnodetail'
-          TabOrder = 1
-          Text = 'Ajuda'
-          Width = 241.000000000000000000
-        end
-      end
-      object GlowEffect6: TGlowEffect
-        Softness = 0.500000000000000000
-        GlowColor = claBlack
-        Opacity = 1.000000000000000000
-      end
     end
   end
   object Rectangle1: TRectangle
@@ -2043,17 +2043,6 @@ object FMain: TFMain
         Opacity = 0.800000011920929000
       end
     end
-    object txtStatus: TText
-      Align = Right
-      Anchors = [akLeft, akTop, akRight, akBottom]
-      Height = 27.000000000000000000
-      Margins.Bottom = 20.000000000000000000
-      Position.X = 120.000000000000000000
-      Text = 'Status'
-      TextSettings.Font.Size = 16.000000000000000000
-      TextSettings.FontColor = claWhite
-      Width = 284.000000000000000000
-    end
     object SpeedButton1: TSpeedButton
       Action = actShowMenuLateral
       StyledSettings = [Family, Style, Other]
@@ -2078,5 +2067,12 @@ object FMain: TFMain
       Text = 'Menu     '
       OnExecute = actShowMenuLateralExecute
     end
+  end
+  object fgVirtualKeyboard1: TfgVirtualKeyboard
+    Buttons = <>
+    OnShow = fgVirtualKeyboard1Show
+    OnHide = fgVirtualKeyboard1Hide
+    Left = 184
+    Top = 16
   end
 end

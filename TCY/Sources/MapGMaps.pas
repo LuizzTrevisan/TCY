@@ -11,7 +11,7 @@ uses
   Data.DB, Datasnap.DBClient, FMX.ListBox, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, FMX.ListView.Types, FMX.ListView, FMX.TMSWEBgMapsMarkers,
-  FGX.ProgressDialog, FGX.ProgressDialog.Types;
+  FGX.ProgressDialog, FGX.ProgressDialog.Types, FGX.VirtualKeyboard, CacheLayout;
 
 type
   MarkerOpcao = (Nenhuma, Adicionando, Editando);
@@ -39,6 +39,8 @@ type
     Rectangle3: TRectangle;
     ClientDataSet1Index: TIntegerField;
     fgProgressDialog1: TfgProgressDialog;
+    Popup1: TPopup;
+    Button3: TButton;
     procedure FormResize(Sender: TObject);
     procedure TMSFMXWebGMaps1MapClick(Sender: TObject;
       Latitude, Longitude: Double; X, Y: Integer);
@@ -152,8 +154,7 @@ var
   i: Integer;
 begin
   inherited;
-    showmessage(ClientDataSet1la.AsFloat.ToString() + ' ' +
-      ClientDataSet1lo.AsFloat.ToString());
+
   if Operacao = MarkerOpcao.Adicionando then begin
 
     if fgProgressDialog1.Progress < 100 then
@@ -178,8 +179,6 @@ begin
     end;
 
     vMarker.Tag := ClientDataSet1Index.AsInteger;
-
-    showmessage(vMarker.Tag.ToString());
 
   end
   else if Operacao = MarkerOpcao.Editando then begin
@@ -213,8 +212,8 @@ end;
 procedure TFMapGMaps.FormResize(Sender: TObject);
 begin
   inherited;
-  Button1.Width := Self.Width / 2 - 5;
-  Button2.Width := Button1.Width - 5;
+  Button1.Width := Self.Width / 2 - 2;
+  Button2.Width := Button1.Width - 2;
 end;
 
 procedure TFMapGMaps.Image1Click(Sender: TObject);
@@ -223,12 +222,12 @@ begin
 
   Image1.Tag := not Image1.Tag;
   if Boolean(Image1.Tag) then begin
+    rectMarkers.AnimateFloat('Height', RectClient.Height);
     Text2.Text := 'Lista de Marcadores ';
     Rectangle1.Visible := False;
     Rectangle2.Visible := False;
     Edit1.Visible := False;
     TMSFMXWebGMaps1.Visible := False;
-    rectMarkers.Align := TAlignLayout.Client;
     Rectangle3.Sides := [TSide.Bottom];
     ListView1.Visible := True;
   end else begin
@@ -244,6 +243,7 @@ begin
     ListView1.Visible := False;
     Ocultar;
   end;
+  Popup1.Visible := ListView1.Visible;
 
 end;
 
@@ -258,7 +258,6 @@ end;
 procedure TFMapGMaps.ListView1DeleteItem(Sender: TObject; AIndex: Integer);
 begin
   inherited;
-  showmessage(AIndex.ToString());
   ClientDataSet1.RecNo := AIndex + 1;
   ClientDataSet1.Delete;
 
@@ -273,12 +272,12 @@ end;
 
 procedure TFMapGMaps.Mostrar;
 begin
-  rectMarkers.Height := 140;
+  rectMarkers.AnimateFloat('Height', 140);
 end;
 
 procedure TFMapGMaps.Ocultar;
 begin
-  rectMarkers.Height := rectMarkersTop.Height;
+  rectMarkers.AnimateFloat('Height', rectMarkersTop.Height);
 end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1DownloadFinish(Sender: TObject);
@@ -301,7 +300,7 @@ begin
 
   ClientDataSet1.FieldByName('la').AsFloat := Latitude;
   ClientDataSet1.FieldByName('lo').AsFloat := Longitude;
-  ClientDataSet1.Post;
+  // ClientDataSet1.Post;
 
   if Boolean(actShowMenuLateral.Tag) then
     actShowMenuLateral.Execute;
@@ -320,12 +319,11 @@ begin
   Operacao := MarkerOpcao.Editando;
 
   ClientDataSet1.First;
-  if not ClientDataSet1.FindKey([TMSFMXWebGMaps1.Markers[IdMarker].Tag]) then
-    showmessage('Fuu');
-
+  ClientDataSet1.FindKey([TMSFMXWebGMaps1.Markers[IdMarker].Tag]);
   Text2.Text := 'Editando Local';
-  Mostrar;
 
+  Edit1.Text := ClientDataSet1Title.AsString;
+  Mostrar;
 end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1MarkerDragEnd(Sender: TObject;
