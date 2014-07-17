@@ -171,17 +171,22 @@ begin
 
     circle := TImage.Create(Rectangle2);
     circle.MultiResBitmap[0].Bitmap := Image3.MultiResBitmap[0].Bitmap;
-    circle.AnimateFloat('Width', 40);
-    circle.AnimateFloat('Height', 67);
-    circle.Position.X := EventInfo.Location.X - Rectangle2.Position.X;
+    circle.Width := 40;
+    circle.Height := 67;
+
+    circle.Position.X := EventInfo.Location.X - Rectangle2.Position.X -
+      (circle.Width / 2);
+
     circle.Position.Y := EventInfo.Location.Y - Rectangle2.Position.Y -
-      RectClient.Position.Y;
+      circle.Height - RectClient.Position.Y;
+
     circle.Parent := Rectangle2;
     circle.BringToFront;
     circle.Anchors := [];
 
-    circle.AnimateFloatDelay('Position.Y', circle.Position.Y - 10, 0.2, 0);
-    circle.AnimateFloatDelay('Position.Y', circle.Position.Y + 10, 0.2, 0.2);
+    circle.AnimateFloatDelay('Position.Y', circle.Position.Y - 50, 0.2, 0.1);
+    circle.AnimateFloatDelay('Position.Y', EventInfo.Location.Y -
+      Rectangle2.Position.Y - circle.Height - RectClient.Position.Y, 0.2, 0.4);
 
   end;
 
