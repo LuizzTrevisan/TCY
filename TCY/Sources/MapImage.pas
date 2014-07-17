@@ -170,6 +170,7 @@ begin
   else if EventInfo.GestureID = igiDoubleTap then begin
 
     circle := TImage.Create(Rectangle2);
+    circle.Visible := False;
     circle.MultiResBitmap[0].Bitmap := Image3.MultiResBitmap[0].Bitmap;
     circle.Width := 40;
     circle.Height := 67;
@@ -184,7 +185,9 @@ begin
     circle.BringToFront;
     circle.Anchors := [];
 
-    circle.AnimateFloatDelay('Position.Y', circle.Position.Y - 50, 0.2, 0.1);
+    circle.Visible := True;
+
+    circle.AnimateFloatDelay('Position.Y', circle.Position.Y - 10, 0.2, 0.1);
     circle.AnimateFloatDelay('Position.Y', EventInfo.Location.Y -
       Rectangle2.Position.Y - circle.Height - RectClient.Position.Y, 0.2, 0.4);
 
