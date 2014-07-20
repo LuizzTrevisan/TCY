@@ -11,7 +11,8 @@ uses
   Data.DB, Datasnap.DBClient, FMX.ListBox, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, FMX.ListView.Types, FMX.ListView, FMX.TMSWEBgMapsMarkers,
-  FGX.ProgressDialog, FGX.ProgressDialog.Types, FGX.VirtualKeyboard, CacheLayout;
+  FGX.ProgressDialog, FGX.ProgressDialog.Types, FGX.VirtualKeyboard,
+  CacheLayout;
 
 type
   MarkerOpcao = (Nenhuma, Adicionando, Editando);
@@ -39,8 +40,6 @@ type
     Rectangle3: TRectangle;
     ClientDataSet1Index: TIntegerField;
     fgProgressDialog1: TfgProgressDialog;
-    Popup1: TPopup;
-    Button3: TButton;
     procedure FormResize(Sender: TObject);
     procedure TMSFMXWebGMaps1MapClick(Sender: TObject;
       Latitude, Longitude: Double; X, Y: Integer);
@@ -60,6 +59,9 @@ type
     procedure ClientDataSet1BeforeDelete(DataSet: TDataSet);
     procedure TMSFMXWebGMaps1DownloadFinish(Sender: TObject);
     procedure ClientDataSet1BeforePost(DataSet: TDataSet);
+    procedure Button4Click(Sender: TObject);
+    procedure fgProgressDialog1Hide(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     Operacao: MarkerOpcao;
@@ -108,6 +110,14 @@ begin
   Text2.Text := 'Clique no Mapa para Adicionar um Local';
 end;
 
+procedure TFMapGMaps.Button4Click(Sender: TObject);
+begin
+  inherited;
+  while not ClientDataSet1.Eof do
+    ClientDataSet1.Delete;
+  ClientDataSet1.SaveToFile(GetHomePath + '/Te.txt');
+end;
+
 procedure TFMapGMaps.CarregarMarcadores;
 begin
 
@@ -127,7 +137,7 @@ begin
   if (ClientDataSet1.RecordCount > 0) then begin
 
     ClientDataSet1.First;
-    while not ClientDataSet1.eof do begin
+    while not ClientDataSet1.Eof do begin
       ClientDataSet1.Edit;
       ClientDataSet1.Post;
       ClientDataSet1.Next;
@@ -194,15 +204,26 @@ begin
 
 end;
 
+procedure TFMapGMaps.fgProgressDialog1Hide(Sender: TObject);
+begin
+  inherited;
+  fgProgressDialog1.Progress := 100;
+end;
+
+procedure TFMapGMaps.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  TMSFMXWebGMaps1.Visible := False;
+end;
+
 procedure TFMapGMaps.FormCreate(Sender: TObject);
 begin
   inherited;
   fgProgressDialog1.Show;
 
   fgProgressDialog1.Title := 'Preparando o Mapa';
-  fgProgressDialog1.Kind := TfgProgressDialogKind.Determinated;
-
   fgProgressDialog1.Message := 'Carregando os Dados';
+
   fgProgressDialog1.Progress := 10;
 
   Ocultar;
@@ -222,7 +243,7 @@ begin
 
   Image1.Tag := not Image1.Tag;
   if Boolean(Image1.Tag) then begin
-    rectMarkers.AnimateFloat('Height', RectClient.Height);
+    rectMarkers.AnimateFloat('Height', Self.Height);
     Text2.Text := 'Lista de Marcadores ';
     Rectangle1.Visible := False;
     Rectangle2.Visible := False;
@@ -238,12 +259,11 @@ begin
     Rectangle2.Visible := True;
     Edit1.Visible := True;
     rectMarkers.Align := TAlignLayout.Bottom;
-    TMSFMXWebGMaps1.Visible := True;
     Rectangle3.Sides := [];
     ListView1.Visible := False;
+    TMSFMXWebGMaps1.Visible := True;
     Ocultar;
   end;
-  Popup1.Visible := ListView1.Visible;
 
 end;
 

@@ -278,7 +278,7 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Sources\MapImage.pas">
-            <Form>FMain1</Form>
+            <Form>FMapImage</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

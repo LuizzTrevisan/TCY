@@ -45,6 +45,7 @@ type
     procedure ListBoxItem2Click(Sender: TObject);
     procedure fgVirtualKeyboard1Hide(Sender: TObject; const Bounds: TRect);
     procedure fgVirtualKeyboard1Show(Sender: TObject; const Bounds: TRect);
+    procedure ListBoxItem3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,7 +59,7 @@ implementation
 
 {$R *.fmx}
 
-uses MapGMaps;
+uses MapGMaps, MapImage;
 
 procedure TFMain.actShowMenuLateralExecute(Sender: TObject);
 begin
@@ -67,6 +68,7 @@ begin
 
   if Boolean(actShowMenuLateral.Tag) then begin
     Rectangle1.BringToFront;
+    rectMenuLateral.BringToFront;
     Image2.Margins.Left := 0;
     rectMenuLateral.Visible := True;
   end else begin
@@ -98,6 +100,16 @@ begin
 
   FMapGMaps.Show;
 
+end;
+
+procedure TFMain.ListBoxItem3Click(Sender: TObject);
+begin
+  if not Assigned(FMapImage) then
+    Application.CreateForm(TFMapImage, FMapImage);
+
+  actShowMenuLateral.Execute;
+
+  FMapImage.Show;
 end;
 
 end.

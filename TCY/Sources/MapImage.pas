@@ -7,17 +7,28 @@ uses
   System.Variants, System.Math,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   Main, FGX.VirtualKeyboard, System.Actions, FMX.ActnList, FMX.Objects,
-  FMX.Effects, FMX.ListBox, FMX.Layouts;
+  FMX.Effects, FMX.ListBox, FMX.Layouts, FMX.ListView.Types, FMX.ListView,
+  FMX.Edit;
 
 type
-  TFMain1 = class(TFMain)
+  TFMapImage = class(TFMain)
     Image1: TImage;
     Rectangle2: TRectangle;
-    Label1: TLabel;
     Rectangle3: TRectangle;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     Image3: TImage;
+    rectMarkers: TRectangle;
+    Rectangle4: TRectangle;
+    Button1: TButton;
+    Button2: TButton;
+    Edit1: TEdit;
+    ListView1: TListView;
+    rectMarkersTop: TRectangle;
+    Text2: TText;
+    Image4: TImage;
+    Rectangle5: TRectangle;
+    Image5: TImage;
     procedure Image1Gesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
     procedure Rectangle2Gesture(Sender: TObject;
@@ -41,18 +52,18 @@ type
   end;
 
 var
-  FMain1: TFMain1;
+  FMapImage: TFMapImage;
 
 implementation
 
 {$R *.fmx}
 
-procedure TFMain1.AddPicture(files: TStrings);
+procedure TFMapImage.AddPicture(files: TStrings);
 begin
 
 end;
 
-procedure TFMain1.FormCreate(Sender: TObject);
+procedure TFMapImage.FormCreate(Sender: TObject);
 begin
   inherited;
   minHeight := Rectangle2.Height;
@@ -62,7 +73,7 @@ begin
   maxWidth := Rectangle2.Width * 2;
 end;
 
-procedure TFMain1.handlePan(EventInfo: TGestureEventInfo);
+procedure TFMapImage.handlePan(EventInfo: TGestureEventInfo);
 begin
   if not(TInteractiveGestureFlag.gfBegin in EventInfo.Flags) then begin
 
@@ -80,12 +91,12 @@ begin
 
 end;
 
-procedure TFMain1.handleRotate(EventInfo: TGestureEventInfo);
+procedure TFMapImage.handleRotate(EventInfo: TGestureEventInfo);
 begin
   Image1.RotationAngle := RadToDeg(-EventInfo.Angle);
 end;
 
-procedure TFMain1.VerificaPosicaoTamanhoMinimo;
+procedure TFMapImage.VerificaPosicaoTamanhoMinimo;
 begin
   if Rectangle2.Position.X > 0 then
     Rectangle2.Position.X := 0;
@@ -112,7 +123,7 @@ begin
 
 end;
 
-procedure TFMain1.ZoomImage(Size, X, Y: Single);
+procedure TFMapImage.ZoomImage(Size, X, Y: Single);
 var
   eventDistance, widthDistance, heightDistance: Single;
 begin
@@ -135,7 +146,7 @@ begin
   VerificaPosicaoTamanhoMinimo;
 end;
 
-procedure TFMain1.handleZoom(EventInfo: TGestureEventInfo);
+procedure TFMapImage.handleZoom(EventInfo: TGestureEventInfo);
 begin
 
   if not(TInteractiveGestureFlag.gfBegin in EventInfo.Flags) then
@@ -146,7 +157,7 @@ begin
 
 end;
 
-procedure TFMain1.Image1Gesture(Sender: TObject;
+procedure TFMapImage.Image1Gesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
   inherited;
@@ -157,7 +168,7 @@ begin
   // handlePressAndTap(EventInfo);
 end;
 
-procedure TFMain1.Rectangle2Gesture(Sender: TObject;
+procedure TFMapImage.Rectangle2Gesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 var
   circle: TImage;
@@ -172,8 +183,8 @@ begin
     circle := TImage.Create(Rectangle2);
     circle.Visible := False;
     circle.MultiResBitmap[0].Bitmap := Image3.MultiResBitmap[0].Bitmap;
-    circle.Width := 40;
-    circle.Height := 67;
+    circle.Width := 18;
+    circle.Height := 41;
 
     circle.Position.X := EventInfo.Location.X - Rectangle2.Position.X -
       (circle.Width / 2);
@@ -195,13 +206,13 @@ begin
 
 end;
 
-procedure TFMain1.SpeedButton2Click(Sender: TObject);
+procedure TFMapImage.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
   ZoomImage(50, Self.Width / 2, Self.Height / 2);
 end;
 
-procedure TFMain1.SpeedButton3Click(Sender: TObject);
+procedure TFMapImage.SpeedButton3Click(Sender: TObject);
 begin
   inherited;
   ZoomImage(-50, Self.Width / 2, Self.Height / 2);
