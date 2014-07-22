@@ -16,7 +16,7 @@ type
   TFMain = class(TForm)
     Rectangle1: TRectangle;
     Image2: TImage;
-    SpeedButton1: TSpeedButton;
+    btnMenu: TSpeedButton;
     actMenu: TActionList;
     actShowMenuLateral: TAction;
     GlowEffect2: TGlowEffect;
@@ -31,10 +31,10 @@ type
     GlowEffect4: TGlowEffect;
     textBottom: TText;
     GlowEffect5: TGlowEffect;
-    ListBox1: TListBox;
-    ListBoxGroupHeader1: TListBoxGroupHeader;
-    ListBoxItem3: TListBoxItem;
-    ListBoxItem2: TListBoxItem;
+    lsMenu: TListBox;
+    lsHeader: TListBoxGroupHeader;
+    liImagem: TListBoxItem;
+    liGMaps: TListBoxItem;
     ListBox2: TListBox;
     ListBoxItem1: TListBoxItem;
     ListBoxItem4: TListBoxItem;
@@ -42,10 +42,10 @@ type
     RectClient: TRectangle;
     fgVirtualKeyboard1: TfgVirtualKeyboard;
     procedure actShowMenuLateralExecute(Sender: TObject);
-    procedure ListBoxItem2Click(Sender: TObject);
+    procedure liGMapsClick(Sender: TObject);
     procedure fgVirtualKeyboard1Hide(Sender: TObject; const Bounds: TRect);
     procedure fgVirtualKeyboard1Show(Sender: TObject; const Bounds: TRect);
-    procedure ListBoxItem3Click(Sender: TObject);
+    procedure liImagemClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -90,24 +90,33 @@ begin
   RectClient.Height := Self.Height - Bounds.Height - Rectangle1.Height;
 end;
 
-procedure TFMain.ListBoxItem2Click(Sender: TObject);
+procedure TFMain.liGMapsClick(Sender: TObject);
 begin
+  if Assigned(FMapImage) then
+    FMapImage.Close;
 
   if not Assigned(FMapGMaps) then
     Application.CreateForm(TFMapGMaps, FMapGMaps);
 
   actShowMenuLateral.Execute;
-
+  FMapGMaps.TMSFMXWebGMaps1.Visible := True;
+  FMapGMaps.TMSFMXWebGMaps1.Repaint;
+  FMapGMaps.liGMaps.IsSelected := True;
   FMapGMaps.Show;
 
 end;
 
-procedure TFMain.ListBoxItem3Click(Sender: TObject);
+procedure TFMain.liImagemClick(Sender: TObject);
 begin
+
+  if Assigned(FMapGMaps) then
+    FMapGMaps.Close;
+
   if not Assigned(FMapImage) then
     Application.CreateForm(TFMapImage, FMapImage);
 
   actShowMenuLateral.Execute;
+  FMapImage.liImagem.IsSelected := True;
 
   FMapImage.Show;
 end;

@@ -8,36 +8,46 @@ inherited FMapImage: TFMapImage
   DesignerOrientation = 0
   DesignerOSVersion = ''
   inherited RectClient: TRectangle
-    Height = 380.000000000000000000
-    object Rectangle3: TRectangle [0]
-      Anchors = [akLeft, akBottom]
-      Height = 98.000000000000000000
-      Position.X = 16.000000000000000000
-      Position.Y = 274.000000000000000000
-      Width = 50.000000000000000000
-      object SpeedButton2: TSpeedButton
-        Align = Top
-        Height = 48.000000000000000000
+    inherited rectMenuLateral: TRectangle
+      ClipParent = True
+      Padding.Left = 1.000000000000000000
+      Padding.Top = 1.000000000000000000
+      Stroke.Kind = Resource
+      Stroke.Thickness = 0.000000000000000000
+      inherited rectTop: TRectangle
         Position.X = 1.000000000000000000
-        RepeatClick = True
-        StyleLookup = 'addtoolbutton'
-        Text = 'SpeedButton2'
-        Width = 48.000000000000000000
-        OnClick = SpeedButton2Click
+        Position.Y = 1.000000000000000000
+        Width = 279.000000000000000000
+        inherited imgTop: TImage
+          MultiResBitmap.Height = 108
+          MultiResBitmap.Width = 205
+        end
       end
-      object SpeedButton3: TSpeedButton
-        Align = Top
-        Height = 48.000000000000000000
+      inherited lsMenu: TListBox
+        Height = 333.000000000000000000
+        Width = 279.000000000000000000
+        inherited lsHeader: TListBoxGroupHeader
+          Width = 279.000000000000000000
+        end
+        inherited liImagem: TListBoxItem
+          Width = 279.000000000000000000
+        end
+        inherited liGMaps: TListBoxItem
+          Width = 279.000000000000000000
+        end
+      end
+      inherited ListBox2: TListBox
         Position.X = 1.000000000000000000
-        Position.Y = 48.000000000000000000
-        RepeatClick = True
-        StyleLookup = 'deleteitembutton'
-        Text = 'SpeedButton2'
-        Width = 48.000000000000000000
-        OnClick = SpeedButton3Click
+        Width = 279.000000000000000000
+        inherited ListBoxItem1: TListBoxItem
+          Width = 279.000000000000000000
+        end
+        inherited ListBoxItem4: TListBoxItem
+          Width = 279.000000000000000000
+        end
       end
     end
-    object Rectangle2: TRectangle [1]
+    object Rectangle2: TRectangle
       OnGesture = Rectangle2Gesture
       Height = 550.000000000000000000
       Width = 792.000000000000000000
@@ -5120,192 +5130,41 @@ inherited FMapImage: TFMapImage
           end>
         Align = Client
         DisableInterpolation = True
+        DragMode = dmAutomatic
         EnableDragHighlight = False
         Height = 550.000000000000000000
         Width = 792.000000000000000000
         WrapMode = Stretch
+        OnDragOver = Image1DragOver
+        OnDragDrop = Image1DragDrop
       end
     end
-    inherited rectMenuLateral: TRectangle
-      ClipParent = True
-      inherited ListBox1: TListBox
-        ClipChildren = True
+    object Rectangle3: TRectangle
+      Anchors = [akLeft, akBottom]
+      Height = 98.000000000000000000
+      Position.X = 16.000000000000000000
+      Position.Y = 416.000000000000000000
+      Width = 50.000000000000000000
+      object SpeedButton2: TSpeedButton
+        Align = Top
+        Height = 48.000000000000000000
+        Position.X = 1.000000000000000000
+        RepeatClick = True
+        StyleLookup = 'addtoolbutton'
+        Text = 'SpeedButton2'
+        Width = 48.000000000000000000
+        OnClick = SpeedButton2Click
       end
-      inherited rectTop: TRectangle
-        inherited imgTop: TImage
-          MultiResBitmap.Height = 108
-          MultiResBitmap.Width = 205
-        end
-      end
-    end
-  end
-  object Image3: TImage [1]
-    MultiResBitmap.Height = 36
-    MultiResBitmap.Width = 22
-    MultiResBitmap.TransparentColor = 16777215
-    MultiResBitmap = <
-      item
-        Width = 22
-        Height = 36
-        PNG = {
-          89504E470D0A1A0A0000000D49484452000000160000002408060000008D06CA
-          9D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          01A149444154484BC597B94EC34010867D48941C4F014A9F868A07404254BC02
-          A2B55CD3D0055AC02D1DA242D0D2F31848B408893458B2BC66663C46B39BBD1C
-          25CAD7CCECF5EFE45F5F4962A9EB7A9FD328528E0BA469DA0134E1A7BCE83B81
-          9DD96DD24184F104C6DDEB399A747321E6621B3601AC1A1947A2699A770851A2
-          08CFEB789D86B95BB4A8C456B96C2C253A608A53521485BACC7ECDEAFFD9BBB9
-          4F5AA568B23C489372DE76555591BD8398B35AAE4423309734B5C333B18922AE
-          7E0909DB2A78FBF8E42C1EA993B56D3BE35CE3F4E985333BC78FCF9CE90C7A59
-          9EE725F5187C15E79CD9793D3BE14C67D0232B6C9E6D655EFBAD481DEF6AD7E9
-          BBFA25240CBE3C50CB028A5C1D1D52FE0DF6F844A58EBC29567AE7492B527C24
-          2E03AF9345EA1EE37376196CEBB45D98519698160CD884912871972832FE628D
-          C45531E2ADDA572DE2AC380BDC79F832F5E11F75541DAA16599BC721E174F7FA
-          8ED31E6E877E69B862051F2D12B3ED22283C9D4E39EB994C269CAD00FCDC8243
-          EC30725790A8C3C36F381963D8D8554128A50E645C35F13E009BB562AD8CFBAB
-          90247FD9EC9EF85677DBF40000000049454E44AE426082}
-        FileName = 
-          'C:\Users\LuizFernando\Desktop\GIT\174-free-google-maps-pointer.p' +
-          'ng'
-      end>
-    Height = 81.000000000000000000
-    Position.X = 264.000000000000000000
-    Position.Y = 120.000000000000000000
-    Visible = False
-    Width = 65.000000000000000000
-  end
-  object rectMarkers: TRectangle [2]
-    Align = Bottom
-    ClipChildren = True
-    Height = 140.000000000000000000
-    Position.Y = 427.000000000000000000
-    Width = 384.000000000000000000
-    object Rectangle4: TRectangle
-      Align = Bottom
-      Fill.Kind = None
-      Height = 43.000000000000000000
-      Position.Y = 97.000000000000000000
-      Sides = []
-      Width = 384.000000000000000000
-      object Button1: TButton
-        Align = Right
-        Height = 43.000000000000000000
-        Position.X = 200.000000000000000000
-        TabOrder = 0
-        Text = 'Adicionar'
-        Width = 184.000000000000000000
-      end
-      object Button2: TButton
-        Align = Left
-        Height = 43.000000000000000000
-        TabOrder = 1
-        Text = 'Excluir'
-        Width = 193.000000000000000000
-      end
-    end
-    object Edit1: TEdit
-      Touch.InteractiveGestures = [LongTap, DoubleTap]
-      Align = Top
-      TabOrder = 1
-      Position.Y = 54.000000000000000000
-      Width = 384.000000000000000000
-      Height = 32.000000000000000000
-      Margins.Top = 10.000000000000000000
-      Margins.Bottom = 10.000000000000000000
-    end
-    object ListView1: TListView
-      ItemAppearanceClassName = 'TListItemAppearance'
-      ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
-      HeaderAppearanceClassName = 'TListHeaderObjects'
-      FooterAppearanceClassName = 'TListHeaderObjects'
-      Align = Client
-      Height = 25.000000000000000000
-      TabOrder = 2
-      Visible = False
-      Width = 384.000000000000000000
-    end
-    object rectMarkersTop: TRectangle
-      Align = MostTop
-      Fill.Color = xFF3767A2
-      Height = 44.000000000000000000
-      Margins.Left = -10.000000000000000000
-      Margins.Right = -10.000000000000000000
-      Position.X = -10.000000000000000000
-      Sides = [Bottom]
-      Stroke.Color = xFF294181
-      Stroke.Thickness = 4.000000000000000000
-      Stroke.Join = Bevel
-      Width = 404.000000000000000000
-      object Text2: TText
-        Align = Client
-        Height = 44.000000000000000000
-        Text = 'Clique no Mapa para Adicionar um Marcador'
-        TextSettings.FontColor = claWhite
-        Width = 271.000000000000000000
-      end
-      object Image4: TImage
-        MultiResBitmap = <
-          item
-            Width = 32
-            Height = 32
-            PNG = {
-              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
-              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-              01D5494441545847ED96CD51C33010856DE7EC0248013490024201843B500005
-              A4804C0A08770A80DC813BE14E1AA0805040B8DAE63DF9D96327B2E29F64C2C1
-              DF8C66A5DDD56A254B9B783D3D5D88E378CAA6612B02C956244972C9A6612B3A
-              25700C7CC95AE0B843886BECFA2A088251AA4D816DEDFBFE0ADD77D8B6A9F630
-              B513E0A2586486E021E416F213EA4D6AF586D08D0BB6B992390E083A41025F51
-              147DB02FF51EB4D187BE2EBF4670E75AFC0541875257421FFA720EE74A5D89F3
-              1320588820AFECE348EF71B4E6C895C82D6CE605C0F60DB12CDA617B96ED06FA
-              DA77A204027191D271B24F9DADD9FC18432A2BCE678800BC78BC546F1CA33FC4
-              8E66C6688136FAB0CF399CCB18C6588133010419A1F1B667387723721FCE650C
-              0DADEC2580ACA7B8444F6C52654FCD543E752BD9F13173B3788C6DB405CE5E09
-              F712C0912D0683C1039B54F9D3D36D77B2E363E666F118DB680B384F0047B646
-              1B6B4896925678E920721FCE650C0DAD3813C06E56C89AE5D53C2FF437F8C673
-              2D54823AF83FD247E309E7328671A8E0D485E817B63BE8DB15228240272DC5B5
-              40D093FD1835FD399EE2382F204B3FC718F353B068F1BEFC402E0E7DFB8CB3FF
-              21E904AB1B9B86ADF87F95B0097C7E7A823D3D2DF1BC3F7499931AC09E715100
-              00000049454E44AE426082}
-          end>
-        Align = Right
-        Height = 40.000000000000000000
-        Margins.Right = 12.000000000000000000
-        Margins.Bottom = 4.000000000000000000
-        Position.X = 332.000000000000000000
-        Width = 60.000000000000000000
-      end
-      object Rectangle5: TRectangle
-        Align = Right
-        Fill.Kind = None
-        Height = 44.000000000000000000
-        Margins.Right = 1.000000000000000000
-        Position.X = 271.000000000000000000
-        Sides = []
-        Stroke.Color = xFF6A8EED
-        Stroke.Thickness = 4.000000000000000000
-        Width = 60.000000000000000000
-        object Image5: TImage
-          MultiResBitmap = <
-            item
-              Width = 32
-              Height = 32
-              PNG = {
-                89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
-                F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                00B6494441545847631805A360A0012394C60AFEFEFD3B13CAA408303333A743
-                991800AF03FEFFFF7F06CAA4083032329A40991880094A0F18187007E005A028
-                806263A810D100A407A61F2A84158CA601A2420048F7027D710B2C482400EA51
-                03EA2906B1F18500510EF8F7EF1FC8F2CF20360980978989490DC4A0D8019402
-                6A38600B103F833089065240EC0362E073C0D048849482A19F0881F4C066434A
-                013E078C5646A35130B80B227A344A47C1281860C0C00000C6FF7B24E4C335F1
-                0000000049454E44AE426082}
-            end>
-          Align = Client
-          Height = 40.000000000000000000
-          Margins.Bottom = 4.000000000000000000
-          Width = 60.000000000000000000
-        end
+      object SpeedButton3: TSpeedButton
+        Align = Top
+        Height = 48.000000000000000000
+        Position.X = 1.000000000000000000
+        Position.Y = 48.000000000000000000
+        RepeatClick = True
+        StyleLookup = 'deleteitembutton'
+        Text = 'SpeedButton2'
+        Width = 48.000000000000000000
+        OnClick = SpeedButton3Click
       end
     end
   end
@@ -5315,5 +5174,48 @@ inherited FMapImage: TFMapImage
       MultiResBitmap.Width = 48
       MultiResBitmap.LoadSize = 2
     end
+  end
+  object SourceMarker: TImage [2]
+    Touch.InteractiveGestures = [Pan]
+    OnGesture = SourceMarkerGesture
+    MultiResBitmap.Height = 42
+    MultiResBitmap.Width = 25
+    MultiResBitmap = <
+      item
+        Width = 25
+        Height = 42
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000190000002A08060000004607F0
+          60000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          0225494441545847CD97BF4B1C4114C7DF1D0A267295CA156902275A07EE0F08
+          A43A45AC636CACF20F58691114E42C92225D48914A440421454E0E218520D8A6
+          B04BE082362222483CFC914BD6796FDE1C7B73F36BF7F6C40FBC376F96DBF9EE
+          776667770F1E0B63225A2222433445144438C9716BE28B8885B765804FD3F240
+          17E2ECCA0640FD17F5AA2296A8D2B08944B5370053E3DC0B60EB08E0F50E955D
+          63EA070645DC45EF64270DB9156A8644DC5225D045A25E04142CD41E3B2E9289
+          80222E94A712E0EBFE025719519FA7661B937292A90B8572834E4AD557D409E2
+          CF9D48FA4A5A5897E396F0E7412EF8AA3A682E033C1DE08E053C4FAD89139300
+          32BCC68507BF88676A6C1710C72BF2F1908B1EF08A4C8C72D1035E918AE7F955
+          1CE6C2018AEC5EFD951D1B2F9F7361E074910B034D396E2D78337EFB0930B3C9
+          1DC6778EDA8CFDDEF1F862CBAB35C9E557B9CA8801391E8DDF5EF82882A885BA
+          19F12F3696BED5329936B5169405FA2DFC61659FAB947C6F50B34799313D347A
+          72A3BB404C22482A219300A24F97E2E0E098AB407E5F52734259C3E60449E4C6
+          E602B13941724F02DF17C5F7D458BF245D2270233E4EE3F7BB8D33FC5805B8A2
+          6CC0355D0AE7B4B9A649E174C2FCB8B8E14AE3BF74794ED9418813C4E826C405
+          12E204695CB6BF6C25FC9CBBA6EC21D409D2E126D40512EA0449FD8C4E225228
+          7F96C59CFC1FF28C721FC0294347895C2571F2608CCC4E928B17B2DB3F12DF00
+          8F72BA5200700F8405852A6F96D4750000000049454E44AE426082}
+        FileName = 'C:\Users\LuizFernando\Desktop\GIT\map-marker-md.png'
+      end>
+    DragMode = dmAutomatic
+    Height = 47.000000000000000000
+    Position.X = 256.000000000000000000
+    Position.Y = 120.000000000000000000
+    Width = 28.000000000000000000
+    OnMouseUp = SourceMarkerMouseUp
+  end
+  inherited fgVirtualKeyboard1: TfgVirtualKeyboard
+    Left = 192
+    Top = 8
   end
 end

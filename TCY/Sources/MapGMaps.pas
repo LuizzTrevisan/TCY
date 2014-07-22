@@ -12,7 +12,8 @@ uses
   System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, FMX.ListView.Types, FMX.ListView, FMX.TMSWEBgMapsMarkers,
   FGX.ProgressDialog, FGX.ProgressDialog.Types, FGX.VirtualKeyboard,
-  CacheLayout;
+  FMX.TMSWebGMapsCommonFunctions, FMX.TMSWebGMapsPolygons,
+  FMX.TMSWebGMapsCommon, FMX.Ani;
 
 type
   MarkerOpcao = (Nenhuma, Adicionando, Editando);
@@ -30,16 +31,20 @@ type
     Rectangle2: TRectangle;
     Button1: TButton;
     Button2: TButton;
-    Text2: TText;
-    Image3: TImage;
-    Image1: TImage;
+    txtAjuda: TText;
     BindingsList1: TBindingsList;
-    ListView1: TListView;
+    lvMarcadores: TListView;
     BindSourceDB1: TBindSourceDB;
     LinkListControlToField1: TLinkListControlToField;
-    Rectangle3: TRectangle;
     ClientDataSet1Index: TIntegerField;
     fgProgressDialog1: TfgProgressDialog;
+    btnMenuPopUp: TSpeedButton;
+    lbMenu: TListBox;
+    liRemoverTodosMarcadores: TListBoxItem;
+    GlowEffect7: TGlowEffect;
+    GPSLocation: TImage;
+    ShowList: TImage;
+    GpsAnimation: TFloatAnimation;
     procedure FormResize(Sender: TObject);
     procedure TMSFMXWebGMaps1MapClick(Sender: TObject;
       Latitude, Longitude: Double; X, Y: Integer);
@@ -53,17 +58,21 @@ type
     procedure TMSFMXWebGMaps1MarkerDragEnd(Sender: TObject; MarkerTitle: string;
       IdMarker: Integer; Latitude, Longitude: Double);
     procedure actShowMenuLateralExecute(Sender: TObject);
-    procedure Image3Click(Sender: TObject);
-    procedure Image1Click(Sender: TObject);
-    procedure ListView1DeleteItem(Sender: TObject; AIndex: Integer);
+    procedure lvMarcadoresDeleteItem(Sender: TObject; AIndex: Integer);
     procedure ClientDataSet1BeforeDelete(DataSet: TDataSet);
     procedure TMSFMXWebGMaps1DownloadFinish(Sender: TObject);
     procedure ClientDataSet1BeforePost(DataSet: TDataSet);
     procedure Button4Click(Sender: TObject);
     procedure fgProgressDialog1Hide(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnMenuPopUpClick(Sender: TObject);
+    procedure liRemoverTodosMarcadoresClick(Sender: TObject);
+    procedure ShowListClick(Sender: TObject);
+    procedure GPSLocationClick(Sender: TObject);
   private
     { Private declarations }
+    PolygonLocationItem: TPolygonItem;
+    CircleLocation: TMapPolygon;
     Operacao: MarkerOpcao;
     procedure Mostrar;
     procedure Ocultar;
@@ -83,6 +92,13 @@ procedure TFMapGMaps.actShowMenuLateralExecute(Sender: TObject);
 begin
   inherited;
   Ocultar;
+  rectMarkers.BringToFront;
+end;
+
+procedure TFMapGMaps.btnMenuPopUpClick(Sender: TObject);
+begin
+  inherited;
+  lbMenu.Visible := not lbMenu.Visible;
 end;
 
 procedure TFMapGMaps.Button1Click(Sender: TObject);
@@ -98,7 +114,7 @@ begin
   ClientDataSet1.SaveToFile(GetHomePath + '/Te.txt');
 
   Ocultar;
-  Text2.Text := 'Clique no Mapa para Adicionar um Local';
+  txtAjuda.Text := 'Clique no Mapa para Adicionar um Marcador';
   Operacao := MarkerOpcao.Nenhuma;
 end;
 
@@ -107,7 +123,7 @@ begin
   inherited;
   ClientDataSet1.Delete;
   Ocultar;
-  Text2.Text := 'Clique no Mapa para Adicionar um Local';
+  txtAjuda.Text := 'Clique no Mapa para Adicionar um Marcador';
 end;
 
 procedure TFMapGMaps.Button4Click(Sender: TObject);
@@ -237,45 +253,16 @@ begin
   Button2.Width := Button1.Width - 2;
 end;
 
-procedure TFMapGMaps.Image1Click(Sender: TObject);
+procedure TFMapGMaps.liRemoverTodosMarcadoresClick(Sender: TObject);
 begin
   inherited;
-
-  Image1.Tag := not Image1.Tag;
-  if Boolean(Image1.Tag) then begin
-    rectMarkers.AnimateFloat('Height', Self.Height);
-    Text2.Text := 'Lista de Marcadores ';
-    Rectangle1.Visible := False;
-    Rectangle2.Visible := False;
-    Edit1.Visible := False;
-    TMSFMXWebGMaps1.Visible := False;
-    Rectangle3.Sides := [TSide.Bottom];
-    ListView1.Visible := True;
-  end else begin
-    if Boolean(actShowMenuLateral.Tag) then
-      actShowMenuLateral.Execute;
-    Text2.Text := 'Clique no Mapa para Adicionar um Marcador ';
-    Rectangle1.Visible := True;
-    Rectangle2.Visible := True;
-    Edit1.Visible := True;
-    rectMarkers.Align := TAlignLayout.Bottom;
-    Rectangle3.Sides := [];
-    ListView1.Visible := False;
-    TMSFMXWebGMaps1.Visible := True;
-    Ocultar;
-  end;
-
+  ClientDataSet1.First;
+  while not ClientDataSet1.Eof do
+    ClientDataSet1.Delete;
+  lbMenu.Visible := False;
 end;
 
-procedure TFMapGMaps.Image3Click(Sender: TObject);
-begin
-  inherited;
-  if not LocationSensor1.Active then begin
-    LocationSensor1.Active := True;
-  end;
-end;
-
-procedure TFMapGMaps.ListView1DeleteItem(Sender: TObject; AIndex: Integer);
+procedure TFMapGMaps.lvMarcadoresDeleteItem(Sender: TObject; AIndex: Integer);
 begin
   inherited;
   ClientDataSet1.RecNo := AIndex + 1;
@@ -283,21 +270,77 @@ begin
 
 end;
 
+procedure TFMapGMaps.GPSLocationClick(Sender: TObject);
+begin
+  inherited;
+  GpsAnimation.Enabled := True;
+  if not LocationSensor1.Active then begin
+    LocationSensor1.Active := True;
+  end;
+end;
+
 procedure TFMapGMaps.LocationSensor1LocationChanged(Sender: TObject;
   const OldLocation, NewLocation: TLocationCoord2D);
 begin
   inherited;
   LocationSensor1.Active := False;
+  TMSFMXWebGMaps1.MapPanTo(NewLocation.Latitude, NewLocation.Longitude);
+
+  if not Assigned(PolygonLocationItem) then begin
+    PolygonLocationItem := TMSFMXWebGMaps1.Polygons.Add;
+    CircleLocation := PolygonLocationItem.Polygon;
+    CircleLocation.PolygonType := FMX.TMSWebGMapsCommon.TPolygonType.ptCircle;
+    CircleLocation.BackgroundOpacity := 50;
+    CircleLocation.BorderWidth := 2;
+    TMSFMXWebGMaps1.CreateMapPolygon(CircleLocation);
+  end;
+
+  CircleLocation.Radius := 75000;
+  CircleLocation.Center.Latitude := NewLocation.Latitude;
+  CircleLocation.Center.Longitude := NewLocation.Longitude;
+
+  GpsAnimation.Enabled := False;
+  GPSLocation.Opacity := 1;
+
 end;
 
 procedure TFMapGMaps.Mostrar;
 begin
-  rectMarkers.AnimateFloat('Height', 140);
+  // rectMarkers.AnimateFloat('Height', 140);
+  rectMarkers.Height := 140;
 end;
 
 procedure TFMapGMaps.Ocultar;
 begin
-  rectMarkers.AnimateFloat('Height', rectMarkersTop.Height);
+  // rectMarkers.AnimateFloat('Height', rectMarkersTop.Height);
+  rectMarkers.Height := rectMarkersTop.Height;
+end;
+
+procedure TFMapGMaps.ShowListClick(Sender: TObject);
+begin
+  inherited;
+  ShowList.Tag := not ShowList.Tag;
+  if Boolean(ShowList.Tag) then begin
+    // rectMarkers.AnimateFloat('Height', Self.Height);
+    rectMarkers.Height := Self.Height;
+    txtAjuda.Text := 'Lista de Marcadores ';
+    Rectangle1.Visible := False;
+    Rectangle2.Visible := False;
+    Edit1.Visible := False;
+    TMSFMXWebGMaps1.Visible := False;
+    lvMarcadores.Visible := True;
+  end else begin
+    if Boolean(actShowMenuLateral.Tag) then
+      actShowMenuLateral.Execute;
+    txtAjuda.Text := 'Clique no Mapa para Adicionar um Marcador ';
+    Rectangle1.Visible := True;
+    Rectangle2.Visible := True;
+    Edit1.Visible := True;
+    rectMarkers.Align := TAlignLayout.Bottom;
+    lvMarcadores.Visible := False;
+    TMSFMXWebGMaps1.Visible := True;
+    Ocultar;
+  end;
 end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1DownloadFinish(Sender: TObject);
@@ -312,6 +355,8 @@ end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1MapClick(Sender: TObject;
   Latitude, Longitude: Double; X, Y: Integer);
+var
+  bounds: FMX.TMSWebGMapsCommonFunctions.TBounds;
 begin
   inherited;
   Operacao := MarkerOpcao.Nenhuma;
@@ -325,8 +370,17 @@ begin
   if Boolean(actShowMenuLateral.Tag) then
     actShowMenuLateral.Execute;
 
-  Text2.Text := 'Adicionando Novo Local';
+  txtAjuda.Text := 'Adicionando Novo Marcador';
   Mostrar;
+
+  bounds := FMX.TMSWebGMapsCommonFunctions.TBounds.Create;
+  bounds.NorthEast.Latitude := Latitude + 0.005;
+  bounds.NorthEast.Longitude := Longitude + 0.005;
+  bounds.SouthWest.Latitude := Latitude - 0.005;
+  bounds.SouthWest.Longitude := Longitude - 0.005;
+
+  TMSFMXWebGMaps1.MapZoomTo(bounds);
+
 end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1MarkerClick(Sender: TObject;
@@ -334,16 +388,29 @@ procedure TFMapGMaps.TMSFMXWebGMaps1MarkerClick(Sender: TObject;
 var
   i: Integer;
   vMarker: TMarker;
+  bounds: FMX.TMSWebGMapsCommonFunctions.TBounds;
 begin
   inherited;
   Operacao := MarkerOpcao.Editando;
 
   ClientDataSet1.First;
   ClientDataSet1.FindKey([TMSFMXWebGMaps1.Markers[IdMarker].Tag]);
-  Text2.Text := 'Editando Local';
+  txtAjuda.Text := 'Editando Marcador';
 
   Edit1.Text := ClientDataSet1Title.AsString;
   Mostrar;
+  bounds := FMX.TMSWebGMapsCommonFunctions.TBounds.Create;
+  bounds.NorthEast.Latitude := TMSFMXWebGMaps1.Markers[IdMarker]
+    .Latitude + 0.005;
+  bounds.NorthEast.Longitude := TMSFMXWebGMaps1.Markers[IdMarker]
+    .Longitude + 0.005;
+  bounds.SouthWest.Latitude := TMSFMXWebGMaps1.Markers[IdMarker]
+    .Latitude - 0.005;
+  bounds.SouthWest.Longitude := TMSFMXWebGMaps1.Markers[IdMarker]
+    .Longitude - 0.005;
+
+  TMSFMXWebGMaps1.MapZoomTo(bounds);
+
 end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1MarkerDragEnd(Sender: TObject;

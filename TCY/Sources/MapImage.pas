@@ -17,18 +17,7 @@ type
     Rectangle3: TRectangle;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
-    Image3: TImage;
-    rectMarkers: TRectangle;
-    Rectangle4: TRectangle;
-    Button1: TButton;
-    Button2: TButton;
-    Edit1: TEdit;
-    ListView1: TListView;
-    rectMarkersTop: TRectangle;
-    Text2: TText;
-    Image4: TImage;
-    Rectangle5: TRectangle;
-    Image5: TImage;
+    SourceMarker: TImage;
     procedure Image1Gesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
     procedure Rectangle2Gesture(Sender: TObject;
@@ -36,6 +25,14 @@ type
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
+    procedure Image1DragDrop(Sender: TObject; const Data: TDragObject;
+      const Point: TPointF);
+    procedure Image1DragOver(Sender: TObject; const Data: TDragObject;
+      const Point: TPointF; var Operation: TDragOperation);
+    procedure SourceMarkerGesture(Sender: TObject;
+      const EventInfo: TGestureEventInfo; var Handled: Boolean);
+    procedure SourceMarkerMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Single);
   private
     { Private declarations }
     minHeight, minWidth, maxHeight, maxWidth: Single;
@@ -76,7 +73,6 @@ end;
 procedure TFMapImage.handlePan(EventInfo: TGestureEventInfo);
 begin
   if not(TInteractiveGestureFlag.gfBegin in EventInfo.Flags) then begin
-
     Rectangle2.Position.X := Rectangle2.Position.X +
       (EventInfo.Location.X - FLastPosition.X);
 
@@ -84,7 +80,6 @@ begin
       (EventInfo.Location.Y - FLastPosition.Y);
 
     VerificaPosicaoTamanhoMinimo;
-
   end;
 
   FLastPosition := EventInfo.Location;
@@ -157,6 +152,22 @@ begin
 
 end;
 
+procedure TFMapImage.Image1DragDrop(Sender: TObject; const Data: TDragObject;
+  const Point: TPointF);
+begin
+  inherited;
+  TImage(Data.Source).Position.X := Point.X;
+  TImage(Data.Source).Position.Y := Point.Y;
+end;
+
+procedure TFMapImage.Image1DragOver(Sender: TObject; const Data: TDragObject;
+  const Point: TPointF; var Operation: TDragOperation);
+begin
+  inherited;
+  TImage(Data.Source).Position.X := Point.X;
+  TImage(Data.Source).Position.Y := Point.Y;
+end;
+
 procedure TFMapImage.Image1Gesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
@@ -168,10 +179,34 @@ begin
   // handlePressAndTap(EventInfo);
 end;
 
+procedure TFMapImage.SourceMarkerGesture(Sender: TObject;
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+begin
+  inherited;
+  if not(TInteractiveGestureFlag.gfBegin in EventInfo.Flags) then begin
+    TImage(Sender).Position.X := TImage(Sender).Position.X +
+      (EventInfo.Location.X - FLastPosition.X);
+
+    TImage(Sender).Position.Y := TImage(Sender).Position.Y +
+      (EventInfo.Location.Y - FLastPosition.Y);
+
+    // VerificaPosicaoTamanhoMinimo;
+  end;
+
+  FLastPosition := EventInfo.Location;
+end;
+
+procedure TFMapImage.SourceMarkerMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Single);
+begin
+  inherited;
+  ShowMessage('Opa');
+end;
+
 procedure TFMapImage.Rectangle2Gesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 var
-  circle: TImage;
+  newMarker: TImage;
 begin
   inherited;
   if EventInfo.GestureID = igiPan then
@@ -180,27 +215,32 @@ begin
     handleZoom(EventInfo)
   else if EventInfo.GestureID = igiDoubleTap then begin
 
-    circle := TImage.Create(Rectangle2);
-    circle.Visible := False;
-    circle.MultiResBitmap[0].Bitmap := Image3.MultiResBitmap[0].Bitmap;
-    circle.Width := 18;
-    circle.Height := 41;
+    newMarker := TImage.Create(Rectangle2);
+    newMarker.DragMode := TDragMode.dmAutomatic;
+    newMarker.Visible := False;
+    newMarker.MultiResBitmap[0].Bitmap := SourceMarker.MultiResBitmap[0].Bitmap;
+    newMarker.Width := SourceMarker.Width;
+    newMarker.Height := SourceMarker.Height;
 
-    circle.Position.X := EventInfo.Location.X - Rectangle2.Position.X -
-      (circle.Width / 2);
+    newMarker.OnMouseUp := SourceMarkerMouseUp;
+    newMarker.OnGesture := SourceMarkerGesture;
+    newMarker.Touch.InteractiveGestures := [TInteractiveGesture.Pan];
 
-    circle.Position.Y := EventInfo.Location.Y - Rectangle2.Position.Y -
-      circle.Height - RectClient.Position.Y;
+    newMarker.Position.X := EventInfo.Location.X - Rectangle2.Position.X -
+      (newMarker.Width / 2);
+    newMarker.Position.Y := EventInfo.Location.Y - Rectangle2.Position.Y -
+      newMarker.Height - RectClient.Position.Y;
 
-    circle.Parent := Rectangle2;
-    circle.BringToFront;
-    circle.Anchors := [];
+    newMarker.Parent := Rectangle2;
+    newMarker.BringToFront;
+    newMarker.Anchors := [];
+    newMarker.Visible := True;
 
-    circle.Visible := True;
-
-    circle.AnimateFloatDelay('Position.Y', circle.Position.Y - 10, 0.2, 0.1);
-    circle.AnimateFloatDelay('Position.Y', EventInfo.Location.Y -
-      Rectangle2.Position.Y - circle.Height - RectClient.Position.Y, 0.2, 0.4);
+    newMarker.AnimateFloatDelay('Position.Y', newMarker.Position.Y - 10,
+      0.2, 0.1);
+    newMarker.AnimateFloatDelay('Position.Y', EventInfo.Location.Y -
+      Rectangle2.Position.Y - newMarker.Height - RectClient.Position.Y,
+      0.2, 0.4);
 
   end;
 

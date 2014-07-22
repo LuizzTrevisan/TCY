@@ -215,6 +215,7 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Android)'!=''">
+        <DCC_DebugInfoInExe>false</DCC_DebugInfoInExe>
         <DCC_Define>RELEASE</DCC_Define>
         <DCC_Optimize>true</DCC_Optimize>
         <AUP_EXPAND_STATUS_BAR>true</AUP_EXPAND_STATUS_BAR>
@@ -415,22 +416,17 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="D:\Android\android-ndk-r9d\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Debug" Class="AndroidGDBServer">
+                <DeployFile LocalName="Splash\res\layout\splash_activity.xml" Class="File">
                     <Platform Name="Android">
+                        <RemoteDir>res\layout\</RemoteDir>
+                        <Enabled>false</Enabled>
+                        <RemoteName>splash_activity.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Android\libTopDasGalaxia.so" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Android">
                         <RemoteName>libTopDasGalaxia.so</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Splash\res\layout\splash_activity.xml" Class="File">
-                    <Platform Name="Android">
-                        <RemoteDir>res\layout\</RemoteDir>
-                        <Enabled>false</Enabled>
-                        <RemoteName>splash_activity.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -464,6 +460,11 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                     <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="D:\Android\android-ndk-r9d\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Debug" Class="AndroidGDBServer">
+                    <Platform Name="Android">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

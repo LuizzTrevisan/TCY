@@ -10,17 +10,10 @@ inherited FMapGMaps: TFMapGMaps
   DesignerOrientation = 0
   DesignerOSVersion = ''
   inherited RectClient: TRectangle
-    inherited rectMenuLateral: TRectangle
-      inherited rectTop: TRectangle
-        inherited imgTop: TImage
-          MultiResBitmap.Height = 108
-          MultiResBitmap.Width = 205
-        end
-      end
-    end
-    object TMSFMXWebGMaps1: TTMSFMXWebGMaps
+    Height = 521.000000000000000000
+    object TMSFMXWebGMaps1: TTMSFMXWebGMaps [0]
       Align = Client
-      Height = 378.000000000000000000
+      Height = 379.000000000000000000
       Width = 384.000000000000000000
       Markers = <>
       Polylines = <>
@@ -45,11 +38,24 @@ inherited FMapGMaps: TFMapGMaps
       OnMarkerDragEnd = TMSFMXWebGMaps1MarkerDragEnd
       OnMapClick = TMSFMXWebGMaps1MapClick
     end
+    inherited rectMenuLateral: TRectangle
+      Position.Y = -1.000000000000000000
+      inherited rectTop: TRectangle
+        inherited imgTop: TImage
+          MultiResBitmap.Height = 108
+          MultiResBitmap.Width = 205
+        end
+      end
+      inherited ListBox2: TListBox [2]
+      end
+      inherited lsMenu: TListBox [3]
+      end
+    end
     object rectMarkers: TRectangle
       Align = Bottom
       ClipChildren = True
       Height = 142.000000000000000000
-      Position.Y = 378.000000000000000000
+      Position.Y = 379.000000000000000000
       Width = 384.000000000000000000
       object Rectangle2: TRectangle
         Align = Bottom
@@ -60,18 +66,22 @@ inherited FMapGMaps: TFMapGMaps
         Width = 384.000000000000000000
         object Button1: TButton
           Align = Right
+          StyledSettings = [Size, Style, FontColor]
           Height = 43.000000000000000000
           Position.X = 200.000000000000000000
           TabOrder = 0
           Text = 'Adicionar'
+          TextSettings.Font.Family = 'Open Sans'
           Width = 184.000000000000000000
           OnClick = Button1Click
         end
         object Button2: TButton
           Align = Left
+          StyledSettings = [Size, Style, FontColor]
           Height = 43.000000000000000000
           TabOrder = 1
           Text = 'Excluir'
+          TextSettings.Font.Family = 'Open Sans'
           Width = 193.000000000000000000
           OnClick = Button2Click
         end
@@ -79,14 +89,17 @@ inherited FMapGMaps: TFMapGMaps
       object Edit1: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Top
+        StyleLookup = 'clearingeditstyle'
         TabOrder = 1
+        TextSettings.Font.Family = 'Open Sans'
         Position.Y = 54.000000000000000000
         Width = 384.000000000000000000
         Height = 32.000000000000000000
         Margins.Top = 10.000000000000000000
         Margins.Bottom = 10.000000000000000000
+        StyledSettings = [Size, Style, FontColor]
       end
-      object ListView1: TListView
+      object lvMarcadores: TListView
         ItemAppearanceClassName = 'TListItemAppearance'
         ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
         HeaderAppearanceClassName = 'TListHeaderObjects'
@@ -96,28 +109,31 @@ inherited FMapGMaps: TFMapGMaps
         TabOrder = 2
         Visible = False
         Width = 384.000000000000000000
-        OnDeleteItem = ListView1DeleteItem
+        ItemAppearanceObjects.ItemObjects.Text.Font.Family = 'Open Sans'
+        OnDeleteItem = lvMarcadoresDeleteItem
+        SelectionCrossfade = True
       end
       object rectMarkersTop: TRectangle
         Align = MostTop
-        Fill.Color = xFF3767A2
+        Fill.Color = xFF1D8ACD
         Height = 44.000000000000000000
         Margins.Left = -10.000000000000000000
         Margins.Right = -10.000000000000000000
         Position.X = -10.000000000000000000
         Sides = [Bottom]
         Stroke.Color = xFF294181
-        Stroke.Thickness = 4.000000000000000000
         Stroke.Join = Bevel
         Width = 404.000000000000000000
-        object Text2: TText
+        object txtAjuda: TText
           Align = Client
           Height = 44.000000000000000000
+          Margins.Left = 10.000000000000000000
           Text = 'Clique no Mapa para Adicionar um Marcador'
+          TextSettings.Font.Family = 'Open Sans'
           TextSettings.FontColor = claWhite
-          Width = 283.000000000000000000
+          Width = 270.000000000000000000
         end
-        object Image3: TImage
+        object GPSLocation: TImage
           MultiResBitmap = <
             item
               Width = 32
@@ -125,79 +141,116 @@ inherited FMapGMaps: TFMapGMaps
               PNG = {
                 89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
                 F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                01D5494441545847ED96CD51C33010856DE7EC0248013490024201843B500005
-                A4804C0A08770A80DC813BE14E1AA0805040B8DAE63DF9D96327B2E29F64C2C1
-                DF8C66A5DDD56A254B9B783D3D5D88E378CAA6612B02C956244972C9A6612B3A
-                25700C7CC95AE0B843886BECFA2A088251AA4D816DEDFBFE0ADD77D8B6A9F630
-                B513E0A2586486E021E416F213EA4D6AF586D08D0BB6B992390E083A41025F51
-                147DB02FF51EB4D187BE2EBF4670E75AFC0541875257421FFA720EE74A5D89F3
-                1320588820AFECE348EF71B4E6C895C82D6CE605C0F60DB12CDA617B96ED06FA
-                DA77A204027191D271B24F9DADD9FC18432A2BCE678800BC78BC546F1CA33FC4
-                8E66C6688136FAB0CF399CCB18C6588133010419A1F1B667387723721FCE650C
-                0DADEC2580ACA7B8444F6C52654FCD543E752BD9F13173B3788C6DB405CE5E09
-                F712C0912D0683C1039B54F9D3D36D77B2E363E666F118DB680B384F0047B646
-                1B6B4896925678E920721FCE650C0DAD3813C06E56C89AE5D53C2FF437F8C673
-                2D54823AF83FD247E309E7328671A8E0D485E817B63BE8DB15228240272DC5B5
-                40D093FD1835FD399EE2382F204B3FC718F353B068F1BEFC402E0E7DFB8CB3FF
-                21E904AB1B9B86ADF87F95B0097C7E7A823D3D2DF1BC3F7499931AC09E715100
-                00000049454E44AE426082}
+                01C3494441545847ED96CB510241108677F74E00128009100004A0DED1000C80
+                002802C0BB012877F52EDE250103C000F00C7EFFD04B0DEC83D95D293CEC57D5
+                D5333D3DBDF3ECD9A8A5A509EBF57A24B16A2D12D375B934A94DD3013426361D
+                04CBDD415D2183388E7BCE686C369B056A8EBC2549B272C6008207C00706C898
+                0F77D02BF407E6E5B635EA62EB7B6D134483F91B98F935813FD1EF2A9B3983DA
+                E463BE857E95209866AE80CF48D7CC85C847BEEAA3BE662EA4740B08A43D7FD9
+                D6A23BF6D62DB90D6488A437E00B991DB43FA90C3755CEC41E041A1E2EA7CA36
+                BB8CE4F92986997239760DB5FC2B66F0AA0AC1BA1CAEB16BC9416DF251597DD4
+                9762E936940E80803D44A73DA57436C6CE477D15C3AAB96406C00C945E1F2566
+                4AAF9A08C97ABE4F7A265C3CC576568FB367C2CC00D8BB29722F31937FF574DA
+                8FE1FBA4E7C1C5536C67F5285D010ED102E95B55CC4CE762876EE7A3BE8A61D5
+                5C8E6DC19C43D461EFDCF562064B024EEC437B98ED413EAAAB8FFA522C4DC9A7
+                4E443FC82DF67A894830B393A6E2200878B2C7A8EA733C625F2FD07BCF31756D
+                8592969EE36FF414097A8ECFFE43D20806E467CC5AFCBF4C58115DBF90ECD8D2
+                524014FD02D6D7693E0AB0BFB00000000049454E44AE426082}
             end>
           Align = Right
-          Height = 40.000000000000000000
-          Margins.Bottom = 4.000000000000000000
-          Position.X = 344.000000000000000000
-          Width = 60.000000000000000000
-          OnClick = Image3Click
-        end
-        object Rectangle3: TRectangle
-          Align = Right
-          Fill.Kind = None
           Height = 44.000000000000000000
-          Margins.Right = 1.000000000000000000
-          Position.X = 283.000000000000000000
-          Sides = []
-          Stroke.Color = xFF6A8EED
-          Stroke.Thickness = 4.000000000000000000
-          Width = 60.000000000000000000
-          object Image1: TImage
-            MultiResBitmap = <
-              item
-                Width = 32
-                Height = 32
-                PNG = {
-                  89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
-                  F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  00B6494441545847631805A360A0012394C60AFEFEFD3B13CAA408303333A743
-                  991800AF03FEFFFF7F06CAA4083032329A40991880094A0F18187007E005A028
-                  806263A810D100A407A61F2A84158CA601A2420048F7027D710B2C482400EA51
-                  03EA2906B1F18500510EF8F7EF1FC8F2CF20360980978989490DC4A0D8019402
-                  6A38600B103F833089065240EC0362E073C0D048849482A19F0881F4C066434A
-                  013E078C5646A35130B80B227A344A47C1281860C0C00000C6FF7B24E4C335F1
-                  0000000049454E44AE426082}
-              end>
-            Align = Client
-            Height = 40.000000000000000000
-            Margins.Bottom = 4.000000000000000000
-            Width = 60.000000000000000000
-            OnClick = Image1Click
+          Margins.Right = 12.000000000000000000
+          Position.X = 336.000000000000000000
+          Width = 56.000000000000000000
+          OnClick = GPSLocationClick
+          object GpsAnimation: TFloatAnimation
+            AutoReverse = True
+            Duration = 0.400000005960464500
+            Loop = True
+            PropertyName = 'Opacity'
+            StartValue = 0.000000000000000000
+            StopValue = 1.000000000000000000
           end
         end
+        object ShowList: TImage
+          MultiResBitmap = <
+            item
+              Width = 32
+              Height = 32
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+                F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00B2494441545847631805A360A0012394C60AFEFDFB3713CAA408303131A543
+                991800AF03FEFFFF7F06CAA4083032329A40991880094A0F18187007E005A028
+                806263A810D100A407A61F2A84158CA601A2420048F7027D710B2C482400EA51
+                03EA2906B1F18500B10E0059FE19C42601F0022D560331287600A5801A0ED802
+                C4CF204CA2811410FB8018F81C30341221A560E82742203DB0D9905280CF01A3
+                95D168140CEE82881E8DD251300A061830300000C9FF7B2432BBD9DF00000000
+                49454E44AE426082}
+            end>
+          Align = Right
+          Height = 44.000000000000000000
+          Position.X = 280.000000000000000000
+          Width = 56.000000000000000000
+          OnClick = ShowListClick
+        end
+      end
+    end
+    object lbMenu: TListBox
+      Align = Top
+      Height = 63.000000000000000000
+      Margins.Top = 1.000000000000000000
+      Position.Y = 137.000000000000000000
+      TabOrder = 3
+      Visible = False
+      Width = 384.000000000000000000
+      DisableFocusEffect = False
+      DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      object liRemoverTodosMarcadores: TListBoxItem
+        TextSettings.Font.Family = 'Open Sans'
+        StyledSettings = [Size, Style, FontColor, Other]
+        Height = 42.000000000000000000
+        StyleLookup = 'listboxitemnodetail'
+        TabOrder = 0
+        Text = 'Remover Todos Marcadores'
+        Width = 384.000000000000000000
+        OnClick = liRemoverTodosMarcadoresClick
+      end
+      object GlowEffect7: TGlowEffect
+        Softness = 0.400000005960464500
+        GlowColor = claBlack
+        Opacity = 1.000000000000000000
       end
     end
   end
   inherited Rectangle1: TRectangle
+    Padding.Bottom = 1.000000000000000000
+    Margins.Bottom = 1.000000000000000000
     inherited Image2: TImage
       MultiResBitmap.Height = 48
       MultiResBitmap.Width = 48
       MultiResBitmap.LoadSize = 2
+      Height = 40.000000000000000000
     end
-    inherited SpeedButton1: TSpeedButton
-      Width = 119.000000000000000000
+    object btnMenuPopUp: TSpeedButton
+      Anchors = [akTop, akRight]
+      StyledSettings = [Size, Style, FontColor]
+      Height = 48.000000000000000000
+      IconTintColor = claWhite
+      Margins.Left = 5.000000000000000000
+      Position.X = 345.000000000000000000
+      Position.Y = -1.000000000000000000
+      StyleLookup = 'detailstoolbutton'
+      TextSettings.Font.Family = 'Open Sans'
+      Width = 48.000000000000000000
+      OnClick = btnMenuPopUpClick
     end
   end
   object LocationSensor1: TLocationSensor
     OnLocationChanged = LocationSensor1LocationChanged
-    Left = 104
+    Left = 128
     Top = 104
   end
   object ClientDataSet1: TClientDataSet
@@ -250,7 +303,7 @@ inherited FMapGMaps: TFMapGMaps
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
       FieldName = 'Title'
-      Control = ListView1
+      Control = lvMarcadores
       FillExpressions = <>
       FillHeaderExpressions = <>
       FillBreakGroups = <>
