@@ -21,6 +21,9 @@
         <Projects Include="ProgressDialogs\Library\fgx.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="MapImage\MapImage.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -83,14 +86,23 @@
     <Target Name="fgx:Make">
         <MSBuild Projects="ProgressDialogs\Library\fgx.dproj" Targets="Make"/>
     </Target>
+    <Target Name="MapImage">
+        <MSBuild Projects="MapImage\MapImage.dproj"/>
+    </Target>
+    <Target Name="MapImage:Clean">
+        <MSBuild Projects="MapImage\MapImage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MapImage:Make">
+        <MSBuild Projects="MapImage\MapImage.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6;TopDasGalaxia;CacheLayoutRuntime;CacheLayoutDesigntime;dclfgx;fgx"/>
+        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6;TopDasGalaxia;CacheLayoutRuntime;CacheLayoutDesigntime;dclfgx;fgx;MapImage"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Clean;TopDasGalaxia:Clean;CacheLayoutRuntime:Clean;CacheLayoutDesigntime:Clean;dclfgx:Clean;fgx:Clean"/>
+        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Clean;TopDasGalaxia:Clean;CacheLayoutRuntime:Clean;CacheLayoutDesigntime:Clean;dclfgx:Clean;fgx:Clean;MapImage:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Make;TopDasGalaxia:Make;CacheLayoutRuntime:Make;CacheLayoutDesigntime:Make;dclfgx:Make;fgx:Make"/>
+        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Make;TopDasGalaxia:Make;CacheLayoutRuntime:Make;CacheLayoutDesigntime:Make;dclfgx:Make;fgx:Make;MapImage:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -8,36 +8,32 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   Main, FGX.VirtualKeyboard, System.Actions, FMX.ActnList, FMX.Objects,
   FMX.Effects, FMX.ListBox, FMX.Layouts, FMX.ListView.Types, FMX.ListView,
-  FMX.Edit;
+  FMX.Edit, uMapImage;
 
 type
   TFMapImage = class(TFMain)
-    Image1: TImage;
     Rectangle2: TRectangle;
     Rectangle3: TRectangle;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
-    SourceMarker: TImage;
-    procedure Image1Gesture(Sender: TObject; const EventInfo: TGestureEventInfo;
-      var Handled: Boolean);
+    MapImage1: TMapImage;
     procedure Rectangle2Gesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
-    procedure Image1DragDrop(Sender: TObject; const Data: TDragObject;
-      const Point: TPointF);
     procedure Image1DragOver(Sender: TObject; const Data: TDragObject;
       const Point: TPointF; var Operation: TDragOperation);
     procedure SourceMarkerGesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
-    procedure SourceMarkerMouseUp(Sender: TObject; Button: TMouseButton;
+    procedure MapImage1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
   private
     { Private declarations }
     minHeight, minWidth, maxHeight, maxWidth: Single;
     procedure VerificaPosicaoTamanhoMinimo;
     procedure ZoomImage(Size, X, Y: Single);
+    procedure CreateMarker(X, Y: Single);
   public
     { Public declarations }
     FLastPosition: TPointF;
@@ -68,6 +64,7 @@ begin
 
   maxHeight := Rectangle2.Height * 2;
   maxWidth := Rectangle2.Width * 2;
+
 end;
 
 procedure TFMapImage.handlePan(EventInfo: TGestureEventInfo);
@@ -88,11 +85,35 @@ end;
 
 procedure TFMapImage.handleRotate(EventInfo: TGestureEventInfo);
 begin
-  Image1.RotationAngle := RadToDeg(-EventInfo.Angle);
+  MapImage1.RotationAngle := RadToDeg(-EventInfo.Angle);
+end;
+
+procedure TFMapImage.CreateMarker(X, Y: Single);
+var
+  newMarker: TImage;
+begin
+  newMarker := TImage.Create(Rectangle2);
+  //newMarker.DragMode := TDragMode.dmAutomatic;
+  newMarker.Visible := False;
+//  newMarker.MultiResBitmap[0].Bitmap := SourceMarker.MultiResBitmap[0].Bitmap;
+//  newMarker.Width := SourceMarker.Width;
+//  newMarker.Height := SourceMarker.Height;
+  // newMarker.OnMouseUp := SourceMarkerMouseUp;
+  // newMarker.OnGesture := SourceMarkerGesture;
+  // newMarker.OnDragDrop := SourceMarkerDragDrop;
+  newMarker.Touch.InteractiveGestures := [TInteractiveGesture.Pan];
+  newMarker.Position.X := X - Rectangle2.Position.X - (newMarker.Width / 2);
+  newMarker.Position.Y := Y - Rectangle2.Position.Y - newMarker.Height -
+    RectClient.Position.Y;
+  newMarker.Parent := Rectangle2;
+  newMarker.BringToFront;
+  newMarker.Anchors := [];
+  newMarker.Visible := True;
+
 end;
 
 procedure TFMapImage.VerificaPosicaoTamanhoMinimo;
-begin
+begin                {
   if Rectangle2.Position.X > 0 then
     Rectangle2.Position.X := 0;
 
@@ -115,17 +136,23 @@ begin
 
   if Rectangle2.Position.X < RectClient.Width - Rectangle2.Width then
     Rectangle2.Position.X := RectClient.Width - Rectangle2.Width;
-
+                }
 end;
 
 procedure TFMapImage.ZoomImage(Size, X, Y: Single);
 var
   eventDistance, widthDistance, heightDistance: Single;
 begin
-  eventDistance := Size / 10;
-  widthDistance := (eventDistance * (Rectangle2.Width / 100));
-  heightDistance := (eventDistance * (Rectangle2.Height / 100));
+  eventDistance  := Size / 100;
 
+//  widthDistance  := (eventDistance * (Rectangle2.Width / 100));
+//  heightDistance := (eventDistance * (Rectangle2.Height / 100));
+
+  Rectangle2.Scale.X := Rectangle2.Scale.X  + eventDistance;
+  Rectangle2.Scale.Y := Rectangle2.Scale.Y  + eventDistance;
+
+
+ {
   Rectangle2.Width := Rectangle2.Width + widthDistance;
   Rectangle2.Height := Rectangle2.Height + heightDistance;
 
@@ -137,7 +164,7 @@ begin
     Rectangle2.Position.Y := Rectangle2.Position.Y -
       ((Y / Self.Height) * heightDistance);
   end;
-
+  }
   VerificaPosicaoTamanhoMinimo;
 end;
 
@@ -152,14 +179,6 @@ begin
 
 end;
 
-procedure TFMapImage.Image1DragDrop(Sender: TObject; const Data: TDragObject;
-  const Point: TPointF);
-begin
-  inherited;
-  TImage(Data.Source).Position.X := Point.X;
-  TImage(Data.Source).Position.Y := Point.Y;
-end;
-
 procedure TFMapImage.Image1DragOver(Sender: TObject; const Data: TDragObject;
   const Point: TPointF; var Operation: TDragOperation);
 begin
@@ -168,79 +187,44 @@ begin
   TImage(Data.Source).Position.Y := Point.Y;
 end;
 
-procedure TFMapImage.Image1Gesture(Sender: TObject;
-  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+procedure TFMapImage.MapImage1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Single);
 begin
   inherited;
-
-  // else if EventInfo.GestureID = igiRotate then
-  // handleRotate(EventInfo);
-  // else if EventInfo.GestureID = igiPressAndTap then
-  // handlePressAndTap(EventInfo);
+  MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, X, Y));
 end;
 
 procedure TFMapImage.SourceMarkerGesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
   inherited;
+
   if not(TInteractiveGestureFlag.gfBegin in EventInfo.Flags) then begin
     TImage(Sender).Position.X := TImage(Sender).Position.X +
       (EventInfo.Location.X - FLastPosition.X);
-
     TImage(Sender).Position.Y := TImage(Sender).Position.Y +
       (EventInfo.Location.Y - FLastPosition.Y);
-
-    // VerificaPosicaoTamanhoMinimo;
   end;
 
   FLastPosition := EventInfo.Location;
 end;
 
-procedure TFMapImage.SourceMarkerMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Single);
-begin
-  inherited;
-  ShowMessage('Opa');
-end;
-
 procedure TFMapImage.Rectangle2Gesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
-var
-  newMarker: TImage;
 begin
   inherited;
   if EventInfo.GestureID = igiPan then
     handlePan(EventInfo)
   else if EventInfo.GestureID = igiZoom then
-    handleZoom(EventInfo)
+   // handleZoom(EventInfo)
   else if EventInfo.GestureID = igiDoubleTap then begin
+    CreateMarker(EventInfo.Location.X, EventInfo.Location.Y);
 
-    newMarker := TImage.Create(Rectangle2);
-    newMarker.DragMode := TDragMode.dmAutomatic;
-    newMarker.Visible := False;
-    newMarker.MultiResBitmap[0].Bitmap := SourceMarker.MultiResBitmap[0].Bitmap;
-    newMarker.Width := SourceMarker.Width;
-    newMarker.Height := SourceMarker.Height;
-
-    newMarker.OnMouseUp := SourceMarkerMouseUp;
-    newMarker.OnGesture := SourceMarkerGesture;
-    newMarker.Touch.InteractiveGestures := [TInteractiveGesture.Pan];
-
-    newMarker.Position.X := EventInfo.Location.X - Rectangle2.Position.X -
-      (newMarker.Width / 2);
-    newMarker.Position.Y := EventInfo.Location.Y - Rectangle2.Position.Y -
-      newMarker.Height - RectClient.Position.Y;
-
-    newMarker.Parent := Rectangle2;
-    newMarker.BringToFront;
-    newMarker.Anchors := [];
-    newMarker.Visible := True;
-
-    newMarker.AnimateFloatDelay('Position.Y', newMarker.Position.Y - 10,
-      0.2, 0.1);
-    newMarker.AnimateFloatDelay('Position.Y', EventInfo.Location.Y -
-      Rectangle2.Position.Y - newMarker.Height - RectClient.Position.Y,
-      0.2, 0.4);
+    // newMarker.AnimateFloatDelay('Position.Y', newMarker.Position.Y - 10,
+    // 0.2, 0.1);
+    // newMarker.AnimateFloatDelay('Position.Y', EventInfo.Location.Y -
+    // Rectangle2.Position.Y - newMarker.Height - RectClient.Position.Y,
+    // 0.2, 0.4);
 
   end;
 
@@ -257,5 +241,7 @@ begin
   inherited;
   ZoomImage(-50, Self.Width / 2, Self.Height / 2);
 end;
+
+
 
 end.

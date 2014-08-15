@@ -32,10 +32,7 @@ type
     Button1: TButton;
     Button2: TButton;
     txtAjuda: TText;
-    BindingsList1: TBindingsList;
     lvMarcadores: TListView;
-    BindSourceDB1: TBindSourceDB;
-    LinkListControlToField1: TLinkListControlToField;
     ClientDataSet1Index: TIntegerField;
     fgProgressDialog1: TfgProgressDialog;
     btnMenuPopUp: TSpeedButton;
@@ -267,7 +264,6 @@ begin
   inherited;
   ClientDataSet1.RecNo := AIndex + 1;
   ClientDataSet1.Delete;
-
 end;
 
 procedure TFMapGMaps.GPSLocationClick(Sender: TObject);
@@ -281,26 +277,40 @@ end;
 
 procedure TFMapGMaps.LocationSensor1LocationChanged(Sender: TObject;
   const OldLocation, NewLocation: TLocationCoord2D);
+var
+  bounds: FMX.TMSWebGMapsCommonFunctions.TBounds;
 begin
   inherited;
   LocationSensor1.Active := False;
   TMSFMXWebGMaps1.MapPanTo(NewLocation.Latitude, NewLocation.Longitude);
 
+  bounds := FMX.TMSWebGMapsCommonFunctions.TBounds.Create;
+
+  bounds.NorthEast.Latitude := NewLocation.Latitude + 0.002;
+  bounds.NorthEast.Longitude := NewLocation.Longitude + 0.002;
+  bounds.SouthWest.Latitude := NewLocation.Latitude - 0.002;
+  bounds.SouthWest.Longitude := NewLocation.Longitude - 0.002;
+  TMSFMXWebGMaps1.MapZoomTo(bounds);
+
   if not Assigned(PolygonLocationItem) then begin
     PolygonLocationItem := TMSFMXWebGMaps1.Polygons.Add;
     CircleLocation := PolygonLocationItem.Polygon;
     CircleLocation.PolygonType := FMX.TMSWebGMapsCommon.TPolygonType.ptCircle;
-    CircleLocation.BackgroundOpacity := 50;
+    CircleLocation.BackgroundOpacity := 80;
     CircleLocation.BorderWidth := 2;
-    TMSFMXWebGMaps1.CreateMapPolygon(CircleLocation);
   end;
 
-  CircleLocation.Radius := 75000;
+  CircleLocation.Radius := 50;
+  CircleLocation.Visible := True;
   CircleLocation.Center.Latitude := NewLocation.Latitude;
   CircleLocation.Center.Longitude := NewLocation.Longitude;
 
+  TMSFMXWebGMaps1.DeleteAllMapPolygon;
+  TMSFMXWebGMaps1.CreateMapPolygon(CircleLocation);
+
   GpsAnimation.Enabled := False;
   GPSLocation.Opacity := 1;
+  GPSLocation.Repaint;
 
 end;
 
@@ -329,6 +339,12 @@ begin
     Edit1.Visible := False;
     TMSFMXWebGMaps1.Visible := False;
     lvMarcadores.Visible := True;
+    lvMarcadores.Items.Clear;
+    ClientDataSet1.First;
+    while not ClientDataSet1.Eof do begin
+      lvMarcadores.Items.Add.Text := ClientDataSet1Title.AsString;
+      ClientDataSet1.Next;
+    end;
   end else begin
     if Boolean(actShowMenuLateral.Tag) then
       actShowMenuLateral.Execute;
@@ -371,13 +387,14 @@ begin
     actShowMenuLateral.Execute;
 
   txtAjuda.Text := 'Adicionando Novo Marcador';
+  Edit1.Text := '';
   Mostrar;
 
   bounds := FMX.TMSWebGMapsCommonFunctions.TBounds.Create;
-  bounds.NorthEast.Latitude := Latitude + 0.005;
-  bounds.NorthEast.Longitude := Longitude + 0.005;
-  bounds.SouthWest.Latitude := Latitude - 0.005;
-  bounds.SouthWest.Longitude := Longitude - 0.005;
+  bounds.NorthEast.Latitude := Latitude + 0.002;
+  bounds.NorthEast.Longitude := Longitude + 0.002;
+  bounds.SouthWest.Latitude := Latitude - 0.002;
+  bounds.SouthWest.Longitude := Longitude - 0.002;
 
   TMSFMXWebGMaps1.MapZoomTo(bounds);
 
