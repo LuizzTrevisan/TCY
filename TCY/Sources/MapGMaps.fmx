@@ -187,7 +187,7 @@ inherited FMapGMaps: TFMapGMaps
       Align = Top
       Height = 63.000000000000000000
       Margins.Top = 1.000000000000000000
-      Position.Y = 137.000000000000000000
+      Position.Y = 9.000000000000000000
       TabOrder = 3
       Visible = False
       Width = 384.000000000000000000

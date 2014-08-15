@@ -231,15 +231,27 @@ begin
 end;
 
 procedure TFMapImage.SpeedButton2Click(Sender: TObject);
+var
+  i: Integer;
 begin
   inherited;
   ZoomImage(50, Self.Width / 2, Self.Height / 2);
+  for i := 0 to MapImage1.Marcadores.Count -1 do begin
+    MapImage1.Marcadores[I].Scale.X := MapImage1.Marcadores[I].Scale.X - 0.1;
+    MapImage1.Marcadores[I].Scale.y := MapImage1.Marcadores[I].Scale.Y - 0.1;
+  end;
 end;
 
 procedure TFMapImage.SpeedButton3Click(Sender: TObject);
+var
+  i : Integer;
 begin
   inherited;
   ZoomImage(-50, Self.Width / 2, Self.Height / 2);
+  for i := 0 to MapImage1.Marcadores.Count -1 do begin
+    MapImage1.Marcadores[I].Scale.X := MapImage1.Marcadores[I].Scale.X + 0.1;
+    MapImage1.Marcadores[I].Scale.Y := MapImage1.Marcadores[I].Scale.Y + 0.1;
+  end;
 end;
 
 

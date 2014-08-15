@@ -362,7 +362,6 @@ end;
 procedure TFMapGMaps.TMSFMXWebGMaps1DownloadFinish(Sender: TObject);
 begin
   inherited;
-
   Operacao := MarkerOpcao.Adicionando;
   CarregarMarcadores;
   fgProgressDialog1.Hide;
@@ -416,15 +415,16 @@ begin
 
   Edit1.Text := ClientDataSet1Title.AsString;
   Mostrar;
+
   bounds := FMX.TMSWebGMapsCommonFunctions.TBounds.Create;
   bounds.NorthEast.Latitude := TMSFMXWebGMaps1.Markers[IdMarker]
-    .Latitude + 0.005;
+    .Latitude + 0.002;
   bounds.NorthEast.Longitude := TMSFMXWebGMaps1.Markers[IdMarker]
-    .Longitude + 0.005;
+    .Longitude + 0.002;
   bounds.SouthWest.Latitude := TMSFMXWebGMaps1.Markers[IdMarker]
-    .Latitude - 0.005;
+    .Latitude - 0.002;
   bounds.SouthWest.Longitude := TMSFMXWebGMaps1.Markers[IdMarker]
-    .Longitude - 0.005;
+    .Longitude - 0.002;
 
   TMSFMXWebGMaps1.MapZoomTo(bounds);
 
