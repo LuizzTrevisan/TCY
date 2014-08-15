@@ -257,6 +257,8 @@ begin
   while not ClientDataSet1.Eof do
     ClientDataSet1.Delete;
   lbMenu.Visible := False;
+
+  ClientDataSet1.SaveToFile(GetHomePath + '/Te.txt');
 end;
 
 procedure TFMapGMaps.lvMarcadoresDeleteItem(Sender: TObject; AIndex: Integer);
