@@ -1765,8 +1765,8 @@ object FMain: TFMain
     end
   end
   object actMenu: TActionList
-    Left = 280
-    Top = 8
+    Left = 272
+    Top = 24
     object actShowMenuLateral: TAction
       Text = 'Menu     '
       OnExecute = actShowMenuLateralExecute
@@ -1776,7 +1776,7 @@ object FMain: TFMain
     Buttons = <>
     OnShow = fgVirtualKeyboard1Show
     OnHide = fgVirtualKeyboard1Hide
-    Left = 312
-    Top = 104
+    Left = 176
+    Top = 240
   end
 end

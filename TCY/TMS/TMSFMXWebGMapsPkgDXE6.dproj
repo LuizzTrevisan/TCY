@@ -110,6 +110,7 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
+        <DCC_UsePackage>IndySystem;IndyProtocols;IndyCore;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>package=com.embarcadero.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=preferExternal;largeHeap=False;theme=TitleBar;hardwareAccelerated=true</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
@@ -119,11 +120,11 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDevelopmentRegion=en;CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleInfoDictionaryVersion=6.0;CFBundleVersion=1.0.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;LSRequiresIPhoneOS=true;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);UIDeviceFamily=iPhone &amp; iPad;CFBundleResourceSpecification=ResourceRules.plist</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
-        <DCC_UsePackage>rtl;fmx;xmlrtl;DbxCommonDriver;dbrtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;xmlrtl;DbxCommonDriver;dbrtl;IndySystem;IndyProtocols;IndyCore;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_iOSSimulator)'!=''">
-        <DCC_UsePackage>rtl;fmx;xmlrtl;DbxCommonDriver;dbrtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;xmlrtl;DbxCommonDriver;dbrtl;IndySystem;IndyProtocols;IndyCore;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDevelopmentRegion=en;CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleInfoDictionaryVersion=6.0;CFBundleVersion=1.0.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;LSRequiresIPhoneOS=true;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);UIDeviceFamily=iPhone &amp; iPad;CFBundleResourceSpecification=ResourceRules.plist</VerInfo_Keys>
@@ -131,15 +132,15 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleVersion=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);NSHighResolutionCapable=true;LSApplicationCategoryType=public.app-category.utilities</VerInfo_Keys>
-        <DCC_UsePackage>rtl;fmx;TMSFMXPackPkgDXE3_Development;xmlrtl;DbxCommonDriver;dbrtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;TMSFMXPackPkgDXE3_Development;xmlrtl;DbxCommonDriver;dbrtl;IndySystem;IndyProtocols;IndyCore;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_UsePackage>rtl;fmx;TMSFMXPackPkgDXE3_Development;xmlrtl;DbxCommonDriver;dbrtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;TMSFMXPackPkgDXE3_Development;xmlrtl;DbxCommonDriver;dbrtl;IndySystem;IndyProtocols;IndyCore;vcl;VclSmp;TMSFMXCloudPackPkgDXE6;TMSFMXCloudPackPkgDEDXE6;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>rtl;fmx;TMSFMXPackPkgDXE3_Development;xmlrtl;DbxCommonDriver;dbrtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;TMSFMXPackPkgDXE3_Development;xmlrtl;DbxCommonDriver;dbrtl;IndySystem;IndyProtocols;IndyCore;vcl;VclSmp;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -351,9 +352,7 @@
                     <Excluded_Packages Name="$(BDSBIN)\TeeUI9200.bpl">TeeChart User Interface Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACDBXDriver200.bpl">Embarcadero FireDAC DBX Driver Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\FireDACDSDriver200.bpl">Embarcadero FireDAC DataSnap Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl\DCEF_XE5.bpl">File C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl\DCEF_XE5.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDXE6.bpl">File C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDXE6.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDEDXE6.bpl">File C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TMS\Win32\TMSFMXPackPkgDEDXE6.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclIBXLegacy200.bpl">Embarcadero Legacy InterBase Express Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>

@@ -29,6 +29,14 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="Splash\res\values\strings.xml">
+            <RemoteDir>TopDasGalaxia\res\values\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TopDasGalaxia\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
@@ -41,6 +49,14 @@
             <RemoteDir>TopDasGalaxia\library\lib\armeabi\</RemoteDir>
             <RemoteName>libTopDasGalaxia.so</RemoteName>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Splash\res\layout\splash_activity.xml">
+            <RemoteDir>TopDasGalaxia\res\layout\</RemoteDir>
+            <RemoteName>splash_activity.xml</RemoteName>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -98,6 +114,14 @@
             <RemoteDir>TopDasGalaxia\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Splash\java\output\dex\classes.dex">
+            <RemoteDir>TopDasGalaxia\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>

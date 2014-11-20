@@ -28,6 +28,7 @@ type
    function GetMarcadores : TList<TMarcador>;
   public
     { Public declarations }
+    MarcadorScale : TPosition;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 //    property Marcadores[Index: Integer]: TMarcador read GetMarcador write SetMarcador;
@@ -51,7 +52,7 @@ constructor TMapImage.Create(AOwner: TComponent);
 begin
   inherited;
   FMarcadores := TList<TMarcador>.Create();
-
+  MarcadorScale := TPosition.Create(PointF(1,1));
 end;
 
 destructor TMapImage.Destroy;
@@ -91,6 +92,8 @@ begin
   Self.Anchors := [];
   InStream := TResourceStream.Create(HInstance, 'PngImage_1', RT_RCDATA);
   Self.MultiResBitmap.Items[0].Bitmap.LoadFromStream(InStream);
+  Self.Scale.X := TMapImage(AOwner).MarcadorScale.X;
+  Self.Scale.Y := TMapImage(AOwner).MarcadorScale.Y;
 end;
 
 function TMarcador.X: Single;

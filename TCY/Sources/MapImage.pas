@@ -236,9 +236,11 @@ var
 begin
   inherited;
   ZoomImage(50, Self.Width / 2, Self.Height / 2);
+  MapImage1.MarcadorScale.Y  := MapImage1.MarcadorScale.Y - 0.1;
+  MapImage1.MarcadorScale.X  := MapImage1.MarcadorScale.X - 0.1;
   for i := 0 to MapImage1.Marcadores.Count -1 do begin
-    MapImage1.Marcadores[I].Scale.X := MapImage1.Marcadores[I].Scale.X - 0.1;
-    MapImage1.Marcadores[I].Scale.y := MapImage1.Marcadores[I].Scale.Y - 0.1;
+    MapImage1.Marcadores[I].Scale.X := MapImage1.MarcadorScale.X;
+    MapImage1.Marcadores[I].Scale.y := MapImage1.MarcadorScale.Y;
   end;
 end;
 
@@ -248,9 +250,11 @@ var
 begin
   inherited;
   ZoomImage(-50, Self.Width / 2, Self.Height / 2);
+  MapImage1.MarcadorScale.Y  := MapImage1.MarcadorScale.Y + 0.1;
+  MapImage1.MarcadorScale.X  := MapImage1.MarcadorScale.X + 0.1;
   for i := 0 to MapImage1.Marcadores.Count -1 do begin
-    MapImage1.Marcadores[I].Scale.X := MapImage1.Marcadores[I].Scale.X + 0.1;
-    MapImage1.Marcadores[I].Scale.Y := MapImage1.Marcadores[I].Scale.Y + 0.1;
+    MapImage1.Marcadores[I].Scale.X := MapImage1.MarcadorScale.X;
+    MapImage1.Marcadores[I].Scale.Y := MapImage1.MarcadorScale.Y;
   end;
 end;
 
