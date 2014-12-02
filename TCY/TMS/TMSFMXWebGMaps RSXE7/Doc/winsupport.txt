@@ -1,0 +1,21 @@
+**********************************************************************
+Author: TMS Software
+        Copyright © 2014
+        E-mail: info@tmssoftware.com
+        Web: http://www.tmssoftware.com
+**********************************************************************
+
+
+TMS WebGMaps for FireMonkey Windows support
+---------------------------------------------
+
+Windows support in the TMS WebGMaps for FireMonkey is based on the Delphi Chromium Embedded opensource library
+and can be installed and compiled by following the steps below.
+
+1) Download and Extract http://www.tmssoftware.com/download/ChromiumFMX.zip
+2) Open the package ChromiumFMX.dpk, compile and then install the package.
+3) Add the directory where the ChromiumFMX source is located to your Win32 library path in the IDE (ceffmx.pas, ceflib.pas, ...)
+4) Navigate to the directory where the TMS WebGMaps for FireMonkey source is installed.
+5) Open the file FMX.TMSWebGMapsWebBrowser.Win and comment the line {$DEFINE CHROMIUMOFF}
+6) Copy the files inside the lib directory from the extracted ChromiumFMX.zip file to the directory where your application executable is or will be located.
+7) Create or open a new or existing project and build your project.

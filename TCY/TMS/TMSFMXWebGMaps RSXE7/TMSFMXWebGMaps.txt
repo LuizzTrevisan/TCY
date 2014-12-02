@@ -1,0 +1,101 @@
+**********************************************************************
+Author: TMS Software
+        Copyright © 1996-2014
+        E-mail: info@tmssoftware.com
+        Web: http://www.tmssoftware.com
+**********************************************************************
+
+
+TMS FMX WebGMaps
+
+
+Release 1.9.1.1:
+-----------------
+
+Google Maps component for FireMonkey designed to render a variety of maps in a web-browser
+
+
+History :
+---------
+  v1.0.0.0 : first release
+  v1.5.0.0 : New : XE5 support
+           : New : Mac OSX support
+           : New : Public property APIKey
+           : New : Function Distance() added
+           : New : Procedure GetDirections() overload to use coordinates instead of string values as origin/destination
+  v1.6.0.0 : New : Android support
+  v1.6.0.1 : Fixed : Issue with Parent and Visibility
+  v1.6.0.2 : Fixed : Issue with click detection when visible is false on Android
+           : Fixed : Issue with statusbar height offset on iOS
+  v1.6.0.3 : Fixed : Issue with parsing marker Javascript 
+  v1.6.0.4 : Improved : Published Visible property
+  v1.6.0.5 : Improved : Enabled and Visible property behavior
+  V1.7.0.0 : New : XE6 support
+  v1.8.0.0 : New : Windows 32 bit support
+  v1.8.0.1 : Fixed : Issue with Android visibility
+  v1.8.0.2 : Fixed : Issue with Android backbutton and iOS positioning
+  v1.8.0.3 : Improved: Allow interception of URL redirection, blocking navigation
+           : Fixed: Issue with keyboard input on Android in TTMSFMXWebGMapsWebBrowser
+  v1.9.0.0 : New: function DegreesToLonLat added
+           : New: Directions extended with WayPoints, avoid Tolls/Highways
+           : New: OnStreetViewChange event
+           : New: Markers.Bounds to retrieve outer bounds of markers
+           : New: PolyLines.Bounds to retrieve outer bounds of all poly lines
+           : New: PolyLines[].Paths[].PathBounds to retrieve outer bounds of a single polyline
+           : New: Polygon.Bounds to retrieve outer bounds of all polygons
+           : New: Polygon[].Paths[].PathBounds to retrieve outer bounds of a single polygon
+           : New: RenderDirections overload added with long/lat parameters
+           : New: KML Layer support: AddMapKMLLayer, DeleteMapKMLLayer, DeleteMapAllKMLLayer functions and OnKMLLayerClick event added
+           : New: MapOptions.DisablePOI to disable the display of points of interest icons on the map
+           : Improved: Polygons and Polylines are automatically displayed when added via the Object Inspector
+           : Improved: In OpenMarkerInfoWindowHTML double quotes are now accepted
+           : Improved: Trial version compiled in release mode
+  v1.9.0.1 : Fixed: Issue parsing javascript when navigating to streetview from POI
+  v1.9.1.0 : New: XE7 support
+  v1.9.1.1 : Fixed: Issue with duplicate GUIDs
+
+Usage:
+------
+ Use of TMS software components in applications requires a license.
+ A license can be obtained by registration. A single developer license
+ registration is available as well as a site license.
+ With the purchase of one single developer license, one developer in
+ the company is entitled to:
+ - use of registered version that contains full source code and no
+   limitations 
+ - free updates for a full version cycle
+ - free email priority support & access to support newsgroups
+ - discounts to purchases of other products
+
+ With a site license, multiple developers in the company are entitled
+ to:
+ - use of registered version that contains full source code and no
+   limitations 
+ - add additional developers at any time who make use of the components
+ - free updates for a full version cycle
+ - free email priority support & access to support newsgroups
+ - discounts to purchases of other products
+
+ Online order information can be found at:
+ http://www.tmssoftware.com/go/?orders
+
+Note: 
+-----
+
+ The components are also part of the TMS Component Pack bundle, see 
+ http://www.tmssoftware.com/site/tmspack.asp
+
+
+Help, hints, tips, bug reports:
+-------------------------------
+ Send any questions/remarks/suggestions to : help@tmssoftware.com
+
+ Before contacting support about a possible issue with the component
+ you encounter, make sure that you are using the latest version of the 
+ component.
+ If a problem persists with the latest version, provide information 
+ about which Delphi or C++Builder version you are using as well as
+ the operating system and if possible, steps to reproduce the problem
+ you encounter. That will guarantee the fastest turnaround times for
+ your support case. 
+
