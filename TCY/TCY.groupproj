@@ -3,16 +3,7 @@
         <ProjectGuid>{B239027B-161B-473E-94B9-298EA43A5C37}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="TMS\TMSFMXWebGMapsPkgDXE6.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="TopDasGalaxia.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="CacheLayout\Source\CacheLayoutRuntime.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="CacheLayout\Source\CacheLayoutDesigntime.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="ProgressDialogs\Design\dclfgx.dproj">
@@ -32,15 +23,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="TMSFMXWebGMapsPkgDXE6">
-        <MSBuild Projects="TMS\TMSFMXWebGMapsPkgDXE6.dproj"/>
-    </Target>
-    <Target Name="TMSFMXWebGMapsPkgDXE6:Clean">
-        <MSBuild Projects="TMS\TMSFMXWebGMapsPkgDXE6.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="TMSFMXWebGMapsPkgDXE6:Make">
-        <MSBuild Projects="TMS\TMSFMXWebGMapsPkgDXE6.dproj" Targets="Make"/>
-    </Target>
     <Target Name="TopDasGalaxia">
         <MSBuild Projects="TopDasGalaxia.dproj"/>
     </Target>
@@ -49,24 +31,6 @@
     </Target>
     <Target Name="TopDasGalaxia:Make">
         <MSBuild Projects="TopDasGalaxia.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="CacheLayoutRuntime">
-        <MSBuild Projects="CacheLayout\Source\CacheLayoutRuntime.dproj"/>
-    </Target>
-    <Target Name="CacheLayoutRuntime:Clean">
-        <MSBuild Projects="CacheLayout\Source\CacheLayoutRuntime.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="CacheLayoutRuntime:Make">
-        <MSBuild Projects="CacheLayout\Source\CacheLayoutRuntime.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="CacheLayoutDesigntime">
-        <MSBuild Projects="CacheLayout\Source\CacheLayoutDesigntime.dproj"/>
-    </Target>
-    <Target Name="CacheLayoutDesigntime:Clean">
-        <MSBuild Projects="CacheLayout\Source\CacheLayoutDesigntime.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="CacheLayoutDesigntime:Make">
-        <MSBuild Projects="CacheLayout\Source\CacheLayoutDesigntime.dproj" Targets="Make"/>
     </Target>
     <Target Name="dclfgx">
         <MSBuild Projects="ProgressDialogs\Design\dclfgx.dproj"/>
@@ -96,13 +60,13 @@
         <MSBuild Projects="MapImage\MapImage.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6;TopDasGalaxia;CacheLayoutRuntime;CacheLayoutDesigntime;dclfgx;fgx;MapImage"/>
+        <CallTarget Targets="TopDasGalaxia;dclfgx;fgx;MapImage"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Clean;TopDasGalaxia:Clean;CacheLayoutRuntime:Clean;CacheLayoutDesigntime:Clean;dclfgx:Clean;fgx:Clean;MapImage:Clean"/>
+        <CallTarget Targets="TopDasGalaxia:Clean;dclfgx:Clean;fgx:Clean;MapImage:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="TMSFMXWebGMapsPkgDXE6:Make;TopDasGalaxia:Make;CacheLayoutRuntime:Make;CacheLayoutDesigntime:Make;dclfgx:Make;fgx:Make;MapImage:Make"/>
+        <CallTarget Targets="TopDasGalaxia:Make;dclfgx:Make;fgx:Make;MapImage:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

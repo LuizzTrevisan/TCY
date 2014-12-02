@@ -14,7 +14,7 @@ unit FGX.Helpers.Android;
 interface
 
 uses
-  FMX.Controls, Androidapi.JNI.App;
+  FMX.Controls, FMX.Helpers.Android,  Androidapi.JNI.JavaTypes,Androidapi.JNI.App;
 
 { Themes }
 
@@ -27,8 +27,8 @@ uses
   ///   If current OS it's Gengebread, we use 0 - default system theme
   /// </remarks>
   /// <returns>Android System theme consts for Dialogs (THEME_HOLO_LIGHT, THEME_HOLO_DARK)</returns>
-  function GetNativeTheme: Integer; overload;
-  function GetNativeTheme(const ATargetControl: TControl): Integer; overload;
+//  function GetNativeTheme: Integer; overload;
+//  function GetNativeTheme(const ATargetControl: TControl): Integer; overload;
 
 { Dialogs }
 
@@ -39,36 +39,36 @@ implementation
 
 uses
   System.SysUtils, System.Math,
-  FMX.Styles, FMX.Forms, FMX.Helpers.Android, FMX.Platform.Android;
+  FMX.Styles, FMX.Forms, FMX.Platform.Android;
 
-function GetNativeTheme(const ATargetControl: TControl): Integer; overload;
-const
-  ANDROID_LIGHT_THEME = '[LIGHTSTYLE]';
-  ANDROID_DARK_THEME = '[DARKSTYLE]';
-var
-  StyleDescriptor: TStyleDescription;
-begin
-  Assert(ATargetControl <> nil);
-
-  Result := 0;
-  if TOSVersion.Check(3, 0) and (ATargetControl <> nil) then
-  begin
-    StyleDescriptor := TStyleManager.GetStyleDescriptionForControl(ATargetControl);
-    if Assigned(StyleDescriptor) then
-    begin
-      if StyleDescriptor.PlatformTarget.Contains(ANDROID_LIGHT_THEME) then
-        Result := TJAlertDialog.JavaClass.THEME_HOLO_LIGHT;
-
-      if StyleDescriptor.PlatformTarget.Contains(ANDROID_DARK_THEME) then
-        Result := TJAlertDialog.JavaClass.THEME_HOLO_DARK;
-    end;
-  end;
-end;
+//function GetNativeTheme(const ATargetControl: TControl): Integer; overload;
+//const
+//  ANDROID_LIGHT_THEME = '[LIGHTSTYLE]';
+//  ANDROID_DARK_THEME = '[DARKSTYLE]';
+//var
+//  StyleDescriptor: TStyleDescription;
+//begin
+//  Assert(ATargetControl <> nil);
+//
+//  Result := 0;
+//  if TOSVersion.Check(3, 0) and (ATargetControl <> nil) then
+//  begin
+//    StyleDescriptor := TStyleManager.GetStyleDescriptionForControl(ATargetControl);
+//    if Assigned(StyleDescriptor) then
+//    begin
+//      if StyleDescriptor.PlatformTarget.Contains(ANDROID_LIGHT_THEME) then
+//        Result := TJAlertDialog.JavaClass.THEME_HOLO_LIGHT;
+//
+//      if StyleDescriptor.PlatformTarget.Contains(ANDROID_DARK_THEME) then
+//        Result := TJAlertDialog.JavaClass.THEME_HOLO_DARK;
+//    end;
+//  end;
+//end;
 
 function GetNativeTheme: Integer;
 begin
   if Screen.FocusControl <> nil then
-    Result := GetNativeTheme(Screen.FocusControl.GetObject as TControl)
+    Result := FMX.Helpers.Android.GetNativeTheme(Screen.FocusControl.GetObject as TControl)
   else
     Result := 0;
 end;

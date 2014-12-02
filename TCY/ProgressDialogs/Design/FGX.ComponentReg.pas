@@ -19,7 +19,6 @@ implementation
 
 uses
   System.Classes,
-  DesignIntf,
   FMX.Graphics,
   FGX.ActionSheet, FGX.VirtualKeyboard, FGX.ProgressDialog, FGX.GradientEdit, FGX.ColorsPanel, FGX.LinkedLabel,
   FGX.Items, FGX.Consts;

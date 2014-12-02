@@ -95,7 +95,6 @@ type
     property ClipChildren default False;
     property ClipParent default False;
     property Cursor default crDefault;
-    property DesignVisible default True;
     property DragMode default TDragMode.dmManual;
     property EnableDragHighlight default True;
     property Enabled default True;

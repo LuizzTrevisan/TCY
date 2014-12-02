@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{03C2B700-2D9A-406D-98EC-7BC0BA56493F}</ProjectGuid>
-        <ProjectVersion>15.4</ProjectVersion>
+        <ProjectVersion>16.0</ProjectVersion>
         <FrameworkType>FMX</FrameworkType>
         <MainSource>TopDasGalaxia.dpr</MainSource>
         <Base>True</Base>
@@ -28,8 +28,18 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Base)'=='true') or '$(Base_OSX32)'!=''">
+        <Base_OSX32>true</Base_OSX32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
         <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
@@ -92,13 +102,13 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_UnitSearchPath>.\MapImage\Lib\$(Platform);.\ProgressDialogs\Library\lib\$(Platform);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <AUP_CAMERA>true</AUP_CAMERA>
-        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <AUP_WRITE_EXTERNAL_STORAGE>true</AUP_WRITE_EXTERNAL_STORAGE>
         <AUP_CALL_PHONE>true</AUP_CALL_PHONE>
         <AUP_READ_CALENDAR>true</AUP_READ_CALENDAR>
         <AUP_ACCESS_FINE_LOCATION>true</AUP_ACCESS_FINE_LOCATION>
-        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
         <AUP_WRITE_CALENDAR>true</AUP_WRITE_CALENDAR>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <AUP_INTERNET>true</AUP_INTERNET>
@@ -115,6 +125,13 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
+        <Android_SplashImage426>$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png</Android_SplashImage426>
+        <Android_SplashImage960>$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png</Android_SplashImage960>
+        <Android_SplashGravity>center</Android_SplashGravity>
+        <VerInfo_Build>1</VerInfo_Build>
+        <Android_SplashTileMode>disabled</Android_SplashTileMode>
+        <Android_SplashImage470>$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png</Android_SplashImage470>
+        <Android_SplashImage640>$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png</Android_SplashImage640>
         <Android_LauncherIcon48>$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png</Android_LauncherIcon48>
         <DCC_UsePackage>FireDACSqliteDriver;FireDACDSDriver;DBXSqliteDriver;fmx;IndySystem;tethering;DBXInterBaseDriver;DataSnapClient;DataSnapCommon;DataSnapProviderClient;DbxCommonDriver;dbxcds;fmxFireDAC;CustomIPTransport;dsnap;IndyIPServer;IndyCore;IndyIPCommon;CloudService;FmxTeeUI;FireDACIBDriver;DataSnapFireDAC;FireDACDBXDriver;soapserver;dsnapxml;bindcompfmx;RESTBackendComponents;rtl;dbrtl;DbxClientDriver;FireDACCommon;bindcomp;xmlrtl;DataSnapNativeClient;ibxpress;IndyProtocols;FireDACCommonDriver;bindcompdbx;bindengine;soaprtl;FMXTee;FireDAC;inet;soapmidas;RESTComponents;dbexpress;IndyIPClient;TMSFMXWebGMapsPkgDXE6;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -197,17 +214,26 @@
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <iPhone_AppIcon114>$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_114x114.png</iPhone_AppIcon114>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_OSX32)'!=''">
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleVersion=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);NSHighResolutionCapable=true;LSApplicationCategoryType=public.app-category.utilities</VerInfo_Keys>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <DCC_UsePackage>FireDACSqliteDriver;FireDACDSDriver;DBXSqliteDriver;FireDACPgDriver;fmx;IndySystem;TeeDB;tethering;inetdbbde;vclib;DBXInterBaseDriver;DataSnapClient;DataSnapServer;DataSnapCommon;DataSnapProviderClient;DBXSybaseASEDriver;DbxCommonDriver;vclimg;dbxcds;DatasnapConnectorsFreePascal;MetropolisUILiveTile;vcldb;vcldsnap;fmxFireDAC;DBXDb2Driver;DBXOracleDriver;CustomIPTransport;vclribbon;dsnap;IndyIPServer;fmxase;vcl;IndyCore;DBXMSSQLDriver;IndyIPCommon;CloudService;FmxTeeUI;FireDACIBDriver;DataSnapFireDAC;FireDACDBXDriver;soapserver;inetdbxpress;dsnapxml;FireDACInfxDriver;FireDACDb2Driver;adortl;FireDACASADriver;bindcompfmx;vcldbx;FireDACODBCDriver;RESTBackendComponents;rtl;dbrtl;DbxClientDriver;FireDACCommon;bindcomp;inetdb;Tee;DBXOdbcDriver;vclFireDAC;xmlrtl;DataSnapNativeClient;svnui;ibxpress;IndyProtocols;DBXMySQLDriver;FireDACCommonDriver;bindcompdbx;bindengine;vclactnband;soaprtl;FMXTee;TeeUI;bindcompvcl;vclie;FireDACADSDriver;vcltouch;VclSmp;FireDACMSSQLDriver;FireDAC;DBXInformixDriver;VCLRESTComponents;DataSnapConnectors;DataSnapServerMidas;CMPS;dsnapcon;DBXFirebirdDriver;inet;fmxobj;FireDACMySQLDriver;soapmidas;vclx;svn;DBXSybaseASADriver;FireDACOracleDriver;fmxdae;RESTComponents;bdertl;FireDACMSAccDriver;dbexpress;DataSnapIndy10ServerTransport;IndyIPClient;office2K;AzureCloud;IDEAndroidPlatform;IDEiOSPlatform;TMSFMXCloudPackPkgDXE6;TMSFMXCloudPackPkgDEDXE6;TMSFMXWebGMapsPkgDXE6;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
         <DCC_Optimize>false</DCC_Optimize>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
@@ -308,97 +334,14 @@
                     <Source Name="MainSource">TopDasGalaxia.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACCommon200.bpl">Embarcadero FireDAC Common Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDAC200.bpl">Embarcadero FireDAC Database Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACSqliteDriver200.bpl">Embarcadero FireDAC Sqlite Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACCommonDriver200.bpl">Embarcadero FireDAC Common Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACInfxDriver200.bpl">Embarcadero FireDAC Infx Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACODBCDriver200.bpl">Embarcadero FireDAC ODBC Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACDb2Driver200.bpl">Embarcadero FireDAC Db2 Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACMSSQLDriver200.bpl">Embarcadero FireDAC MSSQL Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACOracleDriver200.bpl">Embarcadero FireDAC Oracle Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\vclFireDAC200.bpl">Embarcadero FireDAC VCL Forms Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\vcldb200.bpl">Embarcadero Database Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bindengine200.bpl">Embarcadero LiveBindings Runtime Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACPgDriver200.bpl">Embarcadero FireDAC PostgreSQL Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACASADriver200.bpl">Embarcadero FireDAC ASA Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACMSAccDriver200.bpl">Embarcadero FireDAC MS Access Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACIBDriver200.bpl">Embarcadero FireDAC IB Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACMySQLDriver200.bpl">Embarcadero FireDAC MySQL Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACADSDriver200.bpl">Embarcadero FireDAC ADS Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\fmxFireDAC200.bpl">Embarcadero FireDAC FMX Forms Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\vclribbon200.bpl">Embarcadero Ribbon Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\VclSmp200.bpl">Embarcadero Sample Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\MetropolisUILiveTile200.bpl">Embarcadero Metropolis UI Live Tile Component Library</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bindcompvcl200.bpl">Embarcadero LiveBindings Components VCL</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\vcldsnap200.bpl">Embarcadero Vcl DataSnap Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dsnap200.bpl">Embarcadero DataSnap Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\inetdb200.bpl">Embarcadero Internet/World Wide Web database components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dbexpress200.bpl">Embarcadero dbExpress Database Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXSqliteDriver200.bpl">Embarcadero Sqlite Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXMySQLDriver200.bpl">Embarcadero MySQL Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXInterBaseDriver200.bpl">Embarcadero InterBase Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dbxcds200.bpl">Embarcadero SimpleDataSet Component (DBX)</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\soapmidas200.bpl">Embarcadero SOAP Midas Runtime Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\soapserver200.bpl">Embarcadero SOAP Server Runtime Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dsnapcon200.bpl">Embarcadero DataSnap Connection Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataSnapServer200.bpl">Embarcadero DataSnap Server Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataSnapNativeClient200.bpl">Embarcadero DataSnap Native Client Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXOdbcDriver200.bpl">Embarcadero ODBC Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXFirebirdDriver200.bpl">Embarcadero Firebird Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXSybaseASEDriver200.bpl">Embarcadero SybaseASE Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXSybaseASADriver200.bpl">Embarcadero SybaseASA Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXOracleDriver200.bpl">Embarcadero Oracle Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXMSSQLDriver200.bpl">Embarcadero MSSQL Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXInformixDriver200.bpl">Embarcadero Informix Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DBXDb2Driver200.bpl">Embarcadero Db2 Client</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataSnapIndy10ServerTransport200.bpl">Embarcadero DataSnap Server Transport Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataSnapServerMidas200.bpl">Embarcadero DataSnap Server Midas Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bdertl200.bpl">Embarcadero BDE Database Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\fmxobj200.bpl">Embarcadero FMX OBJ Import Library</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\fmxdae200.bpl">Embarcadero FMX DAE Import Library</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\fmxase200.bpl">Embarcadero FMX ASE Import Library</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\svnui200.bpl">User interface code for subversion integration</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bindcompfmx200.bpl">Embarcadero LiveBindings Components Firemonkey</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\tethering200.bpl">Tethering Component</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\vcldbx200.bpl">Embarcadero Compatibility Database Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\vcltouch200.bpl">Embarcadero Touch VCL Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\vclib200.bpl">Embarcadero InterBase Express VCL Controls</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\ibxpress200.bpl">Embarcadero InterBase Express Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\adortl200.bpl">Embarcadero ADO Database Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\IndyIPClient200.bpl">Embarcadero IP Indy Client Implementation</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\IndyIPCommon200.bpl">Embarcadero IP Indy Common Implementation</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\IndySystem200.bpl">Indy 10 System</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\IndyCore200.bpl">Indy 10 Core</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\IndyIPServer200.bpl">Embarcadero IP Indy Server Implementation</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\RESTBackendComponents200.bpl">Embarcadero REST-Backend Components (Runtime)</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\VCLRESTComponents200.bpl">Embarcadero REST Client Components VCL</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\RESTComponents200.bpl">Embarcadero REST Client Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\CloudService200.bpl">Embarcadero Cloud Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DatasnapConnectorsFreePascal200.bpl">Embarcadero DataSnap Free Pascal Connector</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataSnapConnectors200.bpl">Embarcadero DataSnap Connector Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataSnapProviderClient200.bpl">Embarcadero DBExpress DataSnap Provider Client Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\TeeUI9200.bpl">TeeChart User Interface Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACDBXDriver200.bpl">Embarcadero FireDAC DBX Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\FireDACDSDriver200.bpl">Embarcadero FireDAC DataSnap Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclIBXLegacy200.bpl">Embarcadero Legacy InterBase Express Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k210.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp210.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\dclfgx200.bpl">(untitled)</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>
-                <DeployFile LocalName="Android\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest">
+                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
                     <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Android\Release\libTopDasGalaxia.so" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="Android">
-                        <RemoteName>libTopDasGalaxia.so</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile">
-                    <Platform Name="Android">
-                        <RemoteName>libTopDasGalaxia.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -409,40 +352,15 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Configuration="Debug" Class="Android_LauncherIcon72">
-                    <Platform Name="Android">
-                        <RemoteName>ic_launcher.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\armeabi\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeArmeabiFile">
+                <DeployFile LocalName="Android\Release\libTopDasGalaxia.so" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Android">
                         <RemoteName>libTopDasGalaxia.so</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Splash\res\layout\splash_activity.xml" Class="File">
-                    <Platform Name="Android">
-                        <RemoteDir>res\layout\</RemoteDir>
-                        <RemoteName>splash_activity.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Android\libTopDasGalaxia.so" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Android">
                         <RemoteName>libTopDasGalaxia.so</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="D:\Android\android-ndk-r9d\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Debug" Class="AndroidGDBServer">
-                    <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Splash\Splash.png" Class="File">
-                    <Platform Name="Android">
-                        <RemoteDir>res\drawable\</RemoteDir>
-                        <RemoteName>splash.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -458,9 +376,34 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="Splash\res\layout\splash_activity.xml" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>res\layout\</RemoteDir>
+                        <RemoteName>splash_activity.xml</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Debug" Class="Android_LauncherIcon144">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Splash\Splash.png" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable\</RemoteDir>
+                        <RemoteName>splash.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest">
+                    <Platform Name="Android">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -485,10 +428,21 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="D:\Android\android-ndk-r9d\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Debug" Class="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Splash\styles.xml" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\values\</RemoteDir>
                         <RemoteName>styles.xml</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\armeabi\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteName>libTopDasGalaxia.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -498,12 +452,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile">
                     <Platform Name="Android">
+                        <RemoteName>libTopDasGalaxia.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Configuration="Debug" Class="Android_LauncherIcon72">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -607,6 +562,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
+                <DeployClass Name="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-normal</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
                 <DeployClass Name="Android_LauncherIcon96">
                     <Platform Name="Android">
                         <RemoteDir>res\drawable-xhdpi</RemoteDir>
@@ -624,6 +585,18 @@
                 <DeployClass Name="Android_LauncherIcon144">
                     <Platform Name="Android">
                         <RemoteDir>res\drawable-xxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xlarge</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashImageDef">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -647,6 +620,12 @@
                     </Platform>
                     <Platform Name="Win32">
                         <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage426">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-small</RemoteDir>
+                        <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectiOSEntitlements">
@@ -675,6 +654,14 @@
                 </DeployClass>
                 <DeployClass Name="ProjectiOSDeviceInfoPList">
                     <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSInfoPList">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -741,6 +728,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
+                <DeployClass Name="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-large</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
                 <DeployClass Name="File">
                     <Platform Name="iOSDevice">
                         <Operation>0</Operation>
@@ -770,6 +763,12 @@
                 <DeployClass Name="Android_LauncherIcon36">
                     <Platform Name="Android">
                         <RemoteDir>res\drawable-ldpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStyles">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -806,10 +805,12 @@
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
-                <Platform value="Android" ActiveMobileDevice="02538733059009be">True</Platform>
+                <Platform value="Android" ActiveMobileDevice="wiglan">True</Platform>
                 <Platform value="iOSDevice">True</Platform>
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">True</Platform>
+                <Platform value="OSX32">False</Platform>
                 <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
             </Platforms>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

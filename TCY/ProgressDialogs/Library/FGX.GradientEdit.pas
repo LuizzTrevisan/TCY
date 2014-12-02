@@ -112,7 +112,6 @@ type
     property ClipChildren default False;
     property ClipParent default False;
     property Cursor default crDefault;
-    property DesignVisible default True;
     property DragMode default TDragMode.dmManual;
     property EnableDragHighlight default True;
     property Enabled default True;
@@ -374,7 +373,7 @@ var
   TmpPoint: TGradientPoint;
 begin
   inherited MouseMove(Shift, X, Y);
-  if (FSelectedPoint <> nil) and FPressed and IsPointMoving then
+  if (FSelectedPoint <> nil) and IsPointMoving then
   begin
     X := X - PickerSize / 2;
     // We return gradient point to field, if we move point into control frame
