@@ -3,18 +3,15 @@ inherited FMapGMaps: TFMapGMaps
   OnCreate = FormCreate
   OnClose = FormClose
   OnResize = FormResize
-  DesignerMobile = True
-  DesignerWidth = 384
-  DesignerHeight = 592
-  DesignerDeviceName = 'Google Nexus 4'
-  DesignerOrientation = 0
-  DesignerOSVersion = ''
+  DesignerMasterStyle = 3
   inherited RectClient: TRectangle
-    Height = 521.000000000000000000
+    Size.Height = 521.000000000000000000
     object TMSFMXWebGMaps1: TTMSFMXWebGMaps
       Align = Client
-      Height = 379.000000000000000000
-      Width = 384.000000000000000000
+      Version = '1.9.0.1'
+      Size.Width = 384.000000000000000000
+      Size.Height = 379.000000000000000000
+      Size.PlatformDefault = False
       Markers = <>
       Polylines = <>
       Polygons = <>
@@ -32,7 +29,6 @@ inherited FMapGMaps: TFMapGMaps
       ControlsOptions.StreetViewControl.Visible = False
       ControlsOptions.OverviewMapControl.Visible = False
       TabOrder = 2
-      Version = '1.8.0.2'
       OnDownloadFinish = TMSFMXWebGMaps1DownloadFinish
       OnMarkerClick = TMSFMXWebGMaps1MarkerClick
       OnMarkerDragEnd = TMSFMXWebGMaps1MarkerDragEnd
@@ -41,35 +37,39 @@ inherited FMapGMaps: TFMapGMaps
     object rectMarkers: TRectangle
       Align = Bottom
       ClipChildren = True
-      Height = 142.000000000000000000
       Position.Y = 379.000000000000000000
-      Width = 384.000000000000000000
+      Size.Width = 384.000000000000000000
+      Size.Height = 142.000000000000000000
+      Size.PlatformDefault = False
       object Rectangle2: TRectangle
         Align = Bottom
         Fill.Kind = None
-        Height = 43.000000000000000000
         Position.Y = 99.000000000000000000
         Sides = []
-        Width = 384.000000000000000000
+        Size.Width = 384.000000000000000000
+        Size.Height = 43.000000000000000000
+        Size.PlatformDefault = False
         object Button1: TButton
           Align = Right
           StyledSettings = [Size, Style, FontColor]
-          Height = 43.000000000000000000
           Position.X = 200.000000000000000000
+          Size.Width = 184.000000000000000000
+          Size.Height = 43.000000000000000000
+          Size.PlatformDefault = False
           TabOrder = 0
           Text = 'Adicionar'
           TextSettings.Font.Family = 'Segoe UI Semibold'
-          Width = 184.000000000000000000
           OnClick = Button1Click
         end
         object Button2: TButton
           Align = Left
           StyledSettings = [Size, Style, FontColor]
-          Height = 43.000000000000000000
+          Size.Width = 193.000000000000000000
+          Size.Height = 43.000000000000000000
+          Size.PlatformDefault = False
           TabOrder = 1
           Text = 'Excluir'
           TextSettings.Font.Family = 'Segoe UI Semibold'
-          Width = 193.000000000000000000
           OnClick = Button2Click
         end
       end
@@ -80,10 +80,11 @@ inherited FMapGMaps: TFMapGMaps
         TabOrder = 1
         TextSettings.Font.Family = 'Segoe UI Semibold'
         Position.Y = 54.000000000000000000
-        Width = 384.000000000000000000
-        Height = 32.000000000000000000
         Margins.Top = 10.000000000000000000
         Margins.Bottom = 10.000000000000000000
+        Size.Width = 384.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
         StyledSettings = [Size, Style, FontColor]
       end
       object lvMarcadores: TListView
@@ -92,32 +93,35 @@ inherited FMapGMaps: TFMapGMaps
         HeaderAppearanceClassName = 'TListHeaderObjects'
         FooterAppearanceClassName = 'TListHeaderObjects'
         Align = Client
-        Height = 25.000000000000000000
+        Size.Width = 384.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
         TabOrder = 2
         Visible = False
-        Width = 384.000000000000000000
         ItemAppearanceObjects.ItemObjects.Text.Font.Family = 'Segoe UI Semibold'
         OnDeleteItem = lvMarcadoresDeleteItem
       end
       object rectMarkersTop: TRectangle
         Align = MostTop
         Fill.Color = xFF1D8ACD
-        Height = 44.000000000000000000
         Margins.Left = -10.000000000000000000
         Margins.Right = -10.000000000000000000
         Position.X = -10.000000000000000000
         Sides = [Bottom]
+        Size.Width = 404.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
         Stroke.Color = xFF294181
         Stroke.Join = Bevel
-        Width = 404.000000000000000000
         object txtAjuda: TText
           Align = Client
-          Height = 44.000000000000000000
           Margins.Left = 10.000000000000000000
+          Size.Width = 270.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
           Text = 'Clique no Mapa para Adicionar um Marcador'
           TextSettings.Font.Family = 'Segoe UI Semibold'
           TextSettings.FontColor = claWhite
-          Width = 270.000000000000000000
         end
         object GPSLocation: TImage
           MultiResBitmap = <
@@ -145,10 +149,11 @@ inherited FMapGMaps: TFMapGMaps
                 00000049454E44AE426082}
             end>
           Align = Right
-          Height = 44.000000000000000000
           Margins.Right = 12.000000000000000000
           Position.X = 336.000000000000000000
-          Width = 56.000000000000000000
+          Size.Width = 56.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
           OnClick = GPSLocationClick
           object GpsAnimation: TFloatAnimation
             AutoReverse = True
@@ -176,33 +181,34 @@ inherited FMapGMaps: TFMapGMaps
                 0000000049454E44AE426082}
             end>
           Align = Right
-          Height = 44.000000000000000000
           Position.X = 280.000000000000000000
-          Width = 56.000000000000000000
+          Size.Width = 56.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
           OnClick = ShowListClick
         end
       end
     end
     object lbMenu: TListBox
       Align = Top
-      Height = 63.000000000000000000
       Margins.Top = 1.000000000000000000
       Position.Y = 9.000000000000000000
+      Size.Width = 384.000000000000000000
+      Size.Height = 63.000000000000000000
+      Size.PlatformDefault = False
       TabOrder = 3
       Visible = False
-      Width = 384.000000000000000000
-      DisableFocusEffect = False
       DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
       object liRemoverTodosMarcadores: TListBoxItem
         TextSettings.Font.Family = 'Segoe UI Semibold'
         StyledSettings = [Size, Style, FontColor, Other]
-        Height = 42.000000000000000000
-        StyleLookup = 'listboxitemnodetail'
+        Size.Width = 384.000000000000000000
+        Size.Height = 42.000000000000000000
+        Size.PlatformDefault = False
         TabOrder = 0
         Text = 'Remover Todos Marcadores'
-        Width = 384.000000000000000000
         OnClick = liRemoverTodosMarcadoresClick
       end
       object GlowEffect7: TGlowEffect
@@ -219,19 +225,20 @@ inherited FMapGMaps: TFMapGMaps
       MultiResBitmap.Height = 48
       MultiResBitmap.Width = 48
       MultiResBitmap.LoadSize = 2
-      Height = 40.000000000000000000
+      Size.Height = 40.000000000000000000
     end
     object btnMenuPopUp: TSpeedButton
       Anchors = [akTop, akRight]
       StyledSettings = [Size, Style, FontColor]
-      Height = 48.000000000000000000
       IconTintColor = claWhite
       Margins.Left = 5.000000000000000000
       Position.X = 345.000000000000000000
       Position.Y = -1.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
       StyleLookup = 'detailstoolbutton'
       TextSettings.Font.Family = 'Segoe UI Semibold'
-      Width = 48.000000000000000000
       OnClick = btnMenuPopUpClick
     end
   end
@@ -280,10 +287,5 @@ inherited FMapGMaps: TFMapGMaps
     object ClientDataSet1Index: TIntegerField
       FieldName = 'Index'
     end
-  end
-  object fgProgressDialog1: TfgProgressDialog
-    OnHide = fgProgressDialog1Hide
-    Left = 232
-    Top = 296
   end
 end

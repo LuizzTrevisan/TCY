@@ -11,9 +11,8 @@ uses
   Data.DB, Datasnap.DBClient, FMX.ListBox, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, FMX.ListView.Types, FMX.ListView, FMX.TMSWEBgMapsMarkers,
-  FGX.ProgressDialog, FGX.ProgressDialog.Types, FGX.VirtualKeyboard,
   FMX.TMSWebGMapsCommonFunctions, FMX.TMSWebGMapsPolygons,
-  FMX.TMSWebGMapsCommon, FMX.Ani;
+  FMX.TMSWebGMapsCommon, FMX.Ani, FMX.Controls.Presentation;
 
 type
   MarkerOpcao = (Nenhuma, Adicionando, Editando);
@@ -34,7 +33,6 @@ type
     txtAjuda: TText;
     lvMarcadores: TListView;
     ClientDataSet1Index: TIntegerField;
-    fgProgressDialog1: TfgProgressDialog;
     btnMenuPopUp: TSpeedButton;
     lbMenu: TListBox;
     liRemoverTodosMarcadores: TListBoxItem;
@@ -60,7 +58,6 @@ type
     procedure TMSFMXWebGMaps1DownloadFinish(Sender: TObject);
     procedure ClientDataSet1BeforePost(DataSet: TDataSet);
     procedure Button4Click(Sender: TObject);
-    procedure fgProgressDialog1Hide(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnMenuPopUpClick(Sender: TObject);
     procedure liRemoverTodosMarcadoresClick(Sender: TObject);
@@ -180,10 +177,6 @@ begin
 
   if Operacao = MarkerOpcao.Adicionando then begin
 
-    if fgProgressDialog1.Progress < 100 then
-      fgProgressDialog1.Progress :=
-        ((ClientDataSet1.RecNo / ClientDataSet1.RecordCount) * 90) + 10;
-
     vMarker := TMSFMXWebGMaps1.Markers.Add(ClientDataSet1la.AsFloat,
       ClientDataSet1lo.AsFloat, ClientDataSet1Title.AsString, '', True, True,
       True, False, True, 0);
@@ -217,12 +210,6 @@ begin
 
 end;
 
-procedure TFMapGMaps.fgProgressDialog1Hide(Sender: TObject);
-begin
-  inherited;
-  fgProgressDialog1.Progress := 100;
-end;
-
 procedure TFMapGMaps.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
@@ -232,13 +219,6 @@ end;
 procedure TFMapGMaps.FormCreate(Sender: TObject);
 begin
   inherited;
-  fgProgressDialog1.Show;
-
-  fgProgressDialog1.Title := 'Preparando o Mapa';
-  fgProgressDialog1.Message := 'Carregando os Dados';
-
-  fgProgressDialog1.Progress := 10;
-
   Ocultar;
 
 end;
@@ -366,8 +346,6 @@ begin
   inherited;
   Operacao := MarkerOpcao.Adicionando;
   CarregarMarcadores;
-  fgProgressDialog1.Hide;
-
 end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1MapClick(Sender: TObject;

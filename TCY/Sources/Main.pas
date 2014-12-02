@@ -9,7 +9,7 @@ uses
   FMX.ListView.Types, FMX.ListView, FMX.Objects, FMX.VirtualKeyboard, FMX.Ani,
   FMX.Menus, System.Actions, FMX.ActnList, System.Math, FMX.Layouts,
   FMX.ListBox, FMX.Edit, FMX.Notification, FMX.TMSWebGMapsWebBrowser,
-  FMX.TMSWebGMaps, FMX.WebBrowser, FGX.ProgressDialog, FGX.VirtualKeyboard;
+  FMX.TMSWebGMaps, FMX.WebBrowser;
 
 type
   TFMain = class(TForm)

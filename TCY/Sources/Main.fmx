@@ -1753,7 +1753,7 @@ object FMain: TFMain
       object GlowEffect2: TGlowEffect
         Softness = 0.100000001490116100
         GlowColor = claBlack
-        Opacity = 0.800000011920928900
+        Opacity = 0.800000011920929000
         Enabled = False
       end
     end

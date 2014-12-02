@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants, System.Math,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  Main, FGX.VirtualKeyboard, System.Actions, FMX.ActnList, FMX.Objects,
+  Main, System.Actions, FMX.ActnList, FMX.Objects,
   FMX.Effects, FMX.ListBox, FMX.Layouts, FMX.ListView.Types, FMX.ListView,
   FMX.Edit, uMapImage;
 

@@ -102,7 +102,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_UnitSearchPath>.\MapImage\Lib\$(Platform);.\ProgressDialogs\Library\lib\$(Platform);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>.\MapImage\Lib\$(Platform);.\TMS\Lib\$(Platform);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <AUP_CAMERA>true</AUP_CAMERA>
         <AUP_WRITE_EXTERNAL_STORAGE>true</AUP_WRITE_EXTERNAL_STORAGE>
@@ -334,9 +334,9 @@
                     <Source Name="MainSource">TopDasGalaxia.dpr</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\MapImage.bpl">File C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\MapImage.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k210.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp210.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\dclfgx200.bpl">(untitled)</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>
@@ -874,7 +874,7 @@
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
-                <Platform value="Android">True</Platform>
+                <Platform value="Android" ActiveMobileDevice="wiglan">True</Platform>
                 <Platform value="iOSDevice">True</Platform>
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">True</Platform>
                 <Platform value="OSX32">False</Platform>
