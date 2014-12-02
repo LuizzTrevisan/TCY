@@ -2,6 +2,8 @@ program TopDasGalaxia;
 
 
 
+
+
 {$R *.dres}
 
 uses

@@ -10,34 +10,32 @@ object FMain: TFMain
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  DesignerMobile = True
-  DesignerWidth = 384
-  DesignerHeight = 592
-  DesignerDeviceName = 'Google Nexus 4'
-  DesignerOrientation = 0
-  DesignerOSVersion = ''
+  DesignerMasterStyle = 3
   object RectClient: TRectangle
     Align = Client
-    Height = 522.000000000000000000
     Sides = []
+    Size.Width = 384.000000000000000000
+    Size.Height = 522.000000000000000000
+    Size.PlatformDefault = False
     Stroke.Dash = DashDot
-    Width = 384.000000000000000000
     object rectMenuLateral: TRectangle
       Align = Left
       Corners = []
       CornerType = Bevel
-      Height = 520.000000000000000000
       Padding.Right = 1.000000000000000000
       Sides = [Right]
+      Size.Width = 281.000000000000000000
+      Size.Height = 520.000000000000000000
+      Size.PlatformDefault = False
       Visible = False
-      Width = 281.000000000000000000
       object rectTop: TRectangle
         Align = Top
         ClipChildren = True
         CornerType = InnerLine
-        Height = 101.000000000000000000
         Sides = []
-        Width = 280.000000000000000000
+        Size.Width = 280.000000000000000000
+        Size.Height = 101.000000000000000000
+        Size.PlatformDefault = False
         object imgTop: TImage
           MultiResBitmap = <
             item
@@ -1446,10 +1444,11 @@ object FMain: TFMain
             end>
           EnableDragHighlight = False
           Locked = True
-          Height = 116.000000000000000000
           Position.X = -10.000000000000000000
           Position.Y = -2.000000000000000000
-          Width = 302.000000000000000000
+          Size.Width = 302.000000000000000000
+          Size.Height = 116.000000000000000000
+          Size.PlatformDefault = False
           WrapMode = Stretch
           object BlurEffect1: TBlurEffect
             Softness = 0.300000011920929000
@@ -1458,15 +1457,16 @@ object FMain: TFMain
         object textFundo: TText
           Anchors = [akTop, akRight]
           ClipChildren = True
-          Height = 48.000000000000000000
           Position.X = 32.000000000000000000
           Position.Y = 51.000000000000000000
+          Size.Width = 223.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
           TextSettings.Font.Family = 'Segoe UI Semibold'
           TextSettings.Font.Size = 15.000000000000000000
           TextSettings.Font.Style = [fsBold]
           TextSettings.FontColor = claWhite
           TextSettings.VertAlign = Leading
-          Width = 223.000000000000000000
           object GlowEffect1: TGlowEffect
             StyleName = '0'
             Softness = 0.200000002980232200
@@ -1475,13 +1475,14 @@ object FMain: TFMain
           end
           object textTop: TText
             Align = Client
-            Height = 30.000000000000000000
+            Size.Width = 223.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
             Text = 'UTFPR Acessibilidade'
             TextSettings.Font.Family = 'Segoe UI Semibold'
             TextSettings.Font.Size = 16.000000000000000000
             TextSettings.Font.Style = [fsBold]
             TextSettings.FontColor = claWhite
-            Width = 223.000000000000000000
             object GlowEffect4: TGlowEffect
               Softness = 0.100000001490116100
               GlowColor = claBlack
@@ -1490,12 +1491,13 @@ object FMain: TFMain
           end
           object textBottom: TText
             Align = Bottom
-            Height = 18.000000000000000000
             Position.Y = 30.000000000000000000
+            Size.Width = 223.000000000000000000
+            Size.Height = 18.000000000000000000
+            Size.PlatformDefault = False
             Text = 'Melhorando a Qualidade de Vida'
             TextSettings.Font.Family = 'Segoe UI Semibold'
             TextSettings.FontColor = claWhite
-            Width = 223.000000000000000000
             object GlowEffect5: TGlowEffect
               Softness = 0.100000001490116100
               GlowColor = claBlack
@@ -1512,12 +1514,14 @@ object FMain: TFMain
       end
       object lsMenu: TListBox
         Align = Client
-        AutoHide = False
-        Height = 334.000000000000000000
         Padding.Top = 100.000000000000000000
-        ShowScrollBars = False
+        Size.Width = 280.000000000000000000
+        Size.Height = 334.000000000000000000
+        Size.PlatformDefault = False
         TabOrder = 1
-        Width = 280.000000000000000000
+        AutoHide = False
+        ShowScrollBars = False
+        DisableFocusEffect = True
         DefaultItemStyles.ItemStyle = 'listboxitemstyle'
         DefaultItemStyles.GroupHeaderStyle = ''
         DefaultItemStyles.GroupFooterStyle = ''
@@ -1528,17 +1532,17 @@ object FMain: TFMain
           TextSettings.Font.Style = [fsBold]
           TextSettings.HorzAlign = Center
           StyledSettings = [Size, FontColor]
-          Height = 30.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
           StyleLookup = 'listboxgroupheader'
           TabOrder = 0
           Text = 'Op'#231#245'es'
-          Width = 280.000000000000000000
         end
         object liImagem: TListBoxItem
           TextSettings.Font.Family = 'Segoe UI Semibold'
           TextSettings.Font.Size = 20.000000000000000000
           StyledSettings = [Style, FontColor]
-          Height = 60.000000000000000000
           ItemData.Bitmap.PNG = {
             89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
             87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
@@ -1567,17 +1571,18 @@ object FMain: TFMain
             4C1316CA6C5B74ED967D197030B429E45FB88ECDFA7F011D0E87C3E170FC1FC4
             627F010E5253F6F3C26C7F0000000049454E44AE426082}
           Position.Y = 30.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
           StyleLookup = 'listboxitemnodetail'
           TabOrder = 1
           Text = '  Imagem'
-          Width = 280.000000000000000000
           OnClick = liImagemClick
         end
         object liGMaps: TListBoxItem
           TextSettings.Font.Family = 'Segoe UI Semibold'
           TextSettings.Font.Size = 20.000000000000000000
           StyledSettings = [Style, FontColor]
-          Height = 60.000000000000000000
           ItemData.Bitmap.PNG = {
             89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
             87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
@@ -1613,21 +1618,25 @@ object FMain: TFMain
             FFF3E7F54327ACC041B9D036842D7094FFE43B71E2C4519348FC03098E63C8CD
             78135A0000000049454E44AE426082}
           Position.Y = 90.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
           StyleLookup = 'listboxitemnodetail'
           TabOrder = 2
           Text = '  GMaps'
-          Width = 280.000000000000000000
           OnClick = liGMapsClick
         end
       end
       object ListBox2: TListBox
         Align = Bottom
-        Height = 85.000000000000000000
         Position.Y = 435.000000000000000000
-        ShowScrollBars = False
+        Size.Width = 280.000000000000000000
+        Size.Height = 85.000000000000000000
+        Size.PlatformDefault = False
         TabOrder = 2
-        Width = 280.000000000000000000
+        ShowScrollBars = False
         CanFocus = False
+        DisableFocusEffect = True
         ItemHeight = 40.000000000000000000
         DefaultItemStyles.ItemStyle = 'listboxitemstyle'
         DefaultItemStyles.GroupHeaderStyle = ''
@@ -1636,7 +1645,6 @@ object FMain: TFMain
         object ListBoxItem1: TListBoxItem
           TextSettings.Font.Family = 'Segoe UI Semibold'
           StyledSettings = [Size, Style, FontColor, Other]
-          Height = 40.000000000000000000
           ItemData.Bitmap.PNG = {
             89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
             F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
@@ -1664,15 +1672,16 @@ object FMain: TFMain
             01CCFDD0F6924B9ED64D1C0C200A04C2040DD5762C34C44EBF8A1A9BB8852804
             76BA570D79D42226E2A80032990C6BC0F693F230765400274E3C3396F50FDEDF
             5837A0EB8AA80000000049454E44AE426082}
+          Size.Width = 280.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
           StyleLookup = 'listboxitemnodetail'
           TabOrder = 0
           Text = 'Configura'#231#245'es'
-          Width = 280.000000000000000000
         end
         object ListBoxItem4: TListBoxItem
           TextSettings.Font.Family = 'Segoe UI Semibold'
           StyledSettings = [Size, Style, FontColor, Other]
-          Height = 40.000000000000000000
           ItemData.Bitmap.PNG = {
             89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
             F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
@@ -1692,10 +1701,12 @@ object FMain: TFMain
             7D09D90DA5153FD974C09A9A3F82E3BC02190C9F6A84FFD4190000000049454E
             44AE426082}
           Position.Y = 40.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
           StyleLookup = 'listboxitemnodetail'
           TabOrder = 1
           Text = 'Ajuda'
-          Width = 280.000000000000000000
         end
       end
     end
@@ -1705,14 +1716,15 @@ object FMain: TFMain
     ClipChildren = True
     ClipParent = True
     Fill.Color = xFF1D8ACD
-    Height = 45.000000000000000000
     Margins.Left = -10.000000000000000000
     Margins.Right = -10.000000000000000000
     Position.X = -10.000000000000000000
     Sides = [Bottom]
+    Size.Width = 404.000000000000000000
+    Size.Height = 45.000000000000000000
+    Size.PlatformDefault = False
     Stroke.Color = xFF294181
     Stroke.Join = Bevel
-    Width = 404.000000000000000000
     object Image2: TImage
       MultiResBitmap.Height = 48
       MultiResBitmap.Width = 48
@@ -1734,28 +1746,32 @@ object FMain: TFMain
             'er.png'
         end>
       Align = Left
-      Height = 41.000000000000000000
       Margins.Bottom = 4.000000000000000000
-      Width = 25.000000000000000000
+      Size.Width = 25.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
       object GlowEffect2: TGlowEffect
         Softness = 0.100000001490116100
         GlowColor = claBlack
-        Opacity = 0.800000011920929000
+        Opacity = 0.800000011920928900
         Enabled = False
       end
     end
     object btnMenu: TSpeedButton
       Action = actShowMenuLateral
+      Enabled = True
       StyledSettings = [Style, Other]
-      Height = 48.000000000000000000
       Margins.Bottom = 4.000000000000000000
       Position.X = 9.000000000000000000
       Position.Y = -3.000000000000000000
+      Size.Width = 112.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
       TextSettings.Font.Family = 'Segoe UI Semibold'
       TextSettings.Font.Size = 22.000000000000000000
       TextSettings.FontColor = claWhite
       TextSettings.HorzAlign = Trailing
-      Width = 112.000000000000000000
+      Visible = True
       object GlowEffect3: TGlowEffect
         Softness = 0.100000001490116100
         GlowColor = claBlack
@@ -1771,12 +1787,5 @@ object FMain: TFMain
       Text = 'Menu     '
       OnExecute = actShowMenuLateralExecute
     end
-  end
-  object fgVirtualKeyboard1: TfgVirtualKeyboard
-    Buttons = <>
-    OnShow = fgVirtualKeyboard1Show
-    OnHide = fgVirtualKeyboard1Hide
-    Left = 176
-    Top = 240
   end
 end
