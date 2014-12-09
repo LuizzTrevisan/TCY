@@ -55,7 +55,6 @@ type
     procedure actShowMenuLateralExecute(Sender: TObject);
     procedure lvMarcadoresDeleteItem(Sender: TObject; AIndex: Integer);
     procedure ClientDataSet1BeforeDelete(DataSet: TDataSet);
-    procedure TMSFMXWebGMaps1DownloadFinish(Sender: TObject);
     procedure ClientDataSet1BeforePost(DataSet: TDataSet);
     procedure Button4Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -63,6 +62,9 @@ type
     procedure liRemoverTodosMarcadoresClick(Sender: TObject);
     procedure ShowListClick(Sender: TObject);
     procedure GPSLocationClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure lvMarcadoresGesture(Sender: TObject;
+      const EventInfo: TGestureEventInfo; var Handled: Boolean);
   private
     { Private declarations }
     PolygonLocationItem: TPolygonItem;
@@ -180,7 +182,7 @@ begin
     vMarker := TMSFMXWebGMaps1.Markers.Add(ClientDataSet1la.AsFloat,
       ClientDataSet1lo.AsFloat, ClientDataSet1Title.AsString, '', True, True,
       True, False, True, 0);
-    vMarker.MapLabel.Text := 'MapLabel:' + ClientDataSet1Title.AsString;
+    vMarker.MapLabel.Text := ClientDataSet1Title.AsString;
 
     if ClientDataSet1Index.AsInteger <= 0 then begin
       Operacao := MarkerOpcao.Nenhuma;
@@ -202,8 +204,7 @@ begin
     for i := 0 to TMSFMXWebGMaps1.Markers.Count - 1 do
       if TMSFMXWebGMaps1.Markers[i].Tag = ClientDataSet1Index.AsInteger then
       begin
-        TMSFMXWebGMaps1.Markers[i].MapLabel.Text := 'MapLabel:' +
-          ClientDataSet1Title.AsString;
+        TMSFMXWebGMaps1.Markers[i].MapLabel.Text := ClientDataSet1Title.AsString;
         Break;
       end;
   end;
@@ -230,6 +231,13 @@ begin
   Button2.Width := Button1.Width - 2;
 end;
 
+procedure TFMapGMaps.FormShow(Sender: TObject);
+begin
+  inherited;
+  Operacao := MarkerOpcao.Adicionando;
+  CarregarMarcadores;
+end;
+
 procedure TFMapGMaps.liRemoverTodosMarcadoresClick(Sender: TObject);
 begin
   inherited;
@@ -246,6 +254,26 @@ begin
   inherited;
   ClientDataSet1.RecNo := AIndex + 1;
   ClientDataSet1.Delete;
+end;
+
+procedure TFMapGMaps.lvMarcadoresGesture(Sender: TObject;
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+var
+  bounds : TBounds;
+begin
+  inherited;
+  if (EventInfo.GestureID = System.UITypes.igiLongTap) then  begin
+    ClientDataSet1.RecNo := lvMarcadores.ItemIndex  + 1;
+    bounds := FMX.TMSWebGMapsCommonFunctions.TBounds.Create;
+    bounds.NorthEast.Latitude := ClientDataSet1la.AsFloat + 0.002;
+    bounds.NorthEast.Longitude := ClientDataSet1lo.AsFloat + 0.002;
+    bounds.SouthWest.Latitude := ClientDataSet1la.AsFloat - 0.002;
+    bounds.SouthWest.Longitude := ClientDataSet1lo.AsFloat - 0.002;
+    TMSFMXWebGMaps1.MapZoomTo(bounds);
+
+    ShowListClick(ShowList);
+  end;
+
 end;
 
 procedure TFMapGMaps.GPSLocationClick(Sender: TObject);
@@ -339,13 +367,6 @@ begin
     TMSFMXWebGMaps1.Visible := True;
     Ocultar;
   end;
-end;
-
-procedure TFMapGMaps.TMSFMXWebGMaps1DownloadFinish(Sender: TObject);
-begin
-  inherited;
-  Operacao := MarkerOpcao.Adicionando;
-  CarregarMarcadores;
 end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1MapClick(Sender: TObject;

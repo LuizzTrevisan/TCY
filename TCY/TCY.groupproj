@@ -3,10 +3,10 @@
         <ProjectGuid>{B239027B-161B-473E-94B9-298EA43A5C37}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="TopDasGalaxia.dproj">
+        <Projects Include="MapImage\MapImage.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="MapImage\MapImage.dproj">
+        <Projects Include="TopDasGalaxia.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="TMS\TMSFMXWebGMapsPkgDXE7.dproj">
@@ -20,15 +20,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="TopDasGalaxia">
-        <MSBuild Projects="TopDasGalaxia.dproj"/>
-    </Target>
-    <Target Name="TopDasGalaxia:Clean">
-        <MSBuild Projects="TopDasGalaxia.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="TopDasGalaxia:Make">
-        <MSBuild Projects="TopDasGalaxia.dproj" Targets="Make"/>
-    </Target>
     <Target Name="MapImage">
         <MSBuild Projects="MapImage\MapImage.dproj"/>
     </Target>
@@ -37,6 +28,15 @@
     </Target>
     <Target Name="MapImage:Make">
         <MSBuild Projects="MapImage\MapImage.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TopDasGalaxia">
+        <MSBuild Projects="TopDasGalaxia.dproj"/>
+    </Target>
+    <Target Name="TopDasGalaxia:Clean">
+        <MSBuild Projects="TopDasGalaxia.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TopDasGalaxia:Make">
+        <MSBuild Projects="TopDasGalaxia.dproj" Targets="Make"/>
     </Target>
     <Target Name="TMSFMXWebGMapsPkgDXE7">
         <MSBuild Projects="TMS\TMSFMXWebGMapsPkgDXE7.dproj"/>
@@ -48,13 +48,13 @@
         <MSBuild Projects="TMS\TMSFMXWebGMapsPkgDXE7.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="TopDasGalaxia;MapImage;TMSFMXWebGMapsPkgDXE7"/>
+        <CallTarget Targets="MapImage;TopDasGalaxia;TMSFMXWebGMapsPkgDXE7"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="TopDasGalaxia:Clean;MapImage:Clean;TMSFMXWebGMapsPkgDXE7:Clean"/>
+        <CallTarget Targets="MapImage:Clean;TopDasGalaxia:Clean;TMSFMXWebGMapsPkgDXE7:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="TopDasGalaxia:Make;MapImage:Make;TMSFMXWebGMapsPkgDXE7:Make"/>
+        <CallTarget Targets="MapImage:Make;TopDasGalaxia:Make;TMSFMXWebGMapsPkgDXE7:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

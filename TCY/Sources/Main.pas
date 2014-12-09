@@ -41,9 +41,11 @@ type
     RectClient: TRectangle;
     procedure actShowMenuLateralExecute(Sender: TObject);
     procedure liGMapsClick(Sender: TObject);
-    procedure fgVirtualKeyboard1Hide(Sender: TObject; const Bounds: TRect);
-    procedure fgVirtualKeyboard1Show(Sender: TObject; const Bounds: TRect);
     procedure liImagemClick(Sender: TObject);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormVirtualKeyboardHidden(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
   private
     { Private declarations }
   public
@@ -77,15 +79,18 @@ begin
   actShowMenuLateral.Enabled := True;
 end;
 
-procedure TFMain.fgVirtualKeyboard1Hide(Sender: TObject; const Bounds: TRect);
+procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   RectClient.Align := TAlignLayout.Client;
 end;
 
-procedure TFMain.fgVirtualKeyboard1Show(Sender: TObject; const Bounds: TRect);
+procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   RectClient.Align := TAlignLayout.Top;
   RectClient.Height := Self.Height - Bounds.Height - Rectangle1.Height;
+
 end;
 
 procedure TFMain.liGMapsClick(Sender: TObject);

@@ -5,11 +5,14 @@ object FMain: TFMain
   Caption = 'Main'
   ClientHeight = 567
   ClientWidth = 384
-  Quality = HighQuality
+  Quality = HighPerformance
+  Transparency = True
   Visible = True
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   DesignerMasterStyle = 3
   object RectClient: TRectangle
     Align = Client

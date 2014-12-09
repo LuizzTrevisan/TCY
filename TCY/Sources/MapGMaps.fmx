@@ -3,6 +3,7 @@ inherited FMapGMaps: TFMapGMaps
   OnCreate = FormCreate
   OnClose = FormClose
   OnResize = FormResize
+  OnShow = FormShow
   DesignerMasterStyle = 3
   inherited RectClient: TRectangle
     Size.Height = 521.000000000000000000
@@ -29,7 +30,6 @@ inherited FMapGMaps: TFMapGMaps
       ControlsOptions.StreetViewControl.Visible = False
       ControlsOptions.OverviewMapControl.Visible = False
       TabOrder = 2
-      OnDownloadFinish = TMSFMXWebGMaps1DownloadFinish
       OnMarkerClick = TMSFMXWebGMaps1MarkerClick
       OnMarkerDragEnd = TMSFMXWebGMaps1MarkerDragEnd
       OnMapClick = TMSFMXWebGMaps1MapClick
@@ -88,6 +88,8 @@ inherited FMapGMaps: TFMapGMaps
         StyledSettings = [Size, Style, FontColor]
       end
       object lvMarcadores: TListView
+        Touch.InteractiveGestures = [LongTap]
+        OnGesture = lvMarcadoresGesture
         ItemAppearanceClassName = 'TListItemAppearance'
         ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
         HeaderAppearanceClassName = 'TListHeaderObjects'
@@ -198,6 +200,7 @@ inherited FMapGMaps: TFMapGMaps
       Size.PlatformDefault = False
       TabOrder = 3
       Visible = False
+      DisableFocusEffect = True
       DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
@@ -228,12 +231,12 @@ inherited FMapGMaps: TFMapGMaps
       Size.Height = 40.000000000000000000
     end
     object btnMenuPopUp: TSpeedButton
-      Anchors = [akTop, akRight]
+      Align = Right
       StyledSettings = [Size, Style, FontColor]
       IconTintColor = claWhite
       Margins.Left = 5.000000000000000000
-      Position.X = 345.000000000000000000
-      Position.Y = -1.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Position.X = 348.000000000000000000
       Size.Width = 48.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
