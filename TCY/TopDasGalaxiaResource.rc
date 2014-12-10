@@ -1,1 +1,4 @@
-PngImage_1 RCDATA "map-point.png"
+PngImage_0 RCDATA "map-point0.png"
+PngImage_1 RCDATA "map-point1.png"
+PngImage_2 RCDATA "map-point2.png"
+PngImage_3 RCDATA "map-point3.png"

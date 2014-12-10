@@ -32,7 +32,10 @@
     <File Path="Sources\MapGMaps.fmx"/>
     <File Path="Sources\MapImage.pas"/>
     <File Path="Sources\MapImage.fmx"/>
-    <File Path="map-point.png"/>
+    <File Path="map-point0.png"/>
+    <File Path="map-point1.png"/>
+    <File Path="map-point2.png"/>
+    <File Path="map-point3.png"/>
   </ProjectSortOrder>
 	<BT_BuildType>Debug</BT_BuildType>
 	<MobileDevice>4d005404297121d1</MobileDevice>

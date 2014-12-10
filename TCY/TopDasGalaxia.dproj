@@ -310,9 +310,21 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="MapImage\Sources\uMapImage.pas"/>
-        <RcItem Include="map-point.png">
+        <RcItem Include="map-point0.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>PngImage_0</ResourceId>
+        </RcItem>
+        <RcItem Include="map-point1.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>PngImage_1</ResourceId>
+        </RcItem>
+        <RcItem Include="map-point2.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>PngImage_2</ResourceId>
+        </RcItem>
+        <RcItem Include="map-point3.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>PngImage_3</ResourceId>
         </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -346,11 +358,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
-                    <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeX86File"/>
                 <DeployFile LocalName="Android\libTopDasGalaxia.so" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Android">
@@ -358,35 +365,24 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Splash\res\values\strings.xml" Class="File">
-                    <Platform Name="Android">
-                        <RemoteDir>res\values\</RemoteDir>
-                        <RemoteName>strings.xml</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Configuration="Debug" Class="Android_SplashImage640"/>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Release" Class="Android_SplashImage426">
                     <Platform Name="Android">
                         <RemoteName>splash_image.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Release" Class="Android_SplashImage470">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Debug" Class="Android_LauncherIcon144">
                     <Platform Name="Android">
-                        <RemoteName>splash_image.png</RemoteName>
+                        <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Debug" Class="Android_SplashImage470"/>
                 <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\armeabi\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeArmeabiFile"/>
                 <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Configuration="Debug" Class="Android_SplashImage960"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Debug" Class="Android_SplashImage426"/>
-                <DeployFile LocalName="map-point.png" Configuration="Release" Class="ProjectFile">
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile">
                     <Platform Name="Android">
-                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <RemoteName>libTopDasGalaxia.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -396,11 +392,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Debug" Class="Android_SplashImage426">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -418,7 +412,42 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="map-point.png" Configuration="Debug" Class="ProjectFile"/>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeX86File">
+                    <Platform Name="Android">
+                        <RemoteName>libTopDasGalaxia.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Configuration="Debug" Class="Android_LauncherIcon72">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Debug" Class="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="map-point0.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="map-point1.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="map-point0.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Release\libTopDasGalaxia.so" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Android">
                         <RemoteName>libTopDasGalaxia.so</RemoteName>
@@ -439,6 +468,140 @@
                 </DeployFile>
                 <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeArmeabiFile"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48"/>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\release\mips\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeMipsFile">
+                    <Platform Name="Android">
+                        <RemoteName>libTopDasGalaxia.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\x86\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeX86File"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Configuration="Debug" Class="Android_LauncherIcon96"/>
+                <DeployFile LocalName="map-point1.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="map-point3.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteName>libTopDasGalaxia.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\15.0\PlatformSDKs\android-ndk-r9c\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Release" Class="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="map-point3.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeX86File">
+                    <Platform Name="Android">
+                        <RemoteName>libTopDasGalaxia.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\release\x86\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeX86File">
+                    <Platform Name="Android">
+                        <RemoteName>libTopDasGalaxia.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Debug" Class="Android_SplashImage426"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Release" Class="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="map-point2.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="map-point2.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Splash\res\values\strings.xml" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values\</RemoteDir>
+                        <RemoteName>strings.xml</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Configuration="Debug" Class="Android_SplashImage640"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Configuration="Debug" Class="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Debug" Class="Android_SplashImage470"/>
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\15.0\PlatformSDKs\android-ndk-r9c\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Debug" Class="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile">
+                    <Platform Name="Android">
+                        <RemoteName>classes.dex</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Configuration="Debug" Class="Android_LauncherIcon96">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Configuration="Debug" Class="Android_LauncherIcon36">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="map-point.png" Configuration="Debug" Class="ProjectFile"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Configuration="Debug" Class="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Splash\res\layout\splash_activity.xml" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\layout\</RemoteDir>
@@ -446,7 +609,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile"/>
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteName>libTopDasGalaxia.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Configuration="Debug" Class="Android_LauncherIcon36"/>
                 <DeployFile LocalName="Splash\Splash.png" Class="File">
@@ -462,17 +630,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\release\mips\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeMipsFile">
+                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\release\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile">
                     <Platform Name="Android">
                         <RemoteName>libTopDasGalaxia.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\14.0\lib\android\debug\x86\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeX86File"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Configuration="Debug" Class="Android_LauncherIcon96"/>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\release\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile">
+                <DeployFile LocalName="Android\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest">
                     <Platform Name="Android">
-                        <RemoteName>libTopDasGalaxia.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -480,12 +645,6 @@
                     <Platform Name="Android">
                         <RemoteDir>classes\</RemoteDir>
                         <RemoteName>classes.dex</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile">
-                    <Platform Name="Android">
-                        <RemoteName>libTopDasGalaxia.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -497,26 +656,9 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Android\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest"/>
-                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\15.0\PlatformSDKs\android-ndk-r9c\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Release" Class="AndroidGDBServer">
-                    <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Configuration="Release" Class="Android_LauncherIcon72">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Configuration="Release" Class="Android_LauncherIcon96">
-                    <Platform Name="Android">
-                        <RemoteName>ic_launcher.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeX86File">
-                    <Platform Name="Android">
-                        <RemoteName>libTopDasGalaxia.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -526,9 +668,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="c:\program files (x86)\embarcadero\studio\15.0\lib\android\release\x86\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeX86File">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Configuration="Release" Class="Android_LauncherIcon96">
                     <Platform Name="Android">
-                        <RemoteName>libTopDasGalaxia.so</RemoteName>
+                        <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -863,7 +1005,7 @@
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
-                <Platform value="Android" ActiveMobileDevice="4d005404297121d1">True</Platform>
+                <Platform value="Android">True</Platform>
                 <Platform value="iOSDevice">True</Platform>
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">True</Platform>
                 <Platform value="OSX32">False</Platform>

@@ -8,14 +8,14 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   Main, System.Actions, FMX.ActnList, FMX.Objects,
   FMX.Effects, FMX.ListBox, FMX.Layouts, FMX.ListView.Types, FMX.ListView,
-  FMX.Edit, uMapImage, FMX.ExtCtrls, FMX.Ani, FMX.Controls.Presentation;
+  FMX.Edit, uMapImage, FMX.ExtCtrls, FMX.Ani, FMX.Controls.Presentation,
+  System.Sensors, System.Sensors.Components;
 
 type
   TFMapImage = class(TFMain)
     Rectangle3: TRectangle;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
-    MapImage1: TMapImage;
     rectMarkers: TRectangle;
     Rectangle2: TRectangle;
     Button1: TButton;
@@ -27,6 +27,13 @@ type
     GPSLocation: TImage;
     GpsAnimation: TFloatAnimation;
     ShowList: TImage;
+    MapImage1: TMapImage;
+    ComboBox1: TComboBox;
+    LocationSensor1: TLocationSensor;
+    Button3: TButton;
+    edtlat: TEdit;
+    edtlong: TEdit;
+    atu: TButton;
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
@@ -38,10 +45,15 @@ type
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
     procedure MapImage1Paint(Sender: TObject; Canvas: TCanvas;
       const ARect: TRectF);
-    procedure MapImage1Tap(Sender: TObject; const Point: TPointF);
     procedure MapImage1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
     procedure Button1Click(Sender: TObject);
+    procedure MapImage1SelectMarker(marker: TMarcador);
+    procedure MapImage1MarkerMove(marker: TMarcador);
+    procedure LocationSensor1LocationChanged(Sender: TObject;
+      const OldLocation, NewLocation: TLocationCoord2D);
+    procedure Button3Click(Sender: TObject);
+    procedure atuClick(Sender: TObject);
   private
     { Private declarations }
     vPoint: TPointF;
@@ -56,6 +68,7 @@ type
     procedure handlePan(EventInfo: TGestureEventInfo);
     procedure handleZoom(EventInfo: TGestureEventInfo);
     procedure handleRotate(EventInfo: TGestureEventInfo);
+    procedure AtualizaLocalGPS;
   end;
 
 var
@@ -70,10 +83,43 @@ begin
 
 end;
 
+procedure TFMapImage.AtualizaLocalGPS;
+const
+  totWid = 0.002667;
+  totHeig = 0.001439;
+  LongIni =  -52.676458;
+  latIni = -26.215338;
+var
+  dif: Single;
+begin
+  inherited;
+
+  dif :=  LongIni -  edtlong.Text.ToSingle();
+  MapImage1.Marcadores[0].Position.X := (dif / totWid) * MapImage1.Width;
+
+  dif :=  latIni - edtlat.Text.ToSingle() ;
+  MapImage1.Marcadores[0].Position.Y := (dif / totHeig) * MapImage1.Height;
+end;
+
+procedure TFMapImage.atuClick(Sender: TObject);
+begin
+  inherited;
+  AtualizaLocalGPS;
+end;
+
 procedure TFMapImage.Button1Click(Sender: TObject);
 begin
   inherited;
-    MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,'Nome OASDOA'));
+  MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,
+    'Nome OASDOA', ComboBox1.ItemIndex));
+  rectMarkers.Visible := False;
+end;
+
+procedure TFMapImage.Button3Click(Sender: TObject);
+begin
+  inherited;
+  LocationSensor1.Active := not LocationSensor1.Active;
+  Button3.Text := LocationSensor1.Active.ToString();
 end;
 
 procedure TFMapImage.FormCreate(Sender: TObject);
@@ -97,7 +143,7 @@ begin
     MapImage1.Position.Y := MapImage1.Position.Y +
       (EventInfo.Location.Y - FLastPosition.Y);
 
-    VerificaPosicaoTamanhoMinimo;
+    // VerificaPosicaoTamanhoMinimo;
   end;
 
   FLastPosition := EventInfo.Location;
@@ -138,12 +184,12 @@ end;
 
 procedure TFMapImage.ZoomImage(Size, X, Y: Single);
 var
-  pos : TPosition;
-  eventDistance  : Single;
+  pos: TPosition;
+  eventDistance: Single;
 begin
   eventDistance := Size / 100;
 
-  pos :=  MapImage1.Position;
+  pos := MapImage1.Position;
   // widthDistance  := (eventDistance * (Rectangle2.Width / 100));
   // heightDistance := (eventDistance * (Rectangle2.Height / 100));
   if (MapImage1.Scale.X + eventDistance <= 0.3) then
@@ -156,7 +202,6 @@ begin
     MapImage1.Scale.X := MapImage1.Scale.X + eventDistance;
     MapImage1.Scale.Y := MapImage1.Scale.Y + eventDistance;
   end;
-
 
   MapImage1.Position := pos;
 
@@ -199,17 +244,36 @@ begin
   TImage(Data.Source).Position.Y := Point.Y;
 end;
 
+procedure TFMapImage.LocationSensor1LocationChanged(Sender: TObject;
+  const OldLocation, NewLocation: TLocationCoord2D);
+begin
+  edtlat.Text  := newLocation.Latitude.ToString();
+  edtlong.Text := newLocation.Longitude.ToString();
+  AtualizaLocalGPS;
+end;
+
 procedure TFMapImage.MapImage1Gesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
   inherited;
-
   if (EventInfo.GestureID = System.UITypes.igiLongTap) then
-    rectMarkers.Visible :=True;
-//    MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,'Nome OASDOA'));
+  begin
+    ComboBox1.DropDown;
+    rectMarkers.Visible := True;
+    Edit1.SetFocus;
+  end;
+  // MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,'Nome OASDOA'));
 
-  if EventInfo.GestureID = igiPan then
+  if (EventInfo.GestureID = igiPan) then
+  begin
     handlePan(EventInfo)
+  end;
+end;
+
+procedure TFMapImage.MapImage1MarkerMove(marker: TMarcador);
+begin
+  inherited;
+  // ShowMessage('Moveu o maledeto');
 end;
 
 procedure TFMapImage.MapImage1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -219,7 +283,7 @@ begin
   vPoint.X := X;
   vPoint.Y := Y;
 
- // MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,'Nome OASDOA'));
+  // MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,'Nome OASDOA'));
   rectMarkers.Visible := True;
 end;
 
@@ -232,10 +296,10 @@ begin
   // Canvas.FillText(ARect,'ASDSDSD',False,1,[],TTextAlign.Center);
 end;
 
-procedure TFMapImage.MapImage1Tap(Sender: TObject; const Point: TPointF);
+procedure TFMapImage.MapImage1SelectMarker(marker: TMarcador);
 begin
   inherited;
-  // MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y));
+  // ShowMessage(marker.Caption);
 end;
 
 procedure TFMapImage.SourceMarkerGesture(Sender: TObject;
@@ -260,13 +324,13 @@ var
 begin
   inherited;
   ZoomImage(20, Self.Width / 2, Self.Height / 2);
-  MapImage1.MarcadorScale.Y := MapImage1.MarcadorScale.Y - 0.1;
-  MapImage1.MarcadorScale.X := MapImage1.MarcadorScale.X - 0.1;
-  for i := 0 to MapImage1.Marcadores.Count - 1 do
-  begin
-    MapImage1.Marcadores[i].Scale.X := MapImage1.MarcadorScale.X;
-    MapImage1.Marcadores[i].Scale.Y := MapImage1.MarcadorScale.Y;
-  end;
+  // MapImage1.MarcadorScale.Y := MapImage1.MarcadorScale.Y - 0.1;
+  // MapImage1.MarcadorScale.X := MapImage1.MarcadorScale.X - 0.1;
+  // for i := 0 to MapImage1.Marcadores.Count - 1 do
+  // begin
+  // MapImage1.Marcadores[i].Scale.X := MapImage1.MarcadorScale.X;
+  // MapImage1.Marcadores[i].Scale.Y := MapImage1.MarcadorScale.Y;
+  // end;
 end;
 
 procedure TFMapImage.SpeedButton3Click(Sender: TObject);
@@ -275,13 +339,13 @@ var
 begin
   inherited;
   ZoomImage(-20, Self.Width / 2, Self.Height / 2);
-  MapImage1.MarcadorScale.Y := MapImage1.MarcadorScale.Y + 0.1;
-  MapImage1.MarcadorScale.X := MapImage1.MarcadorScale.X + 0.1;
-  for i := 0 to MapImage1.Marcadores.Count - 1 do
-  begin
-    MapImage1.Marcadores[i].Scale.X := MapImage1.MarcadorScale.X;
-    MapImage1.Marcadores[i].Scale.Y := MapImage1.MarcadorScale.Y;
-  end;
+  // MapImage1.MarcadorScale.Y := MapImage1.MarcadorScale.Y + 0.1;
+  // MapImage1.MarcadorScale.X := MapImage1.MarcadorScale.X + 0.1;
+  // for i := 0 to MapImage1.Marcadores.Count - 1 do
+  // begin
+  // MapImage1.Marcadores[i].Scale.X := MapImage1.MarcadorScale.X;
+  // MapImage1.Marcadores[i].Scale.Y := MapImage1.MarcadorScale.Y;
+  // end;
 end;
 
 end.
