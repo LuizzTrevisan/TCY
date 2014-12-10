@@ -13,6 +13,11 @@ type
   TMarkerNotify = procedure(marker: TMarcador) of object;
 
   TMarcador = class(TImage)
+  private
+    function GetX: Single;
+    function GetY: Single;
+    procedure SetX(const Value: Single);
+    procedure SetY(const Value: Single);
   protected
     FLastPosition: TPointF;
 
@@ -23,11 +28,11 @@ type
   public
 
     Caption: String;
-    function X: Single;
-    function Y: Single;
     constructor Create(AOwner: TComponent; X, Y: Single; Caption: String;
       Index: Integer); reintroduce;
   published
+    property X : Single read GetX write SetX;
+    property Y : Single read GetY write SetY;
   end;
 
   TMapImage = class(TImage)
@@ -114,8 +119,8 @@ begin
   Self.Parent := TFmxObject(AOwner);
   Self.Height := 60;
   Self.Width := 30;
-  Self.Position.X := X;
-  Self.Position.Y := Y;
+  Self.X := X;
+  Self.Y := Y;
   Self.Anchors := [];
 
   InStream := TResourceStream.Create(HInstance, 'PngImage_'+index.ToString(), RT_RCDATA);
@@ -153,6 +158,27 @@ begin
   FLastPosition := EventInfo.Location;
 end;
 
+function TMarcador.GetX: Single;
+begin
+  Result := Self.Position.X + (self.Width / 2);
+end;
+
+function TMarcador.GetY: Single;
+begin
+  Result := Self.Position.Y + Self.Height;
+end;
+
+procedure TMarcador.SetX(const Value: Single);
+begin
+  Self.Position.X := Value - (Self.Width / 2);
+end;
+
+procedure TMarcador.SetY(const Value: Single);
+begin
+  Self.Position.Y := Value - (Self.Height);
+end;
+
+
 procedure TMarcador.Paint;
 begin
   inherited;
@@ -182,14 +208,5 @@ begin
   Self.Canvas.EndScene();
 end;
 
-function TMarcador.X: Single;
-begin
-  Result := Self.Position.X;
-end;
-
-function TMarcador.Y: Single;
-begin
-  Result := Self.Position.Y;
-end;
 
 end.

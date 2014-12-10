@@ -85,20 +85,24 @@ end;
 
 procedure TFMapImage.AtualizaLocalGPS;
 const
-  totWid = 0.002667;
-  totHeig = 0.001439;
-  LongIni =  -52.676458;
-  latIni = -26.215338;
+  totWid = 0.009452;
+  totHeig = 0.005901;
+//  LongIni =  -52.680848; // -52.676524 casa
+//  latIni = -26.215312;  //final -26.218189
+
+  LongIni =  -52.695230; //final   -52.685778
+  latIni = -26.199538;  //final -26.193637
+
 var
   dif: Single;
 begin
   inherited;
 
-  dif :=  LongIni -  edtlong.Text.ToSingle();
-  MapImage1.Marcadores[0].Position.X := (dif / totWid) * MapImage1.Width;
+  dif :=   edtlong.Text.ToSingle() -  LongIni;
+  MapImage1.Marcadores[0].X := (dif / totWid) * MapImage1.Width;
 
-  dif :=  latIni - edtlat.Text.ToSingle() ;
-  MapImage1.Marcadores[0].Position.Y := (dif / totHeig) * MapImage1.Height;
+  dif := edtlat.Text.ToSingle() - latIni ;
+  MapImage1.Marcadores[0].Y :=  MapImage1.Height - (dif / totHeig) * MapImage1.Height;
 end;
 
 procedure TFMapImage.atuClick(Sender: TObject);
@@ -111,7 +115,7 @@ procedure TFMapImage.Button1Click(Sender: TObject);
 begin
   inherited;
   MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,
-    'Nome OASDOA', ComboBox1.ItemIndex));
+    Edit1.Text, ComboBox1.ItemIndex));
   rectMarkers.Visible := False;
 end;
 

@@ -45,14 +45,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\classes.dex" Condition="'$(Config)'=='Release'">
-            <RemoteDir>TopDasGalaxia\classes\</RemoteDir>
-            <RemoteName>classes.dex</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TopDasGalaxia\res\drawable-small\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
@@ -77,14 +69,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>TopDasGalaxia\library\lib\x86\</RemoteDir>
-            <RemoteName>libTopDasGalaxia.so</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TopDasGalaxia\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
@@ -93,9 +77,17 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>TopDasGalaxia\res\drawable-normal\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
+        <DeployFile Include="map-point1.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>TopDasGalaxia\assets\internal\</RemoteDir>
+            <RemoteName>map-point1.png</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>TopDasGalaxia\library\lib\x86\</RemoteDir>
+            <RemoteName>libTopDasGalaxia.so</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -109,10 +101,10 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="map-point1.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>TopDasGalaxia\assets\internal\</RemoteDir>
-            <RemoteName>map-point1.png</RemoteName>
-            <Operation>0</Operation>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>TopDasGalaxia\res\drawable-normal\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -182,22 +174,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Release'">
-            <RemoteDir>TopDasGalaxia\library\lib\armeabi\</RemoteDir>
-            <RemoteName>libTopDasGalaxia.so</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="C:\Users\Public\Documents\Embarcadero\Studio\15.0\PlatformSDKs\android-ndk-r9c\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Release'">
-            <RemoteDir>TopDasGalaxia\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>gdbserver</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="map-point3.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>TopDasGalaxia\assets\internal\</RemoteDir>
             <RemoteName>map-point3.png</RemoteName>
@@ -206,10 +182,10 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Release'">
-            <RemoteDir>TopDasGalaxia\library\lib\x86\</RemoteDir>
-            <RemoteName>libTopDasGalaxia.so</RemoteName>
-            <Operation>1</Operation>
+        <DeployFile Include="map-point2.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TopDasGalaxia\assets\internal\</RemoteDir>
+            <RemoteName>map-point2.png</RemoteName>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -230,14 +206,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="map-point2.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>TopDasGalaxia\assets\internal\</RemoteDir>
-            <RemoteName>map-point2.png</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="Android\Release\AndroidManifest.xml" Condition="'$(Config)'=='Release'">
             <RemoteDir>TopDasGalaxia\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
@@ -249,14 +217,6 @@
         <DeployFile Include="map-point2.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TopDasGalaxia\assets\internal\</RemoteDir>
             <RemoteName>map-point2.png</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Splash\res\values\strings.xml">
-            <RemoteDir>TopDasGalaxia\res\values\</RemoteDir>
-            <RemoteName>strings.xml</RemoteName>
             <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -310,26 +270,10 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Splash\res\layout\splash_activity.xml">
-            <RemoteDir>TopDasGalaxia\res\layout\</RemoteDir>
-            <RemoteName>splash_activity.xml</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Debug'">
             <RemoteDir>TopDasGalaxia\library\lib\armeabi\</RemoteDir>
             <RemoteName>libTopDasGalaxia.so</RemoteName>
             <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Splash\Splash.png">
-            <RemoteDir>TopDasGalaxia\res\drawable\</RemoteDir>
-            <RemoteName>splash.png</RemoteName>
-            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -358,33 +302,9 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Splash\java\output\dex\classes.dex">
-            <RemoteDir>TopDasGalaxia\classes\</RemoteDir>
-            <RemoteName>classes.dex</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Splash\styles.xml">
-            <RemoteDir>TopDasGalaxia\res\values\</RemoteDir>
-            <RemoteName>styles.xml</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>TopDasGalaxia\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Release'">
-            <RemoteDir>TopDasGalaxia\library\lib\mips\</RemoteDir>
-            <RemoteName>libTopDasGalaxia.so</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
