@@ -12,12 +12,25 @@ type
 
   TMarkerNotify = procedure(marker: TMarcador) of object;
 
-  TMarcador = class(TImage)
-  private
+  TCircle = class(Timage)
     function GetX: Single;
     function GetY: Single;
     procedure SetX(const Value: Single);
     procedure SetY(const Value: Single);
+  public
+    property X: Single read GetX write SetX;
+    property Y: Single read GetY write SetY;
+    constructor Create(AOwner: TComponent);
+  end;
+
+  TMarcador = class(Timage)
+  private
+    fCaption: String;
+    function GetX: Single;
+    function GetY: Single;
+    procedure SetX(const Value: Single);
+    procedure SetY(const Value: Single);
+    procedure SetCaption(const Value: String);
   protected
     FLastPosition: TPointF;
 
@@ -27,32 +40,35 @@ type
       var Handled: Boolean); override;
   public
 
-    Caption: String;
-    constructor Create(AOwner: TComponent; X, Y: Single; Caption: String;
-      Index: Integer); reintroduce;
+    property Caption: String read fCaption write SetCaption;
+    constructor Create(AOwner: TComponent; X, Y: Single; ACaption: String;
+      Categoria: Integer); reintroduce;
   published
-    property X : Single read GetX write SetX;
-    property Y : Single read GetY write SetY;
+    property X: Single read GetX write SetX;
+    property Y: Single read GetY write SetY;
   end;
 
-  TMapImage = class(TImage)
+  TMapImage = class(Timage)
   private
     { Private declarations }
-    FMarcadores: TList<TMarcador>;
+    FMarcadores: TObjectList<TMarcador>;
     fOnSelectMarker: TMarkerNotify;
     fonMarkerMove: TMarkerNotify;
+    fCircle: TCircle;
   protected
     { Protected declarations }
     // function GetMarcador(Index: Integer) : TMarcador;
     // procedure SetMarcador(Index: Integer; Value : TMarcador);
-    function GetMarcadores: TList<TMarcador>;
   public
     { Public declarations }
     MarcadorScale: TPosition;
+
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     // property Marcadores[Index: Integer]: TMarcador read GetMarcador write SetMarcador;
-    Property Marcadores: TList<TMarcador> read GetMarcadores;
+    Property Marcadores: TObjectList<TMarcador> read FMarcadores
+      write FMarcadores;
+    property Circle: TCircle read fCircle;
   published
     property onSelectMarker: TMarkerNotify read fOnSelectMarker
       write fOnSelectMarker;
@@ -74,19 +90,15 @@ end;
 constructor TMapImage.Create(AOwner: TComponent);
 begin
   inherited;
-  FMarcadores := TList<TMarcador>.Create();
+  FMarcadores := TObjectList<TMarcador>.Create();
   MarcadorScale := TPosition.Create(PointF(1, 1));
+  fCircle := TCircle.Create(Self);
 end;
 
 destructor TMapImage.Destroy;
 begin
   FreeAndNil(FMarcadores);
   inherited;
-end;
-
-function TMapImage.GetMarcadores: TList<TMarcador>;
-begin
-  Result := FMarcadores;
 end;
 
 // function TMapImage.GetMarcador(Index: Integer): TMarcador;
@@ -110,8 +122,8 @@ begin
 
 end;
 
-constructor TMarcador.Create(AOwner: TComponent; X, Y: Single; Caption: String;
-  Index: Integer);
+constructor TMarcador.Create(AOwner: TComponent; X, Y: Single; ACaption: String;
+  Categoria: Integer);
 var
   InStream: TResourceStream;
 begin
@@ -123,14 +135,16 @@ begin
   Self.Y := Y;
   Self.Anchors := [];
 
-  InStream := TResourceStream.Create(HInstance, 'PngImage_'+index.ToString(), RT_RCDATA);
+  InStream := TResourceStream.Create(HInstance,
+    'PngImage_' + Categoria.ToString(), RT_RCDATA);
 
   Self.MultiResBitmap.Items[0].Bitmap.LoadFromStream(InStream);
   Self.Scale.X := TMapImage(AOwner).MarcadorScale.X;
   Self.Scale.Y := TMapImage(AOwner).MarcadorScale.Y;
-  Self.Caption := Caption;
+  Self.Caption := ACaption;
 
-  Self.TouchManager.InteractiveGestures := [TInteractiveGesture.Pan]
+  Self.TouchManager.InteractiveGestures := [TInteractiveGesture.Pan];
+
 end;
 
 procedure TMarcador.DoGesture(const EventInfo: TGestureEventInfo;
@@ -160,12 +174,18 @@ end;
 
 function TMarcador.GetX: Single;
 begin
-  Result := Self.Position.X + (self.Width / 2);
+  Result := Self.Position.X + (Self.Width / 2);
 end;
 
 function TMarcador.GetY: Single;
 begin
   Result := Self.Position.Y + Self.Height;
+end;
+
+procedure TMarcador.SetCaption(const Value: String);
+begin
+  fCaption := Value;
+  TMapImage(Self.Owner).Repaint;
 end;
 
 procedure TMarcador.SetX(const Value: Single);
@@ -178,8 +198,10 @@ begin
   Self.Position.Y := Value - (Self.Height);
 end;
 
-
 procedure TMarcador.Paint;
+var
+  vRect: TRectF;
+  vTextWidth: Single;
 begin
   inherited;
 
@@ -192,6 +214,9 @@ begin
   // Canvas.FillText(r, 'FillText', false, 100, [TFillTextFlag.ftRightToLeft],
   // TTextAlign.taCenter, TTextAlign.taCenter);
 
+  vTextWidth := Self.Canvas.TextWidth(Self.Caption) + 2;
+
+  vRect := RectF(10 - (vTextWidth / 2), -15, (vTextWidth / 2) + 10, 4);
 
   // Self.Canvas.ClearRect(RectF(0, 0, 100, 20),clWhite);
 
@@ -200,13 +225,50 @@ begin
   // Self.Canvas.Stroke.Color  := clLime;
   // Self.Canvas.Stroke.Kind  := TBrushKind.Solid;
 
-  Self.Canvas.FillRect(RectF(-40, -10, 50, 0), 2, 2, AllCorners, 100,
-    Canvas.Stroke);
-  Self.Canvas.FillText(RectF(-40, -15, 50, 5), Self.Caption, false, 100, [],
-    TTextAlign.Center);
+  Self.Canvas.FillRect(vRect, 2, 2, AllCorners, 100, Canvas.Stroke);
+  Self.Canvas.FillText(vRect, Self.Caption, false, 100, [], TTextAlign.Center);
 
   Self.Canvas.EndScene();
 end;
 
+{ TCircle }
+
+constructor TCircle.Create(AOwner: TComponent);
+var
+  InStream: TResourceStream;
+begin
+  inherited Create(AOwner);
+  Self.Parent := TFmxObject(AOwner);
+  Self.Height := 15;
+  Self.Width := 15;
+  Self.Anchors := [];
+
+  InStream := TResourceStream.Create(HInstance, 'MapCircle', RT_RCDATA);
+
+  Self.MultiResBitmap.Items[0].Bitmap.LoadFromStream(InStream);
+  // Self.Scale.X := TMapImage(AOwner).MarcadorScale.X;
+  // Self.Scale.Y := TMapImage(AOwner).MarcadorScale.Y;
+
+end;
+
+function TCircle.GetX: Single;
+begin
+  Result := Self.Position.X + (Self.Width / 2);
+end;
+
+function TCircle.GetY: Single;
+begin
+  Result := Self.Position.Y + Self.Height;
+end;
+
+procedure TCircle.SetX(const Value: Single);
+begin
+  Self.Position.X := Value - (Self.Width / 2);
+end;
+
+procedure TCircle.SetY(const Value: Single);
+begin
+  Self.Position.Y := Value - (Self.Height);
+end;
 
 end.

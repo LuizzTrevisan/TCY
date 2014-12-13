@@ -9,9 +9,11 @@ uses
   Main, System.Actions, FMX.ActnList, FMX.Objects,
   FMX.Effects, FMX.ListBox, FMX.Layouts, FMX.ListView.Types, FMX.ListView,
   FMX.Edit, uMapImage, FMX.ExtCtrls, FMX.Ani, FMX.Controls.Presentation,
-  System.Sensors, System.Sensors.Components;
+  System.Sensors, System.Sensors.Components, Data.DB, Datasnap.DBClient;
 
 type
+  MarkerOpcao = (Nenhuma, Adicionando, Editando);
+
   TFMapImage = class(TFMain)
     Rectangle3: TRectangle;
     SpeedButton2: TSpeedButton;
@@ -34,6 +36,12 @@ type
     edtlat: TEdit;
     edtlong: TEdit;
     atu: TButton;
+    ClientDataSet1: TClientDataSet;
+    ClientDataSet1la: TFloatField;
+    ClientDataSet1lo: TFloatField;
+    ClientDataSet1Title: TStringField;
+    ClientDataSet1Index: TIntegerField;
+    ClientDataSet1categoria: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
@@ -54,12 +62,21 @@ type
       const OldLocation, NewLocation: TLocationCoord2D);
     procedure Button3Click(Sender: TObject);
     procedure atuClick(Sender: TObject);
+    procedure ClientDataSet1BeforePost(DataSet: TDataSet);
+    procedure Button2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure GPSLocationClick(Sender: TObject);
+    procedure ClientDataSet1BeforeDelete(DataSet: TDataSet);
   private
     { Private declarations }
-    vPoint: TPointF;
     minHeight, minWidth, maxHeight, maxWidth: Single;
+    Operacao: MarkerOpcao;
     procedure VerificaPosicaoTamanhoMinimo;
     procedure ZoomImage(Size, X, Y: Single);
+    procedure CarregarMarcadores;
+    procedure Mostrar;
+    procedure Ocultar;
+
   public
     { Public declarations }
     FLastPosition: TPointF;
@@ -87,22 +104,22 @@ procedure TFMapImage.AtualizaLocalGPS;
 const
   totWid = 0.009452;
   totHeig = 0.005901;
-//  LongIni =  -52.680848; // -52.676524 casa
-//  latIni = -26.215312;  //final -26.218189
+  // LongIni =  -52.680848; // -52.676524 casa
+  // latIni = -26.215312;  //final -26.218189
 
-  LongIni =  -52.695230; //final   -52.685778
-  latIni = -26.199538;  //final -26.193637
+  LongIni = -52.695230; // final   -52.685778
+  latIni = -26.199538; // final -26.193637
 
 var
   dif: Single;
 begin
   inherited;
 
-  dif :=   edtlong.Text.ToSingle() -  LongIni;
-  MapImage1.Marcadores[0].X := (dif / totWid) * MapImage1.Width;
+  dif := edtlong.Text.ToSingle() - LongIni;
+  MapImage1.Circle.X := (dif / totWid) * MapImage1.Width;
 
-  dif := edtlat.Text.ToSingle() - latIni ;
-  MapImage1.Marcadores[0].Y :=  MapImage1.Height - (dif / totHeig) * MapImage1.Height;
+  dif := edtlat.Text.ToSingle() - latIni;
+  MapImage1.Circle.Y := MapImage1.Height - (dif / totHeig) * MapImage1.Height;
 end;
 
 procedure TFMapImage.atuClick(Sender: TObject);
@@ -114,9 +131,27 @@ end;
 procedure TFMapImage.Button1Click(Sender: TObject);
 begin
   inherited;
-  MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,
-    Edit1.Text, ComboBox1.ItemIndex));
-  rectMarkers.Visible := False;
+  if Operacao = MarkerOpcao.Nenhuma then
+    Operacao := MarkerOpcao.Adicionando;
+
+  ClientDataSet1.Edit;
+  ClientDataSet1Title.AsString := Edit1.Text;
+  ClientDataSet1categoria.AsInteger := ComboBox1.ItemIndex;
+  ClientDataSet1.Post;
+
+  ClientDataSet1.SaveToFile(GetHomePath + '/Tm.txt');
+
+  Ocultar;
+  txtAjuda.Text := 'Clique no Mapa para Adicionar um Marcador';
+  Operacao := MarkerOpcao.Nenhuma;
+end;
+
+procedure TFMapImage.Button2Click(Sender: TObject);
+begin
+  inherited;
+  ClientDataSet1.Delete;
+  Ocultar;
+  txtAjuda.Text := 'Clique no Mapa para Adicionar um Marcador';
 end;
 
 procedure TFMapImage.Button3Click(Sender: TObject);
@@ -124,6 +159,95 @@ begin
   inherited;
   LocationSensor1.Active := not LocationSensor1.Active;
   Button3.Text := LocationSensor1.Active.ToString();
+end;
+
+procedure TFMapImage.CarregarMarcadores;
+begin
+  if FileExists(GetHomePath + '/Tm.txt') then
+  begin
+    try
+      ClientDataSet1.LoadFromFile(GetHomePath + '/Tm.txt');
+    except
+      ClientDataSet1.Close;
+      ClientDataSet1.CreateDataSet;
+    end;
+  end
+  else
+  begin
+    ClientDataSet1.Close;
+    ClientDataSet1.CreateDataSet;
+    ClientDataSet1.EmptyDataSet;
+  end;
+
+  if (ClientDataSet1.RecordCount > 0) then
+  begin
+
+    ClientDataSet1.First;
+    while not ClientDataSet1.Eof do
+    begin
+      ClientDataSet1.Edit;
+      ClientDataSet1.Post;
+      ClientDataSet1.Next;
+    end;
+  end;
+
+end;
+
+procedure TFMapImage.ClientDataSet1BeforeDelete(DataSet: TDataSet);
+var
+  i: Integer;
+begin
+  inherited;
+  for i := 0 to MapImage1.Marcadores.Count - 1 do
+    if MapImage1.Marcadores[i].Tag = ClientDataSet1Index.AsInteger then
+    begin
+      MapImage1.Marcadores.Delete(i);
+      Break;
+    end;
+end;
+
+procedure TFMapImage.ClientDataSet1BeforePost(DataSet: TDataSet);
+var
+  vMarker: TMarcador;
+  i: Integer;
+begin
+  inherited;
+
+  if Operacao = MarkerOpcao.Adicionando then
+  begin
+    vMarker := TMarcador.Create(MapImage1, ClientDataSet1la.AsFloat,
+      ClientDataSet1lo.AsFloat, ClientDataSet1Title.AsString,
+      ClientDataSet1categoria.AsInteger);
+
+    MapImage1.Marcadores.Add(vMarker);
+
+    if ClientDataSet1Index.AsInteger <= 0 then
+    begin
+      Operacao := MarkerOpcao.Nenhuma;
+      ClientDataSet1.Edit;
+      if MapImage1.Marcadores.Count >= 2 then
+        ClientDataSet1Index.AsInteger := MapImage1.Marcadores
+          [MapImage1.Marcadores.Count - 2].Tag + 1
+      else
+        ClientDataSet1Index.AsInteger := 1;
+
+      // ClientDataSet1.Post;
+      Operacao := MarkerOpcao.Adicionando;
+    end;
+
+    vMarker.Tag := ClientDataSet1Index.AsInteger;
+
+  end
+  else if Operacao = MarkerOpcao.Editando then
+  begin
+
+    for i := 0 to MapImage1.Marcadores.Count - 1 do
+      if MapImage1.Marcadores[i].Tag = ClientDataSet1Index.AsInteger then
+      begin
+        MapImage1.Marcadores[i].Caption := ClientDataSet1Title.AsString;
+        Break;
+      end;
+  end;
 end;
 
 procedure TFMapImage.FormCreate(Sender: TObject);
@@ -134,7 +258,20 @@ begin
   //
   // maxHeight := Rectangle2.Height * 2;
   // maxWidth := Rectangle2.Width * 2;
-  vPoint := TPointF.Create(0, 0)
+end;
+
+procedure TFMapImage.FormShow(Sender: TObject);
+begin
+  inherited;
+  Operacao := MarkerOpcao.Adicionando;
+  CarregarMarcadores;
+end;
+
+procedure TFMapImage.GPSLocationClick(Sender: TObject);
+begin
+  inherited;
+  LocationSensor1.Active := not LocationSensor1.Active;
+  GpsAnimation.Enabled := LocationSensor1.Active;
 end;
 
 procedure TFMapImage.handlePan(EventInfo: TGestureEventInfo);
@@ -194,12 +331,12 @@ begin
   eventDistance := Size / 100;
 
   pos := MapImage1.Position;
-  // widthDistance  := (eventDistance * (Rectangle2.Width / 100));
-  // heightDistance := (eventDistance * (Rectangle2.Height / 100));
-  if (MapImage1.Scale.X + eventDistance <= 0.3) then
+
+
+  if (MapImage1.Scale.X + eventDistance <= 0.1) then
   begin
-    MapImage1.Scale.X := 0.3;
-    MapImage1.Scale.Y := 0.3;
+    MapImage1.Scale.X := 0.1;
+    MapImage1.Scale.Y := 0.1;
   end
   else
   begin
@@ -207,10 +344,10 @@ begin
     MapImage1.Scale.Y := MapImage1.Scale.Y + eventDistance;
   end;
 
-  MapImage1.Position := pos;
+  MapImage1.Position.X := ((MapImage1.Position.X * MapImage1.Scale.X) / 2 ) * MapImage1.Scale.X ;
+  MapImage1.Position.Y := ((MapImage1.Position.Y * MapImage1.Scale.Y) / 2 ) * MapImage1.Scale.X;
 
   // MapImage1.Bitmap.BitmapScale := MapImage1.Bitmap.BitmapScale  + eventDistance;
-
   // MapImage1.BitmapScale.Y := MapImage1.BitmapScale.Y  + eventDistance;
 
   {
@@ -251,8 +388,8 @@ end;
 procedure TFMapImage.LocationSensor1LocationChanged(Sender: TObject;
   const OldLocation, NewLocation: TLocationCoord2D);
 begin
-  edtlat.Text  := newLocation.Latitude.ToString();
-  edtlong.Text := newLocation.Longitude.ToString();
+  edtlat.Text := NewLocation.Latitude.ToString();
+  edtlong.Text := NewLocation.Longitude.ToString();
   AtualizaLocalGPS;
 end;
 
@@ -262,8 +399,11 @@ begin
   inherited;
   if (EventInfo.GestureID = System.UITypes.igiLongTap) then
   begin
+    txtAjuda.Text := 'Adicionando Novo Marcador';
+    Edit1.Text := '';
+    // MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,'Nome OASDOA'));
     ComboBox1.DropDown;
-    rectMarkers.Visible := True;
+    Mostrar;
     Edit1.SetFocus;
   end;
   // MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,'Nome OASDOA'));
@@ -277,18 +417,40 @@ end;
 procedure TFMapImage.MapImage1MarkerMove(marker: TMarcador);
 begin
   inherited;
-  // ShowMessage('Moveu o maledeto');
+  Operacao := MarkerOpcao.Editando;
+
+  ClientDataSet1.First;
+  ClientDataSet1.FindKey([marker.Tag]);
+  ClientDataSet1.Edit;
+  ClientDataSet1.FieldByName('la').AsFloat := marker.X;
+  ClientDataSet1.FieldByName('lo').AsFloat := marker.Y;
+  ClientDataSet1.Post;
+
+  ClientDataSet1.SaveToFile(GetHomePath + '/Tm.txt');
 end;
 
 procedure TFMapImage.MapImage1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
   inherited;
-  vPoint.X := X;
-  vPoint.Y := Y;
+  Operacao := MarkerOpcao.Nenhuma;
+  if ClientDataSet1.State <> dsInsert then
+    ClientDataSet1.Append;
+
+  ClientDataSet1.FieldByName('la').AsFloat := X;
+  ClientDataSet1.FieldByName('lo').AsFloat := Y;
+  // ClientDataSet1.Post;
+
+  if Boolean(actShowMenuLateral.Tag) then
+    actShowMenuLateral.Execute;
+{$IFDEF WIN32}
+  txtAjuda.Text := 'Adicionando Novo Marcador';
+  Edit1.Text := '';
 
   // MapImage1.Marcadores.Add(TMarcador.Create(MapImage1, vPoint.X, vPoint.Y,'Nome OASDOA'));
-  rectMarkers.Visible := True;
+
+  Mostrar;
+{$ENDIF}
 end;
 
 procedure TFMapImage.MapImage1Paint(Sender: TObject; Canvas: TCanvas;
@@ -303,7 +465,25 @@ end;
 procedure TFMapImage.MapImage1SelectMarker(marker: TMarcador);
 begin
   inherited;
-  // ShowMessage(marker.Caption);
+  Operacao := MarkerOpcao.Editando;
+
+  ClientDataSet1.First;
+  ClientDataSet1.FindKey([marker.Tag]);
+  txtAjuda.Text := 'Editando Marcador';
+
+  Edit1.Text := ClientDataSet1Title.AsString;
+  Mostrar;
+
+end;
+
+procedure TFMapImage.Mostrar;
+begin
+  rectMarkers.Height := 140;
+end;
+
+procedure TFMapImage.Ocultar;
+begin
+  rectMarkers.Height := rectMarkersTop.Height
 end;
 
 procedure TFMapImage.SourceMarkerGesture(Sender: TObject;

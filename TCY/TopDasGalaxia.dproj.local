@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2014/06/26 18:50:00.000.412,C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\Unit1.fmx=C:\Users\LuizFernando\Desktop\TCY\Sources\Main.fmx</Transaction>
-    <Transaction>2014/06/26 18:50:05.000.596,C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\TopDasGalaxia.dproj</Transaction>
-    <Transaction>2014/06/26 19:46:38.000.975,C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\TopDasGalaxia.dproj=C:\Users\LuizFernando\Desktop\TCY\Sources\TopDasGalaxia.dproj</Transaction>
-    <Transaction>2014/06/26 22:42:25.000.722,C:\Users\LuizFernando\Desktop\TCY\Sources\MapGMaps.fmx=C:\Users\LuizFernando\Desktop\TCY\Unit1.fmx</Transaction>
-    <Transaction>2014/06/27 19:41:10.000.157,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit2.pas=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\Spl.pas</Transaction>
-    <Transaction>2014/06/27 19:41:10.000.157,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit2.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\Spl.fmx</Transaction>
-    <Transaction>2014/06/27 19:57:15.000.138,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit1.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\Splash.fmx</Transaction>
-    <Transaction>2014/06/27 19:58:24.000.129,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit2.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MainMenu.fmx</Transaction>
-    <Transaction>2014/06/27 19:58:24.000.129,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit2.pas=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MainMenu.pas</Transaction>
-    <Transaction>2014/06/29 15:04:06.000.535,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarker.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit1.fmx</Transaction>
-    <Transaction>2014/06/29 15:04:09.000.671,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarkers.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarker.fmx</Transaction>
-    <Transaction>2014/06/29 15:04:09.000.671,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarkers.pas=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarker.pas</Transaction>
-    <Transaction>2014/07/05 17:39:44.000.485,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers2.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Unit1.fmx</Transaction>
-    <Transaction>2014/07/05 17:47:51.000.831,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers2.fmx</Transaction>
-    <Transaction>2014/07/05 17:47:51.000.831,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers.pas=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers2.pas</Transaction>
-    <Transaction>2014/07/09 19:34:52.000.299,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Unit1.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapGmapss.fmx</Transaction>
-    <Transaction>2014/07/09 19:41:38.000.945,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapGmapss.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Unit1.fmx</Transaction>
-    <Transaction>2014/07/09 19:49:45.000.906,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapGmaps.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapGmapss.fmx</Transaction>
-    <Transaction>2014/07/14 19:26:35.000.113,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapImage.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Unit1.fmx</Transaction>
+    <Transaction>2014/06/26 18:50:00.000.412,C:\Users\LuizFernando\Desktop\TCY\Sources\Main.fmx=C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2014/06/26 18:50:05.000.596,C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\TopDasGalaxia.dproj=C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2014/06/26 19:46:38.000.975,C:\Users\LuizFernando\Desktop\TCY\Sources\TopDasGalaxia.dproj=C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\TopDasGalaxia.dproj</Transaction>
+    <Transaction>2014/06/26 22:42:25.000.722,C:\Users\LuizFernando\Desktop\TCY\Unit1.fmx=C:\Users\LuizFernando\Desktop\TCY\Sources\MapGMaps.fmx</Transaction>
+    <Transaction>2014/06/27 19:41:10.000.157,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\Spl.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit2.fmx</Transaction>
+    <Transaction>2014/06/27 19:41:10.000.157,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\Spl.pas=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit2.pas</Transaction>
+    <Transaction>2014/06/27 19:57:15.000.138,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\Splash.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit1.fmx</Transaction>
+    <Transaction>2014/06/27 19:58:24.000.129,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MainMenu.pas=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit2.pas</Transaction>
+    <Transaction>2014/06/27 19:58:24.000.129,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MainMenu.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit2.fmx</Transaction>
+    <Transaction>2014/06/29 15:04:06.000.535,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Unit1.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarker.fmx</Transaction>
+    <Transaction>2014/06/29 15:04:09.000.671,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarker.pas=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarkers.pas</Transaction>
+    <Transaction>2014/06/29 15:04:09.000.671,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarker.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\Sources\MapMarkers.fmx</Transaction>
+    <Transaction>2014/07/05 17:39:44.000.485,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Unit1.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers2.fmx</Transaction>
+    <Transaction>2014/07/05 17:47:51.000.831,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers2.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers.fmx</Transaction>
+    <Transaction>2014/07/05 17:47:51.000.831,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers2.pas=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapMarkers.pas</Transaction>
+    <Transaction>2014/07/09 19:34:52.000.299,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapGmapss.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Unit1.fmx</Transaction>
+    <Transaction>2014/07/09 19:41:38.000.945,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Unit1.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapGmapss.fmx</Transaction>
+    <Transaction>2014/07/09 19:49:45.000.906,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapGmapss.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapGmaps.fmx</Transaction>
+    <Transaction>2014/07/14 19:26:35.000.113,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Unit1.fmx=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY\Sources\MapImage.fmx</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="MapImage"/>
@@ -36,6 +36,7 @@
     <File Path="map-point1.png"/>
     <File Path="map-point2.png"/>
     <File Path="map-point3.png"/>
+    <File Path="map-circle.png"/>
   </ProjectSortOrder>
 	<BT_BuildType>Debug</BT_BuildType>
 	<MobileDevice>LG-V500-00f824ffdd4b0a02</MobileDevice>
