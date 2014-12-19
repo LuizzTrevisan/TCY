@@ -1578,7 +1578,7 @@ object FMain: TFMain
           Size.PlatformDefault = False
           StyleLookup = 'listboxitemnodetail'
           TabOrder = 1
-          Text = '  Imagem'
+          Text = '  Mapa UTFPR'
           OnClick = liImagemClick
         end
         object liGMaps: TListBoxItem
@@ -1625,7 +1625,7 @@ object FMain: TFMain
           Size.PlatformDefault = False
           StyleLookup = 'listboxitemnodetail'
           TabOrder = 2
-          Text = '  GMaps'
+          Text = '  Navega'#231#227'o Livre'
           OnClick = liGMapsClick
         end
       end
@@ -1755,7 +1755,7 @@ object FMain: TFMain
       object GlowEffect2: TGlowEffect
         Softness = 0.100000001490116100
         GlowColor = claBlack
-        Opacity = 0.800000011920928900
+        Opacity = 0.800000011920929000
         Enabled = False
       end
     end
