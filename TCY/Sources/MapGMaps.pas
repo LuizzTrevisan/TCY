@@ -19,20 +19,20 @@ type
 
   TFMapGMaps = class(TFMain)
     LocationSensor1: TLocationSensor;
-    ClientDataSet1: TClientDataSet;
-    ClientDataSet1la: TFloatField;
-    ClientDataSet1lo: TFloatField;
-    ClientDataSet1Title: TStringField;
+    cdsPontos: TClientDataSet;
+    cdsPontosla: TFloatField;
+    cdsPontoslo: TFloatField;
+    cdsPontosTitle: TStringField;
     TMSFMXWebGMaps1: TTMSFMXWebGMaps;
     rectMarkers: TRectangle;
     rectMarkersTop: TRectangle;
-    Edit1: TEdit;
-    Rectangle2: TRectangle;
-    Button1: TButton;
-    Button2: TButton;
+    edtDescricao: TEdit;
+    rectOpcoes: TRectangle;
+    btAdicionar: TButton;
+    btRemover: TButton;
     txtAjuda: TText;
     lvMarcadores: TListView;
-    ClientDataSet1Index: TIntegerField;
+    cdsPontosIndex: TIntegerField;
     btnMenuPopUp: TSpeedButton;
     lbMenu: TListBox;
     liRemoverTodosMarcadores: TListBoxItem;
@@ -44,8 +44,8 @@ type
     procedure TMSFMXWebGMaps1MapClick(Sender: TObject;
       Latitude, Longitude: Double; X, Y: Integer);
     procedure FormCreate(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure btAdicionarClick(Sender: TObject);
+    procedure btRemoverClick(Sender: TObject);
     procedure LocationSensor1LocationChanged(Sender: TObject;
       const OldLocation, NewLocation: TLocationCoord2D);
     procedure TMSFMXWebGMaps1MarkerClick(Sender: TObject; MarkerTitle: string;
@@ -54,8 +54,8 @@ type
       IdMarker: Integer; Latitude, Longitude: Double);
     procedure actShowMenuLateralExecute(Sender: TObject);
     procedure lvMarcadoresDeleteItem(Sender: TObject; AIndex: Integer);
-    procedure ClientDataSet1BeforeDelete(DataSet: TDataSet);
-    procedure ClientDataSet1BeforePost(DataSet: TDataSet);
+    procedure cdsPontosBeforeDelete(DataSet: TDataSet);
+    procedure cdsPontosBeforePost(DataSet: TDataSet);
     procedure Button4Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnMenuPopUpClick(Sender: TObject);
@@ -97,27 +97,31 @@ begin
   lbMenu.Visible := not lbMenu.Visible;
 end;
 
-procedure TFMapGMaps.Button1Click(Sender: TObject);
+procedure TFMapGMaps.btAdicionarClick(Sender: TObject);
 begin
   inherited;
+
+
   if Operacao = MarkerOpcao.Nenhuma then
     Operacao := MarkerOpcao.Adicionando;
 
-  ClientDataSet1.Edit;
-  ClientDataSet1Title.AsString := Edit1.Text;
-  ClientDataSet1.Post;
+  cdsPontos.Edit;
+  cdsPontosTitle.AsString := edtDescricao.Text;
+  cdsPontos.Post;
 
-  ClientDataSet1.SaveToFile(GetHomePath + '/Te.txt');
+  cdsPontos.SaveToFile(GetHomePath + '/Te.txt');
 
   Ocultar;
   txtAjuda.Text := 'Clique no Mapa para Adicionar um Marcador';
   Operacao := MarkerOpcao.Nenhuma;
+
+
 end;
 
-procedure TFMapGMaps.Button2Click(Sender: TObject);
+procedure TFMapGMaps.btRemoverClick(Sender: TObject);
 begin
   inherited;
-  ClientDataSet1.Delete;
+  cdsPontos.Delete;
   Ocultar;
   txtAjuda.Text := 'Clique no Mapa para Adicionar um Marcador';
 end;
@@ -125,9 +129,9 @@ end;
 procedure TFMapGMaps.Button4Click(Sender: TObject);
 begin
   inherited;
-  while not ClientDataSet1.Eof do
-    ClientDataSet1.Delete;
-  ClientDataSet1.SaveToFile(GetHomePath + '/Te.txt');
+  while not cdsPontos.Eof do
+    cdsPontos.Delete;
+  cdsPontos.SaveToFile(GetHomePath + '/Te.txt');
 end;
 
 procedure TFMapGMaps.CarregarMarcadores;
@@ -135,42 +139,42 @@ begin
 
   if FileExists(GetHomePath + '/Te.txt') then begin
     try
-      ClientDataSet1.LoadFromFile(GetHomePath + '/Te.txt');
+      cdsPontos.LoadFromFile(GetHomePath + '/Te.txt');
     except
-      ClientDataSet1.Close;
-      ClientDataSet1.CreateDataSet;
+      cdsPontos.Close;
+      cdsPontos.CreateDataSet;
     end;
   end else begin
-    ClientDataSet1.Close;
-    ClientDataSet1.CreateDataSet;
-    ClientDataSet1.EmptyDataSet;
+    cdsPontos.Close;
+    cdsPontos.CreateDataSet;
+    cdsPontos.EmptyDataSet;
   end;
 
-  if (ClientDataSet1.RecordCount > 0) then begin
+  if (cdsPontos.RecordCount > 0) then begin
 
-    ClientDataSet1.First;
-    while not ClientDataSet1.Eof do begin
-      ClientDataSet1.Edit;
-      ClientDataSet1.Post;
-      ClientDataSet1.Next;
+    cdsPontos.First;
+    while not cdsPontos.Eof do begin
+      cdsPontos.Edit;
+      cdsPontos.Post;
+      cdsPontos.Next;
     end;
   end;
 
 end;
 
-procedure TFMapGMaps.ClientDataSet1BeforeDelete(DataSet: TDataSet);
+procedure TFMapGMaps.cdsPontosBeforeDelete(DataSet: TDataSet);
 var
   i: Integer;
 begin
   inherited;
   for i := 0 to TMSFMXWebGMaps1.Markers.Count - 1 do
-    if TMSFMXWebGMaps1.Markers[i].Tag = ClientDataSet1Index.AsInteger then begin
+    if TMSFMXWebGMaps1.Markers[i].Tag = cdsPontosIndex.AsInteger then begin
       TMSFMXWebGMaps1.Markers.Delete(i);
       Break;
     end;
 end;
 
-procedure TFMapGMaps.ClientDataSet1BeforePost(DataSet: TDataSet);
+procedure TFMapGMaps.cdsPontosBeforePost(DataSet: TDataSet);
 var
   vMarker: TMarker;
   i: Integer;
@@ -179,32 +183,32 @@ begin
 
   if Operacao = MarkerOpcao.Adicionando then begin
 
-    vMarker := TMSFMXWebGMaps1.Markers.Add(ClientDataSet1la.AsFloat,
-      ClientDataSet1lo.AsFloat, ClientDataSet1Title.AsString, '', True, True,
+    vMarker := TMSFMXWebGMaps1.Markers.Add(cdsPontosla.AsFloat,
+      cdsPontoslo.AsFloat, cdsPontosTitle.AsString, '', True, True,
       True, False, True, 0);
-    vMarker.MapLabel.Text := ClientDataSet1Title.AsString;
+    vMarker.MapLabel.Text := cdsPontosTitle.AsString;
 
-    if ClientDataSet1Index.AsInteger <= 0 then begin
+    if cdsPontosIndex.AsInteger <= 0 then begin
       Operacao := MarkerOpcao.Nenhuma;
-      ClientDataSet1.Edit;
+      cdsPontos.Edit;
       if TMSFMXWebGMaps1.Markers.Count >= 2 then
-        ClientDataSet1Index.AsInteger := TMSFMXWebGMaps1.Markers
+        cdsPontosIndex.AsInteger := TMSFMXWebGMaps1.Markers
           [TMSFMXWebGMaps1.Markers.Count - 2].Tag + 1
       else
-        ClientDataSet1Index.AsInteger := 1;
+        cdsPontosIndex.AsInteger := 1;
       // ClientDataSet1.Post;
       Operacao := MarkerOpcao.Adicionando;
     end;
 
-    vMarker.Tag := ClientDataSet1Index.AsInteger;
+    vMarker.Tag := cdsPontosIndex.AsInteger;
 
   end
   else if Operacao = MarkerOpcao.Editando then begin
 
     for i := 0 to TMSFMXWebGMaps1.Markers.Count - 1 do
-      if TMSFMXWebGMaps1.Markers[i].Tag = ClientDataSet1Index.AsInteger then
+      if TMSFMXWebGMaps1.Markers[i].Tag = cdsPontosIndex.AsInteger then
       begin
-        TMSFMXWebGMaps1.Markers[i].MapLabel.Text := ClientDataSet1Title.AsString;
+        TMSFMXWebGMaps1.Markers[i].MapLabel.Text := cdsPontosTitle.AsString;
         Break;
       end;
   end;
@@ -227,8 +231,10 @@ end;
 procedure TFMapGMaps.FormResize(Sender: TObject);
 begin
   inherited;
-  Button1.Width := Self.Width / 2 - 2;
-  Button2.Width := Button1.Width - 2;
+
+  //ajusta tamanho dos botoes pra fica do tambanho da tela (adicionar e excluir)
+  btAdicionar.Width := Self.Width / 2 - 2;
+  btRemover.Width := btAdicionar.Width - 2;
 end;
 
 procedure TFMapGMaps.FormShow(Sender: TObject);
@@ -241,19 +247,19 @@ end;
 procedure TFMapGMaps.liRemoverTodosMarcadoresClick(Sender: TObject);
 begin
   inherited;
-  ClientDataSet1.First;
-  while not ClientDataSet1.Eof do
-    ClientDataSet1.Delete;
+  cdsPontos.First;
+  while not cdsPontos.Eof do
+    cdsPontos.Delete;
   lbMenu.Visible := False;
 
-  ClientDataSet1.SaveToFile(GetHomePath + '/Te.txt');
+  cdsPontos.SaveToFile(GetHomePath + '/Te.txt');
 end;
 
 procedure TFMapGMaps.lvMarcadoresDeleteItem(Sender: TObject; AIndex: Integer);
 begin
   inherited;
-  ClientDataSet1.RecNo := AIndex + 1;
-  ClientDataSet1.Delete;
+  cdsPontos.RecNo := AIndex + 1;
+  cdsPontos.Delete;
 end;
 
 procedure TFMapGMaps.lvMarcadoresGesture(Sender: TObject;
@@ -262,15 +268,20 @@ var
   bounds : TBounds;
 begin
   inherited;
+
+
+  //quanto segura um item pressionado na lista, da zoom nas suas coordenadas.
   if (EventInfo.GestureID = System.UITypes.igiLongTap) then  begin
-    ClientDataSet1.RecNo := lvMarcadores.ItemIndex  + 1;
+
+    cdsPontos.RecNo := lvMarcadores.ItemIndex  + 1;
     bounds := FMX.TMSWebGMapsCommonFunctions.TBounds.Create;
-    bounds.NorthEast.Latitude := ClientDataSet1la.AsFloat + 0.002;
-    bounds.NorthEast.Longitude := ClientDataSet1lo.AsFloat + 0.002;
-    bounds.SouthWest.Latitude := ClientDataSet1la.AsFloat - 0.002;
-    bounds.SouthWest.Longitude := ClientDataSet1lo.AsFloat - 0.002;
+    bounds.NorthEast.Latitude := cdsPontosla.AsFloat + 0.002;
+    bounds.NorthEast.Longitude := cdsPontoslo.AsFloat + 0.002;
+    bounds.SouthWest.Latitude := cdsPontosla.AsFloat - 0.002;
+    bounds.SouthWest.Longitude := cdsPontoslo.AsFloat - 0.002;
     TMSFMXWebGMaps1.MapZoomTo(bounds);
 
+    //ocultar a lista de pontos
     ShowListClick(ShowList);
   end;
 
@@ -279,6 +290,9 @@ end;
 procedure TFMapGMaps.GPSLocationClick(Sender: TObject);
 begin
   inherited;
+
+  //ativa o gps para encontrar localizacao atual
+
   GpsAnimation.Enabled := True;
   if not LocationSensor1.Active then begin
     LocationSensor1.Active := True;
@@ -291,6 +305,10 @@ var
   bounds: FMX.TMSWebGMapsCommonFunctions.TBounds;
 begin
   inherited;
+
+
+
+  //quando muda  localizacao do GPS, aplica o zoom novamente
   LocationSensor1.Active := False;
   TMSFMXWebGMaps1.MapPanTo(NewLocation.Latitude, NewLocation.Longitude);
 
@@ -302,6 +320,9 @@ begin
   bounds.SouthWest.Longitude := NewLocation.Longitude - 0.002;
   TMSFMXWebGMaps1.MapZoomTo(bounds);
 
+
+
+  //circulo da localização atual
   if not Assigned(PolygonLocationItem) then begin
     PolygonLocationItem := TMSFMXWebGMaps1.Polygons.Add;
     CircleLocation := PolygonLocationItem.Polygon;
@@ -310,12 +331,15 @@ begin
     CircleLocation.BorderWidth := 2;
   end;
 
-  CircleLocation.Radius := 50;
+  CircleLocation.Radius := 45;
   CircleLocation.Visible := True;
   CircleLocation.Center.Latitude := NewLocation.Latitude;
   CircleLocation.Center.Longitude := NewLocation.Longitude;
 
+
+  //quando encontra a localizacao, apaga o circulo antigo e desenha novamente
   TMSFMXWebGMaps1.DeleteAllMapPolygon;
+
   TMSFMXWebGMaps1.CreateMapPolygon(CircleLocation);
 
   GpsAnimation.Enabled := False;
@@ -333,40 +357,46 @@ end;
 procedure TFMapGMaps.Ocultar;
 begin
   // rectMarkers.AnimateFloat('Height', rectMarkersTop.Height);
+  //igual a tela da utf
+
   rectMarkers.Height := rectMarkersTop.Height;
 end;
 
 procedure TFMapGMaps.ShowListClick(Sender: TObject);
 begin
   inherited;
+
+
   ShowList.Tag := not ShowList.Tag;
   if Boolean(ShowList.Tag) then begin
     // rectMarkers.AnimateFloat('Height', Self.Height);
     rectMarkers.Height := Self.Height;
     txtAjuda.Text := 'Lista de Marcadores ';
-    Rectangle1.Visible := False;
-    Rectangle2.Visible := False;
-    Edit1.Visible := False;
+    RectMenu.Visible := False;
+    rectOpcoes.Visible := False;
+    edtDescricao.Visible := False;
     TMSFMXWebGMaps1.Visible := False;
     lvMarcadores.Visible := True;
     lvMarcadores.Items.Clear;
-    ClientDataSet1.First;
-    while not ClientDataSet1.Eof do begin
-      lvMarcadores.Items.Add.Text := ClientDataSet1Title.AsString;
-      ClientDataSet1.Next;
+    cdsPontos.First;
+
+    while not cdsPontos.Eof do begin
+      lvMarcadores.Items.Add.Text := CdsPontosTitle.AsString;
+      cdsPontos.Next;
     end;
   end else begin
     if Boolean(actShowMenuLateral.Tag) then
       actShowMenuLateral.Execute;
     txtAjuda.Text := 'Clique no Mapa para Adicionar um Marcador ';
-    Rectangle1.Visible := True;
-    Rectangle2.Visible := True;
-    Edit1.Visible := True;
+    RectMenu.Visible := True;
+    rectOpcoes.Visible := True;
+    edtDescricao.Visible := True;
     rectMarkers.Align := TAlignLayout.Bottom;
     lvMarcadores.Visible := False;
     TMSFMXWebGMaps1.Visible := True;
     Ocultar;
   end;
+
 end;
 
 procedure TFMapGMaps.TMSFMXWebGMaps1MapClick(Sender: TObject;
@@ -375,27 +405,31 @@ var
   bounds: FMX.TMSWebGMapsCommonFunctions.TBounds;
 begin
   inherited;
-  Operacao := MarkerOpcao.Nenhuma;
-  if ClientDataSet1.State <> dsInsert then
-    ClientDataSet1.Append;
 
-  ClientDataSet1.FieldByName('la').AsFloat := Latitude;
-  ClientDataSet1.FieldByName('lo').AsFloat := Longitude;
+  Operacao := MarkerOpcao.Nenhuma;
+  if cdsPontos.State <> dsInsert then
+    cdsPontos.Append;
+
+  cdsPontos.FieldByName('la').AsFloat := Latitude;
+  cdsPontos.FieldByName('lo').AsFloat := Longitude;
   // ClientDataSet1.Post;
 
   if Boolean(actShowMenuLateral.Tag) then
     actShowMenuLateral.Execute;
 
   txtAjuda.Text := 'Adicionando Novo Marcador';
-  Edit1.Text := '';
+  edtDescricao.Text := '';
   Mostrar;
 
+
+  //aplica zoom aonde clico no mapa
   bounds := FMX.TMSWebGMapsCommonFunctions.TBounds.Create;
   bounds.NorthEast.Latitude := Latitude + 0.002;
   bounds.NorthEast.Longitude := Longitude + 0.002;
   bounds.SouthWest.Latitude := Latitude - 0.002;
   bounds.SouthWest.Longitude := Longitude - 0.002;
 
+  //aplica o zoom montando acima
   TMSFMXWebGMaps1.MapZoomTo(bounds);
 
 end;
@@ -410,13 +444,14 @@ begin
   inherited;
   Operacao := MarkerOpcao.Editando;
 
-  ClientDataSet1.First;
-  ClientDataSet1.FindKey([TMSFMXWebGMaps1.Markers[IdMarker].Tag]);
+  cdsPontos.First;
+  cdsPontos.FindKey([TMSFMXWebGMaps1.Markers[IdMarker].Tag]);
   txtAjuda.Text := 'Editando Marcador';
 
-  Edit1.Text := ClientDataSet1Title.AsString;
+  edtDescricao.Text := cdsPontosTitle.AsString;
   Mostrar;
 
+  //zoom no marcador
   bounds := FMX.TMSWebGMapsCommonFunctions.TBounds.Create;
   bounds.NorthEast.Latitude := TMSFMXWebGMaps1.Markers[IdMarker]
     .Latitude + 0.002;
@@ -435,16 +470,19 @@ procedure TFMapGMaps.TMSFMXWebGMaps1MarkerDragEnd(Sender: TObject;
   MarkerTitle: string; IdMarker: Integer; Latitude, Longitude: Double);
 begin
   inherited;
+
+  //quanto termina de arrastar o ponto, atualiza as coordenadas
+
   Operacao := MarkerOpcao.Editando;
 
-  ClientDataSet1.First;
-  ClientDataSet1.FindKey([TMSFMXWebGMaps1.Markers[IdMarker].Tag]);
-  ClientDataSet1.Edit;
-  ClientDataSet1.FieldByName('la').AsFloat := Latitude;
-  ClientDataSet1.FieldByName('lo').AsFloat := Longitude;
-  ClientDataSet1.Post;
+  cdsPontos.First;
+  cdsPontos.FindKey([TMSFMXWebGMaps1.Markers[IdMarker].Tag]);
+  cdsPontos.Edit;
+  cdsPontos.FieldByName('la').AsFloat := Latitude;
+  cdsPontos.FieldByName('lo').AsFloat := Longitude;
+  cdsPontos.Post;
 
-  ClientDataSet1.SaveToFile(GetHomePath + '/Te.txt');
+  cdsPontos.SaveToFile(GetHomePath + '/Te.txt');
 
 end;
 

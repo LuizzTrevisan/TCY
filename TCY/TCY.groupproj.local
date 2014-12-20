@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2014/06/27 20:35:36.000.885,C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj=C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY.groupproj</Transaction>
+    <Transaction>2014/06/27 20:35:36.000.885,C:\Users\LuizFernando\Desktop\GIT\TCY\trunk\TCY.groupproj=C:\Users\LuizFernando\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj</Transaction>
   </Transactions>
 	<Default.Personality>
-		<Projects ActiveProject="C:\Users\wiglan\Desktop\WIGLAN\trunk\TCY\UTFPR_Acessibilidade.dproj"/>
+		<Projects ActiveProject="C:\Users\wiglan\Desktop\WIGLAN\trunk\TCY\MapImage\MapImage.dproj"/>
 	</Default.Personality>
 </BorlandProject>

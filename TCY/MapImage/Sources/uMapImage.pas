@@ -1,5 +1,9 @@
 unit uMapImage;
 
+
+//componente que herda da classe TImage.
+
+
 interface
 
 uses
@@ -8,13 +12,17 @@ uses
   FMX.Graphics;
 
 type
-  TMarcador = class;
 
-  TMarkerNotify = procedure(marker: TMarcador) of object;
 
+
+  //Objeto da apresenta a posicao atual
   TCircle = class(Timage)
+
+
+    //quando usa as cordenadas deste componente, tem que considerar o tamanho (Width,heigth) pra fica no meio, no local correto.
     function GetX: Single;
     function GetY: Single;
+
     procedure SetX(const Value: Single);
     procedure SetY(const Value: Single);
   public
@@ -23,21 +31,33 @@ type
     constructor Create(AOwner: TComponent);
   end;
 
+
+  //classe do marcador
   TMarcador = class(Timage)
   private
     fCaption: String;
+
+    //mesma correcao do componente TCircle, pra fica na posicao correta
     function GetX: Single;
     function GetY: Single;
     procedure SetX(const Value: Single);
     procedure SetY(const Value: Single);
     procedure SetCaption(const Value: String);
+
   protected
+
+    //usado quando move um ponto ja adicionado, para calcular a distancia movida
     FLastPosition: TPointF;
 
-    procedure Paint; override;
-    procedure Click; override;
+    procedure Paint; override; //considera o evendo do ancestral, e adiciona o desenho da descricao no ponto
+    procedure Click; override; //sobreescreve o evento antigo
+
+
     procedure DoGesture(const EventInfo: TGestureEventInfo;
       var Handled: Boolean); override;
+
+
+
   public
 
     property Caption: String read fCaption write SetCaption;
@@ -48,28 +68,44 @@ type
     property Y: Single read GetY write SetY;
   end;
 
+  //declaracao padrao da procedure.
+  //poder criar procedures que tenham como parametro um marcador.
+  TMarkerNotify = procedure(marker: TMarcador) of object;
+
+
+  //classe do componente TMapImage
   TMapImage = class(Timage)
   private
     { Private declarations }
+
+
+    //dentro da classe, tem um lista de marcadores da classe TMarcador
     FMarcadores: TObjectList<TMarcador>;
+
+    //evento que retorna quando seleciona um marcador (retornar o proprio marker selecionado)
     fOnSelectMarker: TMarkerNotify;
     fonMarkerMove: TMarkerNotify;
+
     fCircle: TCircle;
+
   protected
     { Protected declarations }
     // function GetMarcador(Index: Integer) : TMarcador;
     // procedure SetMarcador(Index: Integer; Value : TMarcador);
   public
     { Public declarations }
-    MarcadorScale: TPosition;
+
+    //nao usa mais
+    //MarcadorScale: TPosition;
 
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     // property Marcadores[Index: Integer]: TMarcador read GetMarcador write SetMarcador;
     Property Marcadores: TObjectList<TMarcador> read FMarcadores
       write FMarcadores;
-    property Circle: TCircle read fCircle;
   published
+
+    property Circle: TCircle read FCircle;
     property onSelectMarker: TMarkerNotify read fOnSelectMarker
       write fOnSelectMarker;
     property onMarkerMove: TMarkerNotify read fonMarkerMove write fonMarkerMove;
@@ -91,8 +127,14 @@ constructor TMapImage.Create(AOwner: TComponent);
 begin
   inherited;
   FMarcadores := TObjectList<TMarcador>.Create();
-  MarcadorScale := TPosition.Create(PointF(1, 1));
-  fCircle := TCircle.Create(Self);
+  //MarcadorScale := TPosition.Create(PointF(1, 1));
+
+
+  //nao adiciona o componente no .dfm (fmx) em tempo de projeto.
+  if not (csDesigning in ComponentState) then begin
+    fCircle := TCircle.Create(Self);
+    fCircle.Name := 'LocalAtualGPS';
+  end;
 end;
 
 destructor TMapImage.Destroy;
@@ -117,6 +159,8 @@ end;
 procedure TMarcador.Click;
 begin
   inherited;
+
+  //chama o evento atribuido no objeto na tela
   if Assigned(TMapImage(Owner).onSelectMarker) then
     TMapImage(Owner).onSelectMarker(Self);
 
@@ -128,6 +172,7 @@ var
   InStream: TResourceStream;
 begin
   inherited Create(AOwner);
+
   Self.Parent := TFmxObject(AOwner);
   Self.Height := 60;
   Self.Width := 30;
@@ -139,11 +184,13 @@ begin
     'PngImage_' + Categoria.ToString(), RT_RCDATA);
 
   Self.MultiResBitmap.Items[0].Bitmap.LoadFromStream(InStream);
-  Self.Scale.X := TMapImage(AOwner).MarcadorScale.X;
-  Self.Scale.Y := TMapImage(AOwner).MarcadorScale.Y;
+ // Self.Scale.X := TMapImage(AOwner).MarcadorScale.X;
+//  Self.Scale.Y := TMapImage(AOwner).MarcadorScale.Y;
   Self.Caption := ACaption;
 
-  Self.TouchManager.InteractiveGestures := [TInteractiveGesture.Pan];
+  //adiciona os eventos que o objeto ira responder
+  Self.TouchManager.InteractiveGestures := [TInteractiveGesture.Pan,
+    TInteractiveGesture.LongTap];
 
 end;
 
@@ -151,6 +198,11 @@ procedure TMarcador.DoGesture(const EventInfo: TGestureEventInfo;
   var Handled: Boolean);
 begin
   inherited;
+  //bloqueia a propagacao para o owner;
+  if (EventInfo.GestureID = System.UITypes.igiLongTap) then
+    Handled := True;
+
+  //ajusta as coordenadas do marcador que esta sendo mexido
   if (EventInfo.GestureID = System.UITypes.igiPan) then
   begin
 
@@ -205,6 +257,7 @@ var
 begin
   inherited;
 
+  //desenha o texto em cima do ponto
   Canvas.Stroke.Kind := TBrushKind.bkSolid;
   Canvas.Stroke.Color := $FFA4C9DF;
 
@@ -238,14 +291,18 @@ var
   InStream: TResourceStream;
 begin
   inherited Create(AOwner);
+
+
   Self.Parent := TFmxObject(AOwner);
   Self.Height := 15;
   Self.Width := 15;
   Self.Anchors := [];
 
+  //carregar o resource (imagem do circulo)
+  //ai adiciona a imagem no resources do componente
   InStream := TResourceStream.Create(HInstance, 'MapCircle', RT_RCDATA);
-
   Self.MultiResBitmap.Items[0].Bitmap.LoadFromStream(InStream);
+
   // Self.Scale.X := TMapImage(AOwner).MarcadorScale.X;
   // Self.Scale.Y := TMapImage(AOwner).MarcadorScale.Y;
 

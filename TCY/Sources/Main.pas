@@ -13,8 +13,8 @@ uses
 
 type
   TFMain = class(TForm)
-    Rectangle1: TRectangle;
-    Image2: TImage;
+    RectMenu: TRectangle;
+    ImgMenu: TImage;
     btnMenu: TSpeedButton;
     actMenu: TActionList;
     actShowMenuLateral: TAction;
@@ -30,13 +30,13 @@ type
     GlowEffect4: TGlowEffect;
     textBottom: TText;
     GlowEffect5: TGlowEffect;
-    lsMenu: TListBox;
+    lsOpcoes: TListBox;
     lsHeader: TListBoxGroupHeader;
     liImagem: TListBoxItem;
     liGMaps: TListBoxItem;
-    ListBox2: TListBox;
-    ListBoxItem1: TListBoxItem;
-    ListBoxItem4: TListBoxItem;
+    ListBoxRodape: TListBox;
+    liConfiguracoes: TListBoxItem;
+    liAjuda: TListBoxItem;
     GlowEffect6: TGlowEffect;
     RectClient: TRectangle;
     procedure actShowMenuLateralExecute(Sender: TObject);
@@ -67,12 +67,12 @@ begin
   actShowMenuLateral.Tag := not actShowMenuLateral.Tag;
 
   if Boolean(actShowMenuLateral.Tag) then begin
-    Rectangle1.BringToFront;
+    RectMenu.BringToFront;
     rectMenuLateral.BringToFront;
-    Image2.Margins.Left := 0;
+    ImgMenu.Margins.Left := 0;
     rectMenuLateral.Visible := True;
   end else begin
-    Image2.Margins.Left := 8;
+    ImgMenu.Margins.Left := 8;
     rectMenuLateral.Visible := False;
   end;
 
@@ -82,22 +82,28 @@ end;
 procedure TFMain.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
+
+  //quando oculta o teclado, retornar o conteudo preenchendo toda tela
   RectClient.Align := TAlignLayout.Client;
 end;
 
 procedure TFMain.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
+
+  //quando mostra o teclado, calcula o tamanho que pode sobrar para o aplicativo.
   RectClient.Align := TAlignLayout.Top;
-  RectClient.Height := Self.Height - Bounds.Height - Rectangle1.Height;
+  RectClient.Height := Self.Height - Bounds.Height - RectMenu.Height;
 
 end;
 
 procedure TFMain.liGMapsClick(Sender: TObject);
 begin
+  //caso a tela da utf estiver aberta, fecha.
   if Assigned(FMapImage) then
     FMapImage.Close;
 
+   //instancia
   if not Assigned(FMapGMaps) then
     Application.CreateForm(TFMapGMaps, FMapGMaps);
 
@@ -106,18 +112,19 @@ begin
   FMapGMaps.TMSFMXWebGMaps1.Repaint;
   FMapGMaps.liGMaps.IsSelected := True;
   FMapGMaps.Show;
-
 end;
 
 procedure TFMain.liImagemClick(Sender: TObject);
 begin
-
+  //caso a tela da navegação livre esteja aberta, fecha
   if Assigned(FMapGMaps) then
     FMapGMaps.Close;
 
+  //se nao ta instanciado, cria uma nova instancia.
   if not Assigned(FMapImage) then
     Application.CreateForm(TFMapImage, FMapImage);
 
+  //fehcar o menu lateral
   actShowMenuLateral.Execute;
   FMapImage.liImagem.IsSelected := True;
 

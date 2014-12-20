@@ -1514,7 +1514,7 @@ object FMain: TFMain
         Opacity = 1.000000000000000000
         Enabled = False
       end
-      object lsMenu: TListBox
+      object lsOpcoes: TListBox
         Align = Client
         Padding.Top = 100.000000000000000000
         Size.Width = 280.000000000000000000
@@ -1629,7 +1629,7 @@ object FMain: TFMain
           OnClick = liGMapsClick
         end
       end
-      object ListBox2: TListBox
+      object ListBoxRodape: TListBox
         Align = Bottom
         Position.Y = 435.000000000000000000
         Size.Width = 280.000000000000000000
@@ -1644,7 +1644,7 @@ object FMain: TFMain
         DefaultItemStyles.GroupHeaderStyle = ''
         DefaultItemStyles.GroupFooterStyle = ''
         GroupingKind = Grouped
-        object ListBoxItem1: TListBoxItem
+        object liConfiguracoes: TListBoxItem
           TextSettings.Font.Family = 'Segoe UI Semibold'
           StyledSettings = [Size, Style, FontColor, Other]
           ItemData.Bitmap.PNG = {
@@ -1681,7 +1681,7 @@ object FMain: TFMain
           TabOrder = 0
           Text = 'Configura'#231#245'es'
         end
-        object ListBoxItem4: TListBoxItem
+        object liAjuda: TListBoxItem
           TextSettings.Font.Family = 'Segoe UI Semibold'
           StyledSettings = [Size, Style, FontColor, Other]
           ItemData.Bitmap.PNG = {
@@ -1713,7 +1713,7 @@ object FMain: TFMain
       end
     end
   end
-  object Rectangle1: TRectangle
+  object RectMenu: TRectangle
     Align = MostTop
     ClipChildren = True
     ClipParent = True
@@ -1727,7 +1727,7 @@ object FMain: TFMain
     Size.PlatformDefault = False
     Stroke.Color = xFF294181
     Stroke.Join = Bevel
-    object Image2: TImage
+    object ImgMenu: TImage
       MultiResBitmap.Height = 48
       MultiResBitmap.Width = 48
       MultiResBitmap.LoadSize = 2
@@ -1755,7 +1755,7 @@ object FMain: TFMain
       object GlowEffect2: TGlowEffect
         Softness = 0.100000001490116100
         GlowColor = claBlack
-        Opacity = 0.800000011920929000
+        Opacity = 0.800000011920928900
         Enabled = False
       end
     end

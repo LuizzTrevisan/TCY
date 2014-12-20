@@ -41,7 +41,7 @@ inherited FMapGMaps: TFMapGMaps
       Size.Width = 384.000000000000000000
       Size.Height = 142.000000000000000000
       Size.PlatformDefault = False
-      object Rectangle2: TRectangle
+      object rectOpcoes: TRectangle
         Align = Bottom
         Fill.Kind = None
         Position.Y = 99.000000000000000000
@@ -49,7 +49,7 @@ inherited FMapGMaps: TFMapGMaps
         Size.Width = 384.000000000000000000
         Size.Height = 43.000000000000000000
         Size.PlatformDefault = False
-        object Button1: TButton
+        object btAdicionar: TButton
           Align = Right
           StyledSettings = [Size, Style, FontColor]
           Position.X = 200.000000000000000000
@@ -59,9 +59,9 @@ inherited FMapGMaps: TFMapGMaps
           TabOrder = 0
           Text = 'Adicionar'
           TextSettings.Font.Family = 'Segoe UI Semibold'
-          OnClick = Button1Click
+          OnClick = btAdicionarClick
         end
-        object Button2: TButton
+        object btRemover: TButton
           Align = Left
           StyledSettings = [Size, Style, FontColor]
           Size.Width = 193.000000000000000000
@@ -70,10 +70,10 @@ inherited FMapGMaps: TFMapGMaps
           TabOrder = 1
           Text = 'Excluir'
           TextSettings.Font.Family = 'Segoe UI Semibold'
-          OnClick = Button2Click
+          OnClick = btRemoverClick
         end
       end
-      object Edit1: TEdit
+      object edtDescricao: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Top
         StyleLookup = 'clearingeditstyle'
@@ -159,7 +159,7 @@ inherited FMapGMaps: TFMapGMaps
           OnClick = GPSLocationClick
           object GpsAnimation: TFloatAnimation
             AutoReverse = True
-            Duration = 0.400000005960464500
+            Duration = 0.400000005960464400
             Loop = True
             PropertyName = 'Opacity'
             StartValue = 0.000000000000000000
@@ -215,16 +215,16 @@ inherited FMapGMaps: TFMapGMaps
         OnClick = liRemoverTodosMarcadoresClick
       end
       object GlowEffect7: TGlowEffect
-        Softness = 0.400000005960464500
+        Softness = 0.400000005960464400
         GlowColor = claBlack
         Opacity = 1.000000000000000000
       end
     end
   end
-  inherited Rectangle1: TRectangle
+  inherited RectMenu: TRectangle
     Padding.Bottom = 1.000000000000000000
     Margins.Bottom = 1.000000000000000000
-    inherited Image2: TImage
+    inherited ImgMenu: TImage
       MultiResBitmap.Height = 48
       MultiResBitmap.Width = 48
       MultiResBitmap.LoadSize = 2
@@ -250,7 +250,7 @@ inherited FMapGMaps: TFMapGMaps
     Left = 128
     Top = 104
   end
-  object ClientDataSet1: TClientDataSet
+  object cdsPontos: TClientDataSet
     Aggregates = <>
     FieldDefs = <
       item
@@ -274,20 +274,20 @@ inherited FMapGMaps: TFMapGMaps
     IndexFieldNames = 'Index'
     Params = <>
     StoreDefs = True
-    BeforePost = ClientDataSet1BeforePost
-    BeforeDelete = ClientDataSet1BeforeDelete
+    BeforePost = cdsPontosBeforePost
+    BeforeDelete = cdsPontosBeforeDelete
     Left = 200
     Top = 144
-    object ClientDataSet1la: TFloatField
+    object cdsPontosla: TFloatField
       FieldName = 'la'
     end
-    object ClientDataSet1lo: TFloatField
+    object cdsPontoslo: TFloatField
       FieldName = 'lo'
     end
-    object ClientDataSet1Title: TStringField
+    object cdsPontosTitle: TStringField
       FieldName = 'Title'
     end
-    object ClientDataSet1Index: TIntegerField
+    object cdsPontosIndex: TIntegerField
       FieldName = 'Index'
     end
   end
