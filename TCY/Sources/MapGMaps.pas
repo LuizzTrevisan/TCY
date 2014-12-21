@@ -139,6 +139,7 @@ begin
 
   if FileExists(GetHomePath + '/Te.txt') then begin
     try
+      cdsPontos.EmptyDataSet;
       cdsPontos.LoadFromFile(GetHomePath + '/Te.txt');
     except
       cdsPontos.Close;
@@ -158,6 +159,7 @@ begin
       cdsPontos.Post;
       cdsPontos.Next;
     end;
+
   end;
 
 end;
