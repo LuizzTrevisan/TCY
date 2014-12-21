@@ -44,6 +44,7 @@ type
     cdsDadosTitle: TStringField;
     cdsDadosIndex: TIntegerField;
     cdsDadoscategoria: TIntegerField;
+    btnMenuPopUp: TSpeedButton;
     procedure sbMaisClick(Sender: TObject);
     procedure sbMenosClick(Sender: TObject);
     procedure MapImage1Gesture(Sender: TObject;
@@ -67,6 +68,7 @@ type
     procedure FormVirtualKeyboardShown(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure cdsDadosAfterDelete(DataSet: TDataSet);
+    procedure btnMenuPopUpClick(Sender: TObject);
   private
     { Private declarations }
     Operacao: MarkerOpcao;
@@ -155,6 +157,22 @@ begin
   Operacao := MarkerOpcao.Nenhuma;
 end;
 
+procedure TFMapImage.btnMenuPopUpClick(Sender: TObject);
+begin
+  inherited;
+
+//no android nao funciona
+//  if MessageDlg('REMOVE',TMsgDlgType.mtConfirmation, [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNO],0,TMsgDlgBtn.mbYes ) = 1   then begin
+
+//    cdsDados.First;
+//    while not cdsDados.Eof do
+//      cdsDados.Delete;
+//
+//    cdsDados.SaveToFile(GetHomePath + '/MapaUtfpr.wmap');
+
+//  end;
+end;
+
 procedure TFMapImage.btRemoverClick(Sender: TObject);
 begin
   inherited;
@@ -190,8 +208,11 @@ begin
     try
       cdsDados.LoadFromFile(GetHomePath + '/MapaUtfpr.wmap');
     except
-      cdsDados.Close;
-      cdsDados.CreateDataSet;
+      on e : exception  do begin
+          cdsDados.Close;
+          cdsDados.CreateDataSet;
+          showmessage(e.Message);
+      end;
     end;
   end
   else
